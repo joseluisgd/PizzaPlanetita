@@ -6,16 +6,15 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import java.util.List;
 import ulima.edu.pe.beans.Ingrediente;
+import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoPersonalizadoDAO {
 //Lista de ingredientes por usuario. (ingredientes, Usuario usuario)
     public void ingresarPedidoxUsuario(List<Ingrediente> ingredientes) {
-        MongoClient mongo = null;
+        MongoClient mongo = ConexionMLab.getInstance().getConexion();
         try {
-            mongo = new MongoClient(new MongoClientURI("mongodb://grupo01:progra@ds063124.mongolab.com:63124/basededatos"));
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("ingredientesxusuario");
 
@@ -39,10 +38,9 @@ public class PedidoPersonalizadoDAO {
         }
     }
     private Integer contar() {
-        MongoClient mongo = null;
+        MongoClient mongo = ConexionMLab.getInstance().getConexion();
         int cont = 0;
         try {
-            mongo = new MongoClient(new MongoClientURI("mongodb://grupo01:progra@ds063124.mongolab.com:63124/basededatos"));
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("ingredientesxusuario");
             DBCursor cursor = coleccion.find();

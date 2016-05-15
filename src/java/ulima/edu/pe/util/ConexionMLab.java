@@ -7,14 +7,15 @@ import java.net.UnknownHostException;
 public class ConexionMLab {
 
     private static ConexionMLab singleton;
-    private final String username = "pizza";
-    private final String password = "pizza";
-    private final String database = "pizzaplaneta";
+    private final String username = "grupo01";
+    private final String password = "progra";
+    private final String database = "basededatos";
     private MongoClient cliente;
     private MongoClientURI uri;
 
     private ConexionMLab() {
-        uri = new MongoClientURI("mongodb://" + username + ":" + password + "@ds023442.mlab.com:23442/" + database);
+        uri = new MongoClientURI("mongodb://" + username + ":" + password + "@ds063124.mongolab.com:63124/" + database);
+        //mongodb://grupo01:progra@ds063124.mongolab.com:63124/basededatos
         try {
             cliente = new MongoClient(uri);
         } catch (UnknownHostException ex) {

@@ -6,15 +6,14 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import ulima.edu.pe.beans.Usuario;
+import ulima.edu.pe.util.ConexionMLab;
 
 public class RegistrarseDAO {
 
     public void registrar(String nombre, String apellidos, String dni, int telefono, String edad, Usuario usu) {
-        MongoClient mongo = null;
+        MongoClient mongo = ConexionMLab.getInstance().getConexion();
         try {
-            mongo = new MongoClient(new MongoClientURI("mongodb://grupo01:progra@ds063124.mongolab.com:63124/basededatos"));
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("cliente");
 
@@ -44,10 +43,9 @@ public class RegistrarseDAO {
     }
 
     private Integer contar() {
-        MongoClient mongo = null;
+        MongoClient mongo = ConexionMLab.getInstance().getConexion();
         int cont = 0;
         try {
-            mongo = new MongoClient(new MongoClientURI("mongodb://grupo01:progra@ds063124.mongolab.com:63124/basededatos"));
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("cliente");
             DBCursor cursor = coleccion.find();
