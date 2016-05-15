@@ -1,4 +1,4 @@
-package com.ulima.sw.pizzaplanetac.beans;
+package ulima.edu.pe.beans;
 
 /**
  * Created by fixt on 10/05/16.

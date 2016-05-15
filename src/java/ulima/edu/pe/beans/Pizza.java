@@ -1,5 +1,7 @@
-package com.ulima.sw.pizzaplanetac.beans;
+package ulima.edu.pe.beans;
 
+
+import ulima.edu.pe.beans.Ingrediente;
 import java.util.List;
 
 /**
