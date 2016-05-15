@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.dao.IngredienteDAO;
-import ulima.edu.pe.beans.dao.PedidoPersonalizadoDAO;
+import ulima.edu.pe.dao.IngredienteDAO;
+import ulima.edu.pe.dao.PedidoPersonalizadoDAO;
 
 
 public class ServletPedido extends HttpServlet {

@@ -1,5 +1,4 @@
-
-package ulima.edu.pe.beans.dao;
+package ulima.edu.pe.dao;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -13,19 +12,19 @@ import java.util.List;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Producto;
 
-
 public class IngredienteDAO {
+
     public List<Ingrediente> getIngredientes() {
         MongoClient mongo = null;
         List<Ingrediente> ingrediente = new ArrayList<>();
         try {
-            mongo = new MongoClient(new MongoClientURI("mongodb://grupo01:progra@ds063124.mongolab.com:63124/basededatos"));
+            mongo = Ingrediente
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("ingrediente");
             DBCursor cursor = coleccion.find();
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                ingrediente.add(new Ingrediente((Integer)dbo.get("id"),(String) dbo.get("nombre")));
+                ingrediente.add(new Ingrediente((Integer) dbo.get("id"), (String) dbo.get("nombre")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,7 +33,7 @@ public class IngredienteDAO {
         }
         return ingrediente;
     }
-    
+
     public Ingrediente BuscarIngrediente(int id) {
         MongoClient mongo = null;
         Ingrediente ingrediente = new Ingrediente();
@@ -58,7 +57,6 @@ public class IngredienteDAO {
         }
         return ingrediente;
 
-        
     }
-    
+
 }
