@@ -1,4 +1,3 @@
-
 package ulima.edu.pe.servlet;
 
 import java.io.IOException;
@@ -10,24 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.dao.LoginDAO;
 
-
 public class ServletLogin extends HttpServlet {
-
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
-        
-        String usuario= request.getParameter("usuario");
-        String password= request.getParameter("password");
-        
-        LoginDAO dao= new LoginDAO();
-        
-        
-         RequestDispatcher rd = null;
-        if(dao.login(usuario, password)==1){
-            rd = request.getRequestDispatcher("login.html");
-        }else{
+
+        String usuario = request.getParameter("usuario");
+        String password = request.getParameter("password");
+
+        LoginDAO dao = new LoginDAO();
+
+        RequestDispatcher rd = null;
+        if (dao.login(usuario, password) == 1) {
+            rd = request.getRequestDispatcher("logincorrecto.html");
+        } else {
             rd = request.getRequestDispatcher("errorlogin.html");
         }
         rd.forward(request, response);

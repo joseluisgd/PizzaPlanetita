@@ -15,7 +15,8 @@ import ulima.edu.pe.util.ConexionMLab;
 public class IngredienteDAO {
 
     public List<Ingrediente> getIngredientes() {
-        MongoClient mongo = ConexionMLab.getInstance().getConexion();
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
         List<Ingrediente> ingrediente = new ArrayList<>();
         try {
             DB db = mongo.getDB("basededatos");
@@ -34,7 +35,8 @@ public class IngredienteDAO {
     }
 
     public Ingrediente BuscarIngrediente(int id) {
-        MongoClient mongo = ConexionMLab.getInstance().getConexion();
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
         Ingrediente ingrediente = new Ingrediente();
         try {
             DB db = mongo.getDB("basededatos");

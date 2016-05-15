@@ -12,23 +12,24 @@ import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoPersonalizadoDAO {
 //Lista de ingredientes por usuario. (ingredientes, Usuario usuario)
+
     public void ingresarPedidoxUsuario(List<Ingrediente> ingredientes) {
-        MongoClient mongo = ConexionMLab.getInstance().getConexion();
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("ingredientesxusuario");
 
             BasicDBObject doc = new BasicDBObject();
-            doc.put("id", contar()+1);
+            doc.put("id", contar() + 1);
             BasicDBObject doc2 = new BasicDBObject();
-            
+
             for (Ingrediente ingrediente : ingredientes) {
-                doc2.put("id",ingrediente.getId());
+                doc2.put("id", ingrediente.getId());
                 doc2.put("nombre", ingrediente.getNombre());
             }
-            
-            doc.put("ingrediente",doc2);
-            
+
+            doc.put("ingrediente", doc2);
 
             coleccion.insert(doc);
         } catch (Exception e) {
@@ -37,8 +38,10 @@ public class PedidoPersonalizadoDAO {
             mongo.close();
         }
     }
+
     private Integer contar() {
-        MongoClient mongo = ConexionMLab.getInstance().getConexion();
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
         int cont = 0;
         try {
             DB db = mongo.getDB("basededatos");
@@ -55,5 +58,5 @@ public class PedidoPersonalizadoDAO {
         }
         return cont;
     }
-    
+
 }

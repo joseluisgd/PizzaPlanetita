@@ -12,26 +12,27 @@ import ulima.edu.pe.util.ConexionMLab;
 public class RegistrarseDAO {
 
     public void registrar(String nombre, String apellidos, String dni, int telefono, String edad, Usuario usu) {
-        MongoClient mongo = ConexionMLab.getInstance().getConexion();
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("cliente");
 
             BasicDBObject doc = new BasicDBObject();
-            
-            doc.put("id", contar()+1);
+
+            doc.put("id", contar() + 1);
             doc.put("nombre", nombre);
             doc.put("apellidos", apellidos);
             doc.put("dni", dni);
             doc.put("telefono", telefono);
             doc.put("edad", edad);
-            
+
             BasicDBObject doc2 = new BasicDBObject();
             doc2.put("usu", usu.getUsuario());
             doc2.put("pass", usu.getPassword());
             doc2.put("correo", usu.getCorreo());
             doc2.put("puntos", usu.getPuntos());
-            
+
             doc.put("Usuario", doc2);
 
             coleccion.insert(doc);
@@ -43,7 +44,8 @@ public class RegistrarseDAO {
     }
 
     private Integer contar() {
-        MongoClient mongo = ConexionMLab.getInstance().getConexion();
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
         int cont = 0;
         try {
             DB db = mongo.getDB("basededatos");
