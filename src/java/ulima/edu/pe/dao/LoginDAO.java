@@ -1,5 +1,5 @@
 
-package ulima.edu.pe.beans.dao;
+package ulima.edu.pe.dao;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;

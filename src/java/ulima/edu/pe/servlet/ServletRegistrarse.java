@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.Usuario;
 
-import ulima.edu.pe.beans.dao.RegistrarseDAO;
+import ulima.edu.pe.dao.RegistrarseDAO;
 
 /**
  *
