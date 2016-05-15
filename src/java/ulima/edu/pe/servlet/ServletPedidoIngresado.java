@@ -1,7 +1,10 @@
 package ulima.edu.pe.servlet;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,47 +12,56 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import ulima.edu.pe.beans.Estado;
 import ulima.edu.pe.beans.Ingrediente;
+import ulima.edu.pe.beans.Pizza;
 import ulima.edu.pe.beans.Producto;
-import ulima.edu.pe.dao.IngredienteDAO;
-import ulima.edu.pe.dao.PedidoPersonalizadoDAO;
-import ulima.edu.pe.dao.ProductoDAO;
+import ulima.edu.pe.dao.PedidoDAO;
 
-public class ServletPedido extends HttpServlet {
+public class ServletPedidoIngresado extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         HttpSession ses = request.getSession(true);
-
-        String ingredientes[] = request.getParameterValues("ingredientes");
-        String productos[] = request.getParameterValues("productos");
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+        Date date = new Date();
+        //estado
+        Estado estado = new Estado();
+        estado.setHora((String)dateFormat.format(date));
+        estado.setEstado("En cola");
+        
+        //usuario
+        String usuario = (String) ses.getAttribute("username");
+        String direccion = request.getParameter("direccion");
         
         
-        //Productos
-        ProductoDAO dao1= new ProductoDAO();
-        List<Producto> listaProd = new ArrayList<Producto>();
-        for (int i = 0; i < productos.length; i++) {
-            listaProd.add(dao1.buscarProducto(Integer.parseInt(productos[i])));
+        //ingredientes
+        List<Ingrediente> ingr = (List<Ingrediente>) ses.getAttribute("ingredientesIngresados");
+        //precio
+        float precio=0.0f;
+        for (Ingrediente ingrediente : ingr) {
+            precio*=precio;
         }
-        ses.setAttribute("productosIngresados", listaProd);
+        //pizza
+        List<Pizza> pizza = new ArrayList<>();
+        pizza.add(new Pizza(precio, ingr));
         
-        //Ingredientes
-        IngredienteDAO dao2 = new IngredienteDAO();
-        List<Ingrediente> listaIngre = new ArrayList<>();
-        for (int i = 0; i < ingredientes.length; i++) {
-            listaIngre.add(dao2.BuscarIngrediente((Integer.parseInt(ingredientes[i]))));
-        }
-        ses.setAttribute("ingredientesIngresados", listaIngre);
-        //usuario ???
-
-        PedidoPersonalizadoDAO dao = new PedidoPersonalizadoDAO();
-
-        dao.ingresarPedidoxUsuario(listaIngre, (String) ses.getAttribute("username"));
-
-        RequestDispatcher rd = request.getRequestDispatcher("pedidoingresado.jsp");
+        //productos
+        List<Producto> prod= (List<Producto>)ses.getAttribute("productosIngresados");
+        
+        
+        PedidoDAO dao10= new PedidoDAO();
+        dao10.agregar(estado, usuario, direccion, pizza, prod);
+        
+        
+        
+        //rd
+        RequestDispatcher rd = request.getRequestDispatcher("EXITOS.html");
 
         rd.forward(request, response);
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

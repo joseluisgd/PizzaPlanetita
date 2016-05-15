@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.dao.IngredienteDAO;
+import ulima.edu.pe.dao.ProductoDAO;
 
 public class ServletIngrediente extends HttpServlet {
 
@@ -20,8 +21,9 @@ public class ServletIngrediente extends HttpServlet {
         HttpSession ses = request.getSession(true);
 
         IngredienteDAO dao = new IngredienteDAO();
-
+        ProductoDAO dao1= new ProductoDAO();
         ses.setAttribute("ingredientes", dao.getIngredientes());
+        ses.setAttribute("productos", dao1.getProductos());
 
         RequestDispatcher rd = request.getRequestDispatcher("crearPedido.jsp");
 

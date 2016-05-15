@@ -13,6 +13,13 @@
                 <input type="checkbox" value="<c:out value="${x.id}"/>" name="ingredientes">
                 <c:out value="${x.nombre}"/><br>
             </c:forEach>
+                <br>
+            <c:forEach var="y" items="${sessionScope.productos}">
+                <input type="checkbox" value="<c:out value="${y.id}"/>" name="productos">
+                <c:out value="${y.nombre}"/>
+                <c:out value="${y.precio}"/><br>
+            </c:forEach>
+                
             <button type="submit"> Eso es todo </button>
         </form>
     </body>

@@ -4,25 +4,25 @@ package ulima.edu.pe.beans;
  * Created by fixt on 10/05/16.
  */
 public class Estado {
-    private String hora;
+    private String fechahora;
     private int id;
-    private int estado;
+    private String estado;
 
     public Estado() {
     }
 
-    public Estado(String hora, int id, int estado) {
-        this.hora = hora;
+    public Estado(String hora, int id, String estado) {
+        this.fechahora = hora;
         this.id = id;
         this.estado = estado;
     }
 
     public String getHora() {
-        return hora;
+        return fechahora;
     }
 
     public void setHora(String hora) {
-        this.hora = hora;
+        this.fechahora = hora;
     }
 
     public int getId() {
@@ -33,11 +33,11 @@ public class Estado {
         this.id = id;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 }

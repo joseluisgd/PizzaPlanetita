@@ -6,12 +6,12 @@ package ulima.edu.pe.beans;
 public class Producto {
     private  int id;
     private  String nombre;
-    private float precio;
+    private double precio;
 
     public Producto() {
     }
 
-    public Producto(int id, String nombre, float precio) {
+    public Producto(int id, String nombre, double precio) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -33,11 +33,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 }

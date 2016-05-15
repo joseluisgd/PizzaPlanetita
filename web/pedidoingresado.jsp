@@ -15,10 +15,14 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form action="sPedido" method="post">
-            <c:forEach var="x" items="${sessionScope.ingredientes}">
+        <form action="sPedidoIngresado" method="post">
+            <c:forEach var="x" items="${sessionScope.ingredientesIngresados}">
                 <c:out value="${x.nombre}"/><br>
+            </c:forEach><br>
+            <c:forEach var="y" items="${sessionScope.productosIngresados}">
+                <c:out value="${y.nombre}"/><br>
             </c:forEach>
+                Direccion : <input type="text" name="direccion"/>
             <button type="submit"> Ok? </button>
         </form>
     </body>
