@@ -8,6 +8,14 @@
         <servlet-name>ServletPedido</servlet-name>
         <servlet-class>ulima.edu.pe.servlet.ServletPedido</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletRegistrarse</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletRegistrarse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletLogin</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletIngrediente</servlet-name>
         <url-pattern>/sIngrediente</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>ServletPedido</servlet-name>
         <url-pattern>/sPedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletRegistrarse</servlet-name>
+        <url-pattern>/sRegistrarse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLogin</servlet-name>
+        <url-pattern>/sLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

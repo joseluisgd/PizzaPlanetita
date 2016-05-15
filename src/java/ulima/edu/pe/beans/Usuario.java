@@ -13,10 +13,14 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String usuario, String password) {
+    public Usuario(String usuario, String password, String correo) {
         this.usuario = usuario;
         this.password = password;
+        this.correo = correo;
+        this.puntos=0;
     }
+
+    
 
     public String getUsuario() {
         return usuario;
