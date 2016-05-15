@@ -6,7 +6,7 @@ import java.net.UnknownHostException;
 
 public class ConexionMLab {
 
-    private ConexionMLab singleton;
+    private static ConexionMLab singleton;
     private final String username = "pizza";
     private final String password = "pizza";
     private final String database = "pizzaplaneta";

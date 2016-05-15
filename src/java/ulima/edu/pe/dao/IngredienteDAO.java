@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.util.ConexionMLab;
 
 public class IngredienteDAO {
 
     public List<Ingrediente> getIngredientes() {
-        MongoClient mongo = null;
+        MongoClient mongo = ConexionMLab.getInstance().getConexion();
         List<Ingrediente> ingrediente = new ArrayList<>();
         try {
-            mongo = Ingrediente
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("ingrediente");
             DBCursor cursor = coleccion.find();
@@ -35,10 +35,9 @@ public class IngredienteDAO {
     }
 
     public Ingrediente BuscarIngrediente(int id) {
-        MongoClient mongo = null;
+        MongoClient mongo = ConexionMLab.getInstance().getConexion();
         Ingrediente ingrediente = new Ingrediente();
         try {
-            mongo = new MongoClient(new MongoClientURI("mongodb://grupo01:progra@ds063124.mongolab.com:63124/basededatos"));
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("ingrediente");
             BasicDBObject query = new BasicDBObject();
