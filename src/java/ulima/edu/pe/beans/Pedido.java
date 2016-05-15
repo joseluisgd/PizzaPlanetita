@@ -1,7 +1,5 @@
 package ulima.edu.pe.beans;
 
-
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,7 +8,7 @@ import java.util.List;
 public class Pedido {
     private int id;
     private Estado estado;
-    private Cliente cli;
+    private String usuario;
     private String direccion;
     private float monto;
     private List<Pizza> pizzas;
@@ -19,10 +17,10 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int id, Estado estado, Cliente cli, String direccion, float monto, List<Pizza> pizzas) {
+    public Pedido(int id, Estado estado, String usuario, String direccion, float monto, List<Pizza> pizzas) {
         this.id = id;
         this.estado = estado;
-        this.cli = cli;
+        this.usuario = usuario;
         this.direccion = direccion;
         this.monto = monto;
         this.pizzas = pizzas;
@@ -44,12 +42,12 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public Cliente getCli() {
-        return cli;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setCli(Cliente cli) {
-        this.cli = cli;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getDireccion() {

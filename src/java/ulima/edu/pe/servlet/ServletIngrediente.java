@@ -1,4 +1,3 @@
-
 package ulima.edu.pe.servlet;
 
 import java.io.IOException;
@@ -13,24 +12,21 @@ import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.dao.IngredienteDAO;
 
-
 public class ServletIngrediente extends HttpServlet {
 
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession ses = request.getSession(true);
-        
-        IngredienteDAO dao= new IngredienteDAO();        
-        
+
+        IngredienteDAO dao = new IngredienteDAO();
+
         ses.setAttribute("ingredientes", dao.getIngredientes());
-        
+
         RequestDispatcher rd = request.getRequestDispatcher("crearPedido.jsp");
 
         rd.forward(request, response);
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

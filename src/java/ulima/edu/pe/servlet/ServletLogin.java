@@ -23,6 +23,7 @@ public class ServletLogin extends HttpServlet {
         RequestDispatcher rd = null;
         if (dao.login(usuario, password) == 1) {
             rd = request.getRequestDispatcher("logincorrecto.html");
+            ses.setAttribute("username", usuario);
         } else {
             rd = request.getRequestDispatcher("errorlogin.html");
         }

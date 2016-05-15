@@ -1,9 +1,9 @@
-
 package ulima.edu.pe.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,31 +13,32 @@ import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.dao.IngredienteDAO;
 import ulima.edu.pe.dao.PedidoPersonalizadoDAO;
 
-
 public class ServletPedido extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
         //ingredientes
-        String ingredientes[]= request.getParameterValues("ingredientes");
-        
-        IngredienteDAO dao2=new IngredienteDAO();
-        
-        List<Ingrediente> listaIngre= new ArrayList<>();
+        String ingredientes[] = request.getParameterValues("ingredientes");
+
+        IngredienteDAO dao2 = new IngredienteDAO();
+
+        List<Ingrediente> listaIngre = new ArrayList<>();
         for (int i = 0; i < ingredientes.length; i++) {
             listaIngre.add(dao2.BuscarIngrediente((Integer.parseInt(ingredientes[i]))));
         }
         //usuario ???
+
+        PedidoPersonalizadoDAO dao = new PedidoPersonalizadoDAO();
+
+        dao.ingresarPedidoxUsuario(listaIngre, (String) ses.getAttribute("username"));
         
+        ses.setAttribute("ingredientes", listaIngre);
         
-        PedidoPersonalizadoDAO dao= new PedidoPersonalizadoDAO();
-        //(listaIngredientes, usuario)
-        dao.ingresarPedidoxUsuario(listaIngre);
-        
-        
-        
+        RequestDispatcher rd = request.getRequestDispatcher("login.html");
+
+        rd.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

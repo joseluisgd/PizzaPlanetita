@@ -6,14 +6,16 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import java.util.ArrayList;
 import java.util.List;
 import ulima.edu.pe.beans.Ingrediente;
+import ulima.edu.pe.beans.Usuario;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoPersonalizadoDAO {
 //Lista de ingredientes por usuario. (ingredientes, Usuario usuario)
 
-    public void ingresarPedidoxUsuario(List<Ingrediente> ingredientes) {
+    public void ingresarPedidoxUsuario(List<Ingrediente> ingredientes, String usuario) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         try {
@@ -21,15 +23,19 @@ public class PedidoPersonalizadoDAO {
             DBCollection coleccion = db.getCollection("ingredientesxusuario");
 
             BasicDBObject doc = new BasicDBObject();
+
             doc.put("id", contar() + 1);
-            BasicDBObject doc2 = new BasicDBObject();
+            doc.put("usu", usuario);
+            BasicDBObject doc2;
+            ArrayList ingredientesA = new ArrayList();
 
             for (Ingrediente ingrediente : ingredientes) {
+                doc2 = new BasicDBObject();
                 doc2.put("id", ingrediente.getId());
                 doc2.put("nombre", ingrediente.getNombre());
+                ingredientesA.add(doc2);
             }
-
-            doc.put("ingrediente", doc2);
+            doc.put("ingredientes", ingredientesA);
 
             coleccion.insert(doc);
         } catch (Exception e) {

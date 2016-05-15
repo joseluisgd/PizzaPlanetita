@@ -1,7 +1,5 @@
 package ulima.edu.pe.beans;
 
-import java.util.Date;
-
 /**
  * Created by fixt on 10/05/16.
  */
