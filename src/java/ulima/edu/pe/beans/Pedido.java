@@ -1,4 +1,5 @@
-package com.ulima.sw.pizzaplanetac.beans;
+package ulima.edu.pe.beans;
+
 
 import java.util.Date;
 import java.util.List;
