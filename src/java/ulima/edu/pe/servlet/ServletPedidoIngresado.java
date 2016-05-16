@@ -32,10 +32,13 @@ public class ServletPedidoIngresado extends HttpServlet {
         estado.setHora((String)dateFormat.format(date));
         estado.setEstado("En cola");
         
+        ses.setAttribute("estado", estado);
+        
         //usuario
         String usuario = (String) ses.getAttribute("username");
         String direccion = request.getParameter("direccion");
         
+        ses.setAttribute("direccion", direccion);
         
         //ingredientes
         List<Ingrediente> ingr = (List<Ingrediente>) ses.getAttribute("ingredientesIngresados");
@@ -44,9 +47,13 @@ public class ServletPedidoIngresado extends HttpServlet {
         for (Ingrediente ingrediente : ingr) {
             precio*=precio;
         }
+        ses.setAttribute("precio", precio);
+        
         //pizza
         List<Pizza> pizza = new ArrayList<>();
         pizza.add(new Pizza(precio, ingr));
+        
+        ses.setAttribute("pizza", pizza);
         
         //productos
         List<Producto> prod= (List<Producto>)ses.getAttribute("productosIngresados");
@@ -58,7 +65,7 @@ public class ServletPedidoIngresado extends HttpServlet {
         
         
         //rd
-        RequestDispatcher rd = request.getRequestDispatcher("EXITOS.html");
+        RequestDispatcher rd = request.getRequestDispatcher("pedidoRegistrado.jsp");
 
         rd.forward(request, response);
         
