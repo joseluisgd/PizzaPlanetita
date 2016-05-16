@@ -9,26 +9,25 @@
     </head>
     <body>
         <h1>Pedido realizado correctamente</h1>
-        -------------------------------------------------
-        <br>
+        -------------------------------------------------<br>
         <c:forEach var="y" items="${sessionScope.productosIngresados}">
             <c:out value="${y.nombre}"/><br>
         </c:forEach><br>
-        -------------------------------------------------
+        -------------------------------------------------<br>
         <c:forEach var="x" items="${sessionScope.ingredientesIngresados}">
             <c:out value="${x.nombre}"/><br>
         </c:forEach><br>
         <c:out value="${sessionScope.precio}" /><br>
-        -------------------------------------------------
+        -------------------------------------------------<br>
         <c:out value="${sessionScope.estado.estado}" /><br>
-        -------------------------------------------------
+        -------------------------------------------------<br>
         <c:out value="${sessionScope.estado.hora}" /><br>
-        -------------------------------------------------
+        -------------------------------------------------<br>
         <c:out value="${sessionScope.direccion}" /><br>
-        
-        
+
+
         <h2> Gracias por la compra</h2>
-        
-            
+
+
     </body>
 </html>

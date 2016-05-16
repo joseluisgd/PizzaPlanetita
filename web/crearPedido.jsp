@@ -20,7 +20,7 @@
                 <c:out value="${y.precio}"/><br>
             </c:forEach>
                 
-            <button type="submit"> Eso es todo </button>
+            <button type="submit"> Aceptar </button>
         </form>
     </body>
 </html>
