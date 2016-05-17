@@ -36,7 +36,7 @@ public class ServletPedido extends HttpServlet {
         IngredienteDAO daoIngrediente = new IngredienteDAO();
         List<Ingrediente> listaIngredientes = new ArrayList<>();
         for (int i = 0; i < ingredientes.length; i++) {
-            listaIngredientes.add(daoIngrediente.BuscarIngrediente((Integer.parseInt(ingredientes[i]))));
+            listaIngredientes.add(daoIngrediente.buscarIngrediente((Integer.parseInt(ingredientes[i]))));
         }
         ses.setAttribute("ingredientesIngresados", listaIngredientes);
         //usuario ???
@@ -46,7 +46,6 @@ public class ServletPedido extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("pedidoingresado.jsp");
         rd.forward(request, response);
-
     }
 
     @Override
