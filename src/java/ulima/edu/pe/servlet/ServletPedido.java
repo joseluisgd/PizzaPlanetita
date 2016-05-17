@@ -27,16 +27,16 @@ public class ServletPedido extends HttpServlet {
         //Productos
         ProductoDAO daoProducto= new ProductoDAO();
         List<Producto> listaProductos = new ArrayList<>();
-        for (int i = 0; i < productos.length; i++) {
-            listaProductos.add(daoProducto.buscarProducto(Integer.parseInt(productos[i])));
+        for (String producto : productos) {
+            listaProductos.add(daoProducto.buscarProducto(Integer.parseInt(producto)));
         }
         ses.setAttribute("productosIngresados", listaProductos);
         
         //Ingredientes
         IngredienteDAO daoIngrediente = new IngredienteDAO();
         List<Ingrediente> listaIngredientes = new ArrayList<>();
-        for (int i = 0; i < ingredientes.length; i++) {
-            listaIngredientes.add(daoIngrediente.buscarIngrediente((Integer.parseInt(ingredientes[i]))));
+        for (String ingrediente : ingredientes) {
+            listaIngredientes.add(daoIngrediente.buscarIngrediente((Integer.parseInt(ingrediente))));
         }
         ses.setAttribute("ingredientesIngresados", listaIngredientes);
         //usuario ???
