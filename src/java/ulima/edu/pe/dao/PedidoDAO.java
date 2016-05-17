@@ -34,7 +34,7 @@ public class PedidoDAO {
             docEstado.put("estado", pedido.getEstado().getEstado());
 
             docPedido.put("Estado", docEstado);
-            docPedido.put("usu", pedido.getUsuario());
+            docPedido.put("usu", pedido.getUsername());
             docPedido.put("direccion", pedido.getDireccion());
 
             BasicDBObject docPizza;
