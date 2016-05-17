@@ -60,7 +60,7 @@ public class PedidoDAO {
 
             BasicDBObject docProducto;
             ArrayList arrayProductos = new ArrayList();
-            List<Producto> productos = pedido.getPRoductos();
+            List<Producto> productos = pedido.getProductos();
             for (Producto producto : productos) {
                 docProducto = new BasicDBObject();
                 docProducto.put("id", producto.getId());
