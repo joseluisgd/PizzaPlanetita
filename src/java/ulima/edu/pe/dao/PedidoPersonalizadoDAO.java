@@ -22,22 +22,22 @@ public class PedidoPersonalizadoDAO {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("ingredientesxusuario");
 
-            BasicDBObject doc = new BasicDBObject();
+            BasicDBObject docIngredienteXUsuario = new BasicDBObject();
 
-            doc.put("id", obtenerSiguienteId());
-            doc.put("usu", usuario);
-            BasicDBObject doc2;
-            ArrayList ingredientesA = new ArrayList();
-
+            docIngredienteXUsuario.put("id", obtenerSiguienteId());
+            docIngredienteXUsuario.put("usu", usuario);
+            
+            BasicDBObject docIngrediente;
+            ArrayList arrayIngredientes = new ArrayList();
             for (Ingrediente ingrediente : ingredientes) {
-                doc2 = new BasicDBObject();
-                doc2.put("id", ingrediente.getId());
-                doc2.put("nombre", ingrediente.getNombre());
-                ingredientesA.add(doc2);
+                docIngrediente = new BasicDBObject();
+                docIngrediente.put("id", ingrediente.getId());
+                docIngrediente.put("nombre", ingrediente.getNombre());
+                arrayIngredientes.add(docIngrediente);
             }
-            doc.put("ingredientes", ingredientesA);
+            docIngredienteXUsuario.put("ingredientes", arrayIngredientes);
 
-            coleccion.insert(doc);
+            coleccion.insert(docIngredienteXUsuario);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
