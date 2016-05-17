@@ -25,7 +25,7 @@ public class PedidoDAO {
 
             BasicDBObject doc = new BasicDBObject();
 
-            doc.put("id", contar() + 1);
+            doc.put("id", obtenerSiguienteId());
 
             BasicDBObject doc1 = new BasicDBObject();
             doc1.put("fechahora", estado.getHora());
@@ -77,7 +77,7 @@ public class PedidoDAO {
         }
     }
 
-    private Integer contar() {
+    private int obtenerSiguienteId() {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         int cont = 0;
@@ -94,6 +94,6 @@ public class PedidoDAO {
         } finally {
             mongo.close();
         }
-        return cont;
+        return cont + 1;
     }
 }
