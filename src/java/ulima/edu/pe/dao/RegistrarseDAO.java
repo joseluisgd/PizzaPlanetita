@@ -20,7 +20,7 @@ public class RegistrarseDAO {
 
             BasicDBObject doc = new BasicDBObject();
 
-            doc.put("id", contar() + 1);
+            doc.put("id", obtenerSiguienteId());
             doc.put("nombre", nombre);
             doc.put("apellidos", apellidos);
             doc.put("dni", dni);
@@ -43,7 +43,7 @@ public class RegistrarseDAO {
         }
     }
 
-    private Integer contar() {
+    private int obtenerSiguienteId() {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         int cont = 0;
@@ -60,6 +60,6 @@ public class RegistrarseDAO {
         } finally {
             mongo.close();
         }
-        return cont;
+        return cont + 1;
     }
 }
