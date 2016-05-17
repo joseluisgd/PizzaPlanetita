@@ -42,7 +42,7 @@ public class ServletPedido extends HttpServlet {
         //usuario ???
 
         PedidoPersonalizadoDAO daoPedidoPersonalizado = new PedidoPersonalizadoDAO();
-        daoPedidoPersonalizado.ingresarPedidoxUsuario(listaIngredientes, (String) ses.getAttribute("username"));
+        daoPedidoPersonalizado.ingresarPedidoxUsuario(listaIngredientes, String.valueOf(ses.getAttribute("username")));
 
         RequestDispatcher rd = request.getRequestDispatcher("pedidoingresado.jsp");
         rd.forward(request, response);
