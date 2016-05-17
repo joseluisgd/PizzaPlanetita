@@ -12,7 +12,7 @@ public class Usuario implements Serializable {
     }
 
     public Usuario(String username, String password, String correo) {
-        this.username = usuario;
+        this.username = username;
         this.password = password;
         this.correo = correo;
         this.puntos=0;
