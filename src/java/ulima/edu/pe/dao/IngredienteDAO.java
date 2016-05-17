@@ -34,7 +34,7 @@ public class IngredienteDAO {
         return ingrediente;
     }
 
-    public Ingrediente BuscarIngrediente(int id) {
+    public Ingrediente buscarIngrediente(int id) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         Ingrediente ingrediente = new Ingrediente();
@@ -56,7 +56,5 @@ public class IngredienteDAO {
             mongo.close();
         }
         return ingrediente;
-
     }
-
 }
