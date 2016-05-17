@@ -5,7 +5,7 @@ import java.util.List;
 public class Pedido {
     private int id;
     private Estado estado;
-    private String usuario;
+    private String username;
     private String direccion;
     private float monto;
     private List<Pizza> pizzas;
@@ -14,10 +14,10 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int id, Estado estado, String usuario, String direccion, float monto, List<Pizza> pizzas, List<Producto> productos) {
+    public Pedido(int id, Estado estado, String username, String direccion, float monto, List<Pizza> pizzas, List<Producto> productos) {
         this.id = id;
         this.estado = estado;
-        this.usuario = usuario;
+        this.username = username;
         this.direccion = direccion;
         this.monto = monto;
         this.pizzas = pizzas;
@@ -40,12 +40,12 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getDireccion() {
