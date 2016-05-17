@@ -1,25 +1,22 @@
 package ulima.edu.pe.beans;
 
-/**
- * Created by fixt on 10/05/16.
- */
 public class Cliente {
 
-    private int id,telefono;
-    private String nombre,apellido,dni,edad;
-    private Usuario user;
+    private int id, telefono;
+    private String nombre, apellido, dni, edad;
+    private Usuario usuario;
 
     public Cliente() {
     }
 
-    public Cliente(int id, int telefono, String nombre, String apellido, String dni, String edad, Usuario user) {
+    public Cliente(int id, int telefono, String nombre, String apellido, String dni, String edad, Usuario usuario) {
         this.id = id;
         this.telefono = telefono;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.edad = edad;
-        this.user = user;
+        this.usuario = usuario;
     }
 
     public int getId() {
@@ -70,11 +67,11 @@ public class Cliente {
         this.edad = edad;
     }
 
-    public Usuario getUser() {
-        return user;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
