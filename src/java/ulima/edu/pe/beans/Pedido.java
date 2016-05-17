@@ -2,9 +2,6 @@ package ulima.edu.pe.beans;
 
 import java.util.List;
 
-/**
- * Created by Admin on 9/05/2016.
- */
 public class Pedido {
     private int id;
     private Estado estado;
@@ -17,13 +14,14 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int id, Estado estado, String usuario, String direccion, float monto, List<Pizza> pizzas) {
+    public Pedido(int id, Estado estado, String usuario, String direccion, float monto, List<Pizza> pizzas, List<Producto> productos) {
         this.id = id;
         this.estado = estado;
         this.usuario = usuario;
         this.direccion = direccion;
         this.monto = monto;
         this.pizzas = pizzas;
+        this.productos = productos;
     }
 
     public int getId() {
@@ -72,5 +70,13 @@ public class Pedido {
 
     public void setPizzas(List<Pizza> pizzas) {
         this.pizzas = pizzas;
+    }
+    
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }
