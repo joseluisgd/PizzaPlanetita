@@ -34,7 +34,7 @@ public class ServletPedidoIngresado extends HttpServlet {
         ses.setAttribute("estado", estado);
         
         //usuario
-        String username = (String) ses.getAttribute("username");
+        String username = String.valueOf(ses.getAttribute("username"));
         String direccion = request.getParameter("direccion");
         ses.setAttribute("direccion", direccion);
         
