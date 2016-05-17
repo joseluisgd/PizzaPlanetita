@@ -14,7 +14,7 @@ public class Estado {
         this.estado = estado;
     }
 
-    public String getFechahora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 
