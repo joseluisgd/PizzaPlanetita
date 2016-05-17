@@ -26,7 +26,7 @@ public class ServletPedido extends HttpServlet {
         
         //Productos
         ProductoDAO daoProducto= new ProductoDAO();
-        List<Producto> listaProductos = new ArrayList<Producto>();
+        List<Producto> listaProductos = new ArrayList<>();
         for (int i = 0; i < productos.length; i++) {
             listaProductos.add(daoProducto.buscarProducto(Integer.parseInt(productos[i])));
         }
