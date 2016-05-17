@@ -6,16 +6,17 @@ import java.text.SimpleDateFormat;
 
 // Verificar si compila
 public class Util {
-	private Util singleton = null;
+	//private static Util singleton = null;
 	
-	private Util {}
+	private Util() {}
 	
-	public static Util getInstance() {
-		if (singleton == null) {
-			singleton = new Util;
-		}
-		return singleton;
-	}
+	// Me parece que no es necesario siquiera instanciarlo una vez (al menos por ahora)
+	//public static Util getInstance() {
+	//	if (singleton == null) {
+	//		singleton = new Util();
+	//	}
+	//	return singleton;
+	//}
 	
 	public static String obtenerFechaHoraActual() {
 		// Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT-05:00")); // No funciona
