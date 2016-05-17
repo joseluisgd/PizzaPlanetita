@@ -7,35 +7,35 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import ulima.edu.pe.beans.Usuario;
+import ulima.edu.pe.beans.Cliente;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class RegistrarseDAO {
 
-    public void registrar(String nombre, String apellidos, String dni, int telefono, String edad, Usuario usu) {
+    public void registrar(Cliente cliente) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("cliente");
 
-            BasicDBObject doc = new BasicDBObject();
+            BasicDBObject docCliente = new BasicDBObject();
 
-            doc.put("id", obtenerSiguienteId());
-            doc.put("nombre", nombre);
-            doc.put("apellidos", apellidos);
-            doc.put("dni", dni);
-            doc.put("telefono", telefono);
-            doc.put("edad", edad);
+            docCliente.put("id", obtenerSiguienteId());
+            docCliente.put("nombre", cliente.getNombre());
+            docCliente.put("apellidos", cliente.getApellido());
+            docCliente.put("dni", cliente.getDni());
+            docCliente.put("telefono", cliente.getTelefono()); // Conversión implícita, arreglar
+            docCliente.put("edad", cliente.getEdad());
 
-            BasicDBObject doc2 = new BasicDBObject();
-            doc2.put("usu", usu.getUsuario());
-            doc2.put("pass", usu.getPassword());
-            doc2.put("correo", usu.getCorreo());
-            doc2.put("puntos", usu.getPuntos());
+            BasicDBObject docUsuario = new BasicDBObject();
+            docUsuario.put("usu", cliente.getUsuario().getUsername());
+            docUsuario.put("pass", cliente.getUsuario().getPassword());
+            docUsuario.put("correo", cliente.getUsuario().getCorreo());
+            docUsuario.put("puntos", cliente.getUsuario().getPuntos());
 
-            doc.put("Usuario", doc2);
-
-            coleccion.insert(doc);
+            docCliente.put("Usuario", docUsuario);
+            coleccion.insert(docCliente);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
