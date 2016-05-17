@@ -13,7 +13,6 @@ import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Producto;
 import ulima.edu.pe.util.ConexionMLab;
 
-
 public class ProductoDAO {
     public List<Producto> getProductos() {
         ConexionMLab con = new ConexionMLab();
@@ -26,7 +25,6 @@ public class ProductoDAO {
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
                 producto.add(new Producto((Integer) dbo.get("id"), (String) dbo.get("nombre"), (Double)dbo.get("precio")));
-                
             }
         } catch (Exception e) {
             e.printStackTrace();
