@@ -45,6 +45,8 @@ public class IngredienteDAO {
             BasicDBObject query1 = new BasicDBObject();
             query1.put("$eq", id);
             query.put("id", query1);
+            // En vez de utilizar query1, ¿Se puede hacer lo siguiente?
+            // query.put("id", id);
             DBCursor cursor = coleccion.find(query);
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
