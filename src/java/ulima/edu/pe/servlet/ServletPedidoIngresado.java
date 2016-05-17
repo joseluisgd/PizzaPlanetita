@@ -35,7 +35,7 @@ public class ServletPedidoIngresado extends HttpServlet {
         ses.setAttribute("estado", estado);
         
         //usuario
-        String usuario = (String) ses.getAttribute("username");
+        String username = (String) ses.getAttribute("username");
         String direccion = request.getParameter("direccion");
         
         ses.setAttribute("direccion", direccion);
@@ -61,7 +61,7 @@ public class ServletPedidoIngresado extends HttpServlet {
         
         Pedido pedido = new Pedido();
         pedido.setEstado(estado);
-        pedido.setUsuario(usuario);
+        pedido.setUsername(username);
         pedido.setDireccion(direccion);
         pedido.setPizzas(pizzas);
         pedido.setProductos(productos);
