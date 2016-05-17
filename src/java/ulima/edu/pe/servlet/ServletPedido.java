@@ -36,7 +36,7 @@ public class ServletPedido extends HttpServlet {
         IngredienteDAO daoIngrediente = new IngredienteDAO();
         List<Ingrediente> listaIngredientes = new ArrayList<>();
         for (String ingrediente : ingredientes) {
-            listaIngredientes.add(daoIngrediente.buscarIngrediente((Integer.parseInt(ingrediente))));
+            listaIngredientes.add(daoIngrediente.buscarIngrediente(Integer.parseInt(ingrediente)));
         }
         ses.setAttribute("ingredientesIngresados", listaIngredientes);
         //usuario ???
