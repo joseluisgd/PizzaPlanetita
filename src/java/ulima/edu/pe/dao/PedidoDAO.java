@@ -12,64 +12,65 @@ import ulima.edu.pe.beans.Estado;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Pizza;
 import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.beans.Pedido;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoDAO {
 
-    public void agregar(Estado estado, String usuario, String direccion, List<Pizza> pizzas, List<Producto> productos) {
+    public void agregarPedido(Pedido pedido) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("pedido");
 
-            BasicDBObject doc = new BasicDBObject();
+            BasicDBObject docPedido = new BasicDBObject();
 
-            doc.put("id", obtenerSiguienteId());
+            docPedido.put("id", obtenerSiguienteId());
 
-            BasicDBObject doc1 = new BasicDBObject();
-            doc1.put("fechahora", estado.getHora());
-            doc1.put("id", estado.getId());
-            doc1.put("estado", estado.getEstado());
+            BasicDBObject docEstado = new BasicDBObject();
+            docEstado.put("fechahora", pedido.getEstado().getHora());
+            docEstado.put("id", pedido.getEstado().getId());
+            docEstado.put("estado", pedido.getEstado().getEstado());
 
-            doc.put("Estado", doc1);
+            docPedido.put("Estado", docEstado);
+            docPedido.put("usu", pedido.getUsuario());
+            docPedido.put("direccion", pedido.getDireccion());
 
-            doc.put("usu", usuario);
-
-            doc.put("direccion", direccion);
-
-            BasicDBObject doc2;
-            BasicDBObject doc4;
+            BasicDBObject docPizza;
+            BasicDBObject docIngrediente;
             ArrayList arrayPizzas = new ArrayList();
             ArrayList arrayIngredientes = new ArrayList();
             List<Ingrediente> ingredientes;
+            List<Pizza> pizzas = pedido.getPizzas();
             for (Pizza pizza : pizzas) {
-                doc2 = new BasicDBObject();
+                docPizza = new BasicDBObject();
                 ingredientes = pizza.getIng();
                 for (Ingrediente ingrediente : ingredientes) {
-                    doc4 = new BasicDBObject();
-                    doc4.put("id", ingrediente.getId());
-                    doc4.put("nombre", ingrediente.getNombre());
-                    arrayIngredientes.add(doc4);
+                    docIngrediente = new BasicDBObject();
+                    docIngrediente.put("id", ingrediente.getId());
+                    docIngrediente.put("nombre", ingrediente.getNombre());
+                    arrayIngredientes.add(docIngrediente);
                 }
-                doc2.put("Ingredientes", arrayIngredientes);
-                doc2.put("precio", pizza.getPrecio());
-                arrayPizzas.add(doc2);
+                docPizza.put("Ingredientes", arrayIngredientes);
+                docPizza.put("precio", pizza.getPrecio());
+                arrayPizzas.add(docPizza);
             }
-            doc.put("Pizzas", arrayPizzas);
+            docPedido.put("Pizzas", arrayPizzas);
 
-            BasicDBObject doc3;
+            BasicDBObject docProducto;
             ArrayList arrayProductos = new ArrayList();
+            List<Producto> productos = pedido.getPRoductos();
             for (Producto producto : productos) {
-                doc3 = new BasicDBObject();
-                doc3.put("id", producto.getId());
-                doc3.put("nombre", producto.getNombre());
-                doc3.put("precio", producto.getPrecio());
-                arrayProductos.add(doc3);
+                docProducto = new BasicDBObject();
+                docProducto.put("id", producto.getId());
+                docProducto.put("nombre", producto.getNombre());
+                docProducto.put("precio", producto.getPrecio());
+                arrayProductos.add(docProducto);
             }
-            doc.put("Productos", arrayProductos);
+            docPedido.put("Productos", arrayProductos);
 
-            coleccion.insert(doc);
+            coleccion.insert(docPedido);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
