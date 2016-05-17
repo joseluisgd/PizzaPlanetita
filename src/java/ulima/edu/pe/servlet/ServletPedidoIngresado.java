@@ -29,7 +29,7 @@ public class ServletPedidoIngresado extends HttpServlet {
         
         //estado
         Estado estado = new Estado();
-        estado.setFechaHora(Util.getInstance().obtenerFechaHoraActual());
+        estado.setFechaHora(Util.obtenerFechaHoraActual());
         estado.setEstado("En cola");
         ses.setAttribute("estado", estado);
         
