@@ -24,7 +24,7 @@ public class PedidoPersonalizadoDAO {
 
             BasicDBObject doc = new BasicDBObject();
 
-            doc.put("id", contar() + 1);
+            doc.put("id", obtenerSiguienteId());
             doc.put("usu", usuario);
             BasicDBObject doc2;
             ArrayList ingredientesA = new ArrayList();
@@ -45,7 +45,7 @@ public class PedidoPersonalizadoDAO {
         }
     }
 
-    private Integer contar() {
+    private int obtenerSiguienteId() {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         int cont = 0;
@@ -62,7 +62,7 @@ public class PedidoPersonalizadoDAO {
         } finally {
             mongo.close();
         }
-        return cont;
+        return cont + 1;
     }
 
 }
