@@ -11,7 +11,7 @@ import ulima.edu.pe.util.ConexionMLab;
 
 public class LoginDAO {
 
-    public Integer login(String usuario, String password) {
+    public int login(String usuario, String password) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         int variable = 0;
@@ -24,13 +24,8 @@ public class LoginDAO {
             BasicDBObject subquery = new BasicDBObject();
             BasicDBObject where1 = new BasicDBObject();
             BasicDBObject where2 = new BasicDBObject();
-//            where1.put("usu", usuario);
-//            where2.put("pass", password);
-//            subquery.put("usu", where1);
-//            subquery.put("pass", where2);
             subquery.put("Usuario.usu", usuario);
             subquery.put("Usuario.pass", password);
-//            query.put("Usuario", subquery);
             
             DBCursor cursor = coleccion.find(subquery);
             if (cursor.hasNext()) {
