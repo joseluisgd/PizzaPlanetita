@@ -16,6 +16,7 @@ import ulima.edu.pe.beans.Estado;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Pizza;
 import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.beans.Pedido;
 import ulima.edu.pe.dao.PedidoDAO;
 
 public class ServletPedidoIngresado extends HttpServlet {
@@ -25,7 +26,7 @@ public class ServletPedidoIngresado extends HttpServlet {
 
         HttpSession ses = request.getSession(true);
         
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         //estado
         Estado estado = new Estado();
@@ -43,68 +44,49 @@ public class ServletPedidoIngresado extends HttpServlet {
         //ingredientes
         List<Ingrediente> ingr = (List<Ingrediente>) ses.getAttribute("ingredientesIngresados");
         //precio
-        float precio=0.0f;
+        //falta corregir
+        float precio = 0.0f;
         for (Ingrediente ingrediente : ingr) {
-            precio*=precio;
+            precio *= precio;
         }
         ses.setAttribute("precio", precio);
         
         //pizza
-        List<Pizza> pizza = new ArrayList<>();
-        pizza.add(new Pizza(precio, ingr));
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(new Pizza(precio, ingr));
         
-        ses.setAttribute("pizza", pizza);
+        ses.setAttribute("pizza", pizzas);
         
         //productos
-        List<Producto> prod= (List<Producto>)ses.getAttribute("productosIngresados");
+        List<Producto> productos = (List<Producto>) ses.getAttribute("productosIngresados");
         
+        Pedido pedido = new Pedido();
+        pedido.setEstado(estado);
+        pedido.setUsuario(usuario);
+        pedido.setDireccion(direccion);
+        pedido.setPizzas(pizzas);
+        pedido.setProductos(productos);
         
-        PedidoDAO dao10= new PedidoDAO();
-        dao10.agregar(estado, usuario, direccion, pizza, prod);
-        
-        
-        
+        PedidoDAO daoPedido = new PedidoDAO();
+        daoPedido.agregarPedido(pedido);
+
         //rd
         RequestDispatcher rd = request.getRequestDispatcher("pedidoRegistrado.jsp");
-
         rd.forward(request, response);
-        
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
