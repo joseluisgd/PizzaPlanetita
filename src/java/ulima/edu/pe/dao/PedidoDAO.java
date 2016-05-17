@@ -29,7 +29,7 @@ public class PedidoDAO {
             docPedido.put("id", obtenerSiguienteId());
 
             BasicDBObject docEstado = new BasicDBObject();
-            docEstado.put("fechahora", pedido.getEstado().getHora());
+            docEstado.put("fechahora", pedido.getEstado().getFechaHora());
             docEstado.put("id", pedido.getEstado().getId());
             docEstado.put("estado", pedido.getEstado().getEstado());
 
