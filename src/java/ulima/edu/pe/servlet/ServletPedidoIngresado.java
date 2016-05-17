@@ -18,6 +18,7 @@ import ulima.edu.pe.beans.Pizza;
 import ulima.edu.pe.beans.Producto;
 import ulima.edu.pe.beans.Pedido;
 import ulima.edu.pe.dao.PedidoDAO;
+import ulima.edu.pe.util.Util;
 
 public class ServletPedidoIngresado extends HttpServlet {
 
@@ -26,11 +27,9 @@ public class ServletPedidoIngresado extends HttpServlet {
 
         HttpSession ses = request.getSession(true);
         
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
         //estado
         Estado estado = new Estado();
-        estado.setHora((String)dateFormat.format(date));
+        estado.setHora(Util.getInstance().obtenerFechaHoraActual());
         estado.setEstado("En cola");
         
         ses.setAttribute("estado", estado);
