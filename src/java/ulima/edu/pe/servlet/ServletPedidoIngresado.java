@@ -29,15 +29,13 @@ public class ServletPedidoIngresado extends HttpServlet {
         
         //estado
         Estado estado = new Estado();
-        estado.setHora(Util.getInstance().obtenerFechaHoraActual());
+        estado.setFechaHora(Util.getInstance().obtenerFechaHoraActual());
         estado.setEstado("En cola");
-        
         ses.setAttribute("estado", estado);
         
         //usuario
         String username = (String) ses.getAttribute("username");
         String direccion = request.getParameter("direccion");
-        
         ses.setAttribute("direccion", direccion);
         
         //ingredientes
@@ -53,7 +51,6 @@ public class ServletPedidoIngresado extends HttpServlet {
         //pizza
         List<Pizza> pizzas = new ArrayList<>();
         pizzas.add(new Pizza(precio, ingr));
-        
         ses.setAttribute("pizza", pizzas);
         
         //productos
