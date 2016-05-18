@@ -10,7 +10,7 @@ public class Util {
 	
 	private Util() {}
 	
-	// Me parece que no es necesario siquiera instanciarlo una vez (al menos por ahora)
+	//No es necesario ni siquiera instanciarlo una vez (al menos por ahora)
 	//public static Util getInstance() {
 	//	if (singleton == null) {
 	//		singleton = new Util();
