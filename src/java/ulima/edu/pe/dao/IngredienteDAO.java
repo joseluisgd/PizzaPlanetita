@@ -24,7 +24,7 @@ public class IngredienteDAO {
             DBCursor cursor = coleccion.find();
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                ingrediente.add(new Ingrediente((Integer) dbo.get("id"), (String) dbo.get("nombre")));
+                ingrediente.add(new Ingrediente((Integer) dbo.get("id"), String.valueOf(dbo.get("nombre"))));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class IngredienteDAO {
             DBCursor cursor = coleccion.find(query);
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                ingrediente = new Ingrediente((Integer) dbo.get("id"), (String) dbo.get("nombre"));
+                ingrediente = new Ingrediente((Integer) dbo.get("id"), String.valueOf(dbo.get("nombre")));
             }
         } catch (Exception e) {
             e.printStackTrace();
