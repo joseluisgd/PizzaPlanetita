@@ -1,7 +1,6 @@
 package ulima.edu.pe.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +11,6 @@ import ulima.edu.pe.beans.Usuario;
 import ulima.edu.pe.beans.Cliente;
 import ulima.edu.pe.dao.RegistrarseDAO;
 
-/**
- *
- * @author Jose Luis
- */
 public class ServletRegistrarse extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
