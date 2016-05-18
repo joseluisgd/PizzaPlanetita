@@ -47,7 +47,7 @@ public class ProductoDAO {
             DBCursor cursor = coleccion.find(query);
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                producto = new Producto((Integer) dbo.get("id"), String.valueOf(dbo.get("nombre")), (Double)dbo.get("precio"));
+                producto = new Producto((Integer) dbo.get("id"), String.valueOf(dbo.get("nombre")), (Double) dbo.get("precio"));
             }
         } catch (Exception e) {
             e.printStackTrace();
