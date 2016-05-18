@@ -9,7 +9,6 @@ import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.Usuario;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoPersonalizadoDAO {
