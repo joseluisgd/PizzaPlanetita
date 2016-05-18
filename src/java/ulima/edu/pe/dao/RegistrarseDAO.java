@@ -6,7 +6,6 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import ulima.edu.pe.beans.Usuario;
 import ulima.edu.pe.beans.Cliente;
 import ulima.edu.pe.util.ConexionMLab;
 
