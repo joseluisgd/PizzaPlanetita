@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.dao.IngredienteDAO;
+import ulima.edu.pe.dao.MostrarCartaPizzaDAO;
 import ulima.edu.pe.dao.ProductoDAO;
 import ulima.edu.pe.dao.TamanoDAO;
 
@@ -17,6 +18,10 @@ public class ServletIngrediente extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession ses = request.getSession(true);
+        
+        
+        MostrarCartaPizzaDAO mostrarCarta=new MostrarCartaPizzaDAO();
+        ses.setAttribute("carta", mostrarCarta.getPizzas());
 
         IngredienteDAO daoIngrediente = new IngredienteDAO();
         ses.setAttribute("ingredientes", daoIngrediente.getIngredientes());

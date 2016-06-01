@@ -44,7 +44,7 @@ public class ServletPedido extends HttpServlet {
         
 
         ses.setAttribute("ingredientesIngresados", listaIngredientes);
-        //Tamano
+        //Tamano DAO ES EXCLUSIVAMENTE USADO PARA PIZZAS PERSONALIZADAS
         TamanoDAO daoTamano=new TamanoDAO();
         List<Tamano> tamanos= daoTamano.getTamanos();
         Tamano t= new Tamano();
