@@ -22,7 +22,10 @@
             <c:forEach var="y" items="${sessionScope.productosIngresados}">
                 <c:out value="${y.nombre}"/><br>
             </c:forEach>
-                Direccion : <input type="text" name="direccion"/>
+
+            <c:out value="${sessionScope.tamanoIngresado.nombre}"/><br>
+
+            Direccion : <input type="text" name="direccion"/>
             <button type="submit"> Ok? </button>
         </form>
     </body>

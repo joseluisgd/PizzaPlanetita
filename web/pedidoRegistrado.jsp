@@ -17,11 +17,14 @@
         <c:forEach var="x" items="${sessionScope.ingredientesIngresados}">
             <c:out value="${x.nombre}"/><br>
         </c:forEach><br>
+        -------------------------------------------------<br>
+        <c:out value="${sessionScope.tamanoIngresado.nombre}"/><br>
+        -------------------------------------------------<br>
         <c:out value="${sessionScope.precio}" /><br>
         -------------------------------------------------<br>
         <c:out value="${sessionScope.estado.estado}" /><br>
         -------------------------------------------------<br>
-        <c:out value="${sessionScope.estado.hora}" /><br>
+        <c:out value="${sessionScope.estado.fechaHora}" /><br>
         -------------------------------------------------<br>
         <c:out value="${sessionScope.direccion}" /><br>
 

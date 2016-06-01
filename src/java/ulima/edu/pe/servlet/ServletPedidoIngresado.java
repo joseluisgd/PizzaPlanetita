@@ -14,6 +14,7 @@ import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Pizza;
 import ulima.edu.pe.beans.Producto;
 import ulima.edu.pe.beans.Pedido;
+import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.util.Util;
 
@@ -39,7 +40,7 @@ public class ServletPedidoIngresado extends HttpServlet {
         List<Ingrediente> ingr = (List<Ingrediente>) ses.getAttribute("ingredientesIngresados");
         //precio
         //falta corregir
-        float precio = 0.0f;
+        float precio = 2.0f;
         for (Ingrediente ingrediente : ingr) {
             precio *= precio;
         }
@@ -47,7 +48,8 @@ public class ServletPedidoIngresado extends HttpServlet {
         
         //pizza
         List<Pizza> pizzas = new ArrayList<>();
-        pizzas.add(new Pizza(precio, ingr));
+        Tamano t = (Tamano)ses.getAttribute("tamanoIngresado");
+        pizzas.add(new Pizza(ingr,t.getNombre(),precio));    
         ses.setAttribute("pizza", pizzas);
         
         //productos

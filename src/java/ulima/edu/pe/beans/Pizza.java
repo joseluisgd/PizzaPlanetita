@@ -1,37 +1,53 @@
 package ulima.edu.pe.beans;
 
 
-import ulima.edu.pe.beans.Ingrediente;
 import java.util.List;
 
 /**
  * Created by fixt on 05/05/16.
  */
+//Elimine el atributo tipo y precio, cree una clase tamano
 public class Pizza {
-    private int id, tipo;
-    private String nombre, tamaño;
-    private float precio;
+    private int id;
+    private String nombrePizza;
     private List<Ingrediente> ing;
-    private String img;
+    private List<Tamano> tam; //solo para pizzas definidas
+    private String tamano; //solo para pizzas personalizadas
+    private float precio;//solo para pizzas personalizadas
 
     public Pizza() {
     }
 
-    public Pizza(float precio, List<Ingrediente> ing) {
-        this.precio = precio;
+    public Pizza(List<Ingrediente> ing, String tamano, float precio) {
         this.ing = ing;
+        this.tamano = tamano;
+        this.precio = precio;
     }
-    
+
     
 
-    public Pizza(int id, int tipo, String nombre, String tamaño, float precio, List<Ingrediente> ing, String img) {
-        this.id = id;
-        this.tipo = tipo;
-        this.nombre = nombre;
-        this.tamaño = tamaño;
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
         this.precio = precio;
+    }
+
+    public String getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(String tamano) {
+        this.tamano = tamano;
+    }
+    
+
+    public Pizza(int id, String nombrePizza, List<Ingrediente> ing, List<Tamano> tam) {
+        this.id = id;
+        this.nombrePizza = nombrePizza;
         this.ing = ing;
-        this.img = img;
+        this.tam = tam;
     }
 
     public int getId() {
@@ -42,36 +58,12 @@ public class Pizza {
         this.id = id;
     }
 
-    public int getTipo() {
-        return tipo;
+    public String getNombrePizza() {
+        return nombrePizza;
     }
 
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTamaño() {
-        return tamaño;
-    }
-
-    public void setTamaño(String tamaño) {
-        this.tamaño = tamaño;
-    }
-
-    public float getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(float precio) {
-        this.precio = precio;
+    public void setNombrePizza(String nombrePizza) {
+        this.nombrePizza = nombrePizza;
     }
 
     public List<Ingrediente> getIng() {
@@ -82,11 +74,12 @@ public class Pizza {
         this.ing = ing;
     }
 
-    public String getImg() {
-        return img;
+    public List<Tamano> getTam() {
+        return tam;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setTam(List<Tamano> tam) {
+        this.tam = tam;
     }
+    
 }

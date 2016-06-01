@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.dao.IngredienteDAO;
 import ulima.edu.pe.dao.PedidoPersonalizadoDAO;
 import ulima.edu.pe.dao.ProductoDAO;
+import ulima.edu.pe.dao.TamanoDAO;
 
 public class ServletPedido extends HttpServlet {
 
@@ -23,6 +25,7 @@ public class ServletPedido extends HttpServlet {
 
         String productos[] = request.getParameterValues("productos");
         String ingredientes[] = request.getParameterValues("ingredientes");
+        String id= request.getParameter("idTamano");
         
         //Productos
         ProductoDAO daoProducto= new ProductoDAO();
@@ -38,7 +41,23 @@ public class ServletPedido extends HttpServlet {
         for (String ingrediente : ingredientes) {
             listaIngredientes.add(daoIngrediente.buscarIngrediente(Integer.parseInt(ingrediente)));
         }
+        
+
         ses.setAttribute("ingredientesIngresados", listaIngredientes);
+        //Tamano
+        TamanoDAO daoTamano=new TamanoDAO();
+        List<Tamano> tamanos= daoTamano.getTamanos();
+        Tamano t= new Tamano();
+        for (Tamano tamano1 : tamanos) {
+            if(tamano1.getId()==Integer.parseInt(id)){
+                t.setId(tamano1.getId());
+                t.setNombre(tamano1.getNombre());
+                t.setSlices(tamano1.getSlices());
+            }
+        }
+        
+        ses.setAttribute("tamanoIngresado", t);
+        
         //usuario ???
 
         PedidoPersonalizadoDAO daoPedidoPersonalizado = new PedidoPersonalizadoDAO();

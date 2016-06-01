@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.dao.IngredienteDAO;
 import ulima.edu.pe.dao.ProductoDAO;
+import ulima.edu.pe.dao.TamanoDAO;
 
 public class ServletIngrediente extends HttpServlet {
 
@@ -22,7 +23,10 @@ public class ServletIngrediente extends HttpServlet {
         
         ProductoDAO daoProducto = new ProductoDAO();
         ses.setAttribute("productos", daoProducto.getProductos());
-
+        //Agregue esta parte -----
+        TamanoDAO daoTamano= new TamanoDAO();
+        ses.setAttribute("tamanos", daoTamano.getTamanos());
+        //-----
         RequestDispatcher rd = request.getRequestDispatcher("crearPedido.jsp");
         rd.forward(request, response);
     }

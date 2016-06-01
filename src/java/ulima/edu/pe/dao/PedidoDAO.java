@@ -53,6 +53,7 @@ public class PedidoDAO {
                     arrayIngredientes.add(docIngrediente);
                 }
                 docPizza.put("Ingredientes", arrayIngredientes);
+                docPizza.put("Tamano", pizza.getTamano());
                 docPizza.put("precio", pizza.getPrecio());
                 arrayPizzas.add(docPizza);
             }

@@ -13,13 +13,17 @@
                 <input type="checkbox" value="<c:out value="${x.id}"/>" name="ingredientes">
                 <c:out value="${x.nombre}"/><br>
             </c:forEach>
-                <br>
+            <br>
             <c:forEach var="y" items="${sessionScope.productos}">
                 <input type="checkbox" value="<c:out value="${y.id}"/>" name="productos">
                 <c:out value="${y.nombre}"/>
                 <c:out value="${y.precio}"/><br>
             </c:forEach>
-                
+            <c:forEach var="z" items="${sessionScope.tamanos}">
+                <input type="radio" value="<c:out value="${z.id}"/>" name="idTamano">
+                <c:out value="${z.nombre}"/><br>
+                <c:out value="${z.slices}"/><br> Slices
+            </c:forEach>
             <button type="submit"> Aceptar </button>
         </form>
     </body>
