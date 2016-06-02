@@ -18,7 +18,7 @@ import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.util.Util;
 
-public class ServletPedidoIngresado extends HttpServlet {
+public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

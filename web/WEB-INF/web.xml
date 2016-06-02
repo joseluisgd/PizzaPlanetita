@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ServletIngrediente</servlet-name>
-        <servlet-class>ulima.edu.pe.servlet.ServletIngrediente</servlet-class>
+        <servlet-name>ServletPizzaPersonalizada</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletPizzaPersonalizada</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletPedido</servlet-name>
-        <servlet-class>ulima.edu.pe.servlet.ServletPedido</servlet-class>
+        <servlet-name>ServletPedidoPersonalizado</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletPedidoPersonalizado</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletRegistrarse</servlet-name>
@@ -17,16 +17,28 @@
         <servlet-class>ulima.edu.pe.servlet.ServletLogin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletPedidoIngresado</servlet-name>
-        <servlet-class>ulima.edu.pe.servlet.ServletPedidoIngresado</servlet-class>
+        <servlet-name>ServletPedidoPersonalizadoIngresado</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletPedidoPersonalizadoIngresado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletPizzasPredeterminadas</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletPizzasPredeterminadas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletPedidoPredeterminado</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletPedidoPredeterminado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletPedidoPredeterminadoIngresado</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletPedidoPredeterminadoIngresado</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ServletIngrediente</servlet-name>
-        <url-pattern>/sIngrediente</url-pattern>
+        <servlet-name>ServletPizzaPersonalizada</servlet-name>
+        <url-pattern>/sPizzaPersonalizada</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletPedido</servlet-name>
-        <url-pattern>/sPedido</url-pattern>
+        <servlet-name>ServletPedidoPersonalizado</servlet-name>
+        <url-pattern>/sPedidoPersonalizado</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletRegistrarse</servlet-name>
@@ -37,8 +49,20 @@
         <url-pattern>/sLogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletPedidoIngresado</servlet-name>
-        <url-pattern>/sPedidoIngresado</url-pattern>
+        <servlet-name>ServletPedidoPersonalizadoIngresado</servlet-name>
+        <url-pattern>/sPedidoPersonalizadoIngresado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletPizzasPredeterminadas</servlet-name>
+        <url-pattern>/sPizzasPredeterminadas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletPedidoPredeterminado</servlet-name>
+        <url-pattern>/sPedidoPredeterminado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletPedidoPredeterminadoIngresado</servlet-name>
+        <url-pattern>/sPedidoPredeterminadoIngresado</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

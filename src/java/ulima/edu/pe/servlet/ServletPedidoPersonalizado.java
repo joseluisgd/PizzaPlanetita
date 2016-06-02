@@ -17,7 +17,7 @@ import ulima.edu.pe.dao.PedidoPersonalizadoDAO;
 import ulima.edu.pe.dao.ProductoDAO;
 import ulima.edu.pe.dao.TamanoDAO;
 
-public class ServletPedido extends HttpServlet {
+public class ServletPedidoPersonalizado extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -63,7 +63,7 @@ public class ServletPedido extends HttpServlet {
         PedidoPersonalizadoDAO daoPedidoPersonalizado = new PedidoPersonalizadoDAO();
         daoPedidoPersonalizado.ingresarPedidoxUsuario(listaIngredientes, String.valueOf(ses.getAttribute("username")));
 
-        RequestDispatcher rd = request.getRequestDispatcher("pedidoingresado.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("pedidoPersonalizadoIngresado.jsp");
         rd.forward(request, response);
     }
 

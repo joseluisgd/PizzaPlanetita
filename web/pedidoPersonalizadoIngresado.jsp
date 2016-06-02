@@ -15,7 +15,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form action="sPedidoIngresado" method="post">
+        <form action="sPedidoPersonalizadoIngresado" method="post">
             <c:forEach var="x" items="${sessionScope.ingredientesIngresados}">
                 <c:out value="${x.nombre}"/><br>
             </c:forEach><br>
