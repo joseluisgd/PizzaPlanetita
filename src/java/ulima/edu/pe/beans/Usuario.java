@@ -3,7 +3,7 @@ package ulima.edu.pe.beans;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
-    private String username;
+    private String usuario;
     private String password;
     private String correo;
     private int puntos;
@@ -11,19 +11,19 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String username, String password, String correo) {
-        this.username = username;
+    public Usuario(String usuario, String password, String correo) {
+        this.usuario = usuario;
         this.password = password;
         this.correo = correo;
         this.puntos=0;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getPassword() {

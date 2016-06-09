@@ -2,10 +2,13 @@ package ulima.edu.pe.beans;
 
 import java.util.List;
 
+/**
+ * Created by Admin on 9/05/2016.
+ */
 public class Pedido {
     private int id;
     private Estado estado;
-    private String username;
+    private Usuario usuario;
     private String direccion;
     private float monto;
     private List<Pizza> pizzas;
@@ -14,14 +17,14 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int id, Estado estado, String username, String direccion, float monto, List<Pizza> pizzas, List<Producto> productos) {
+    public Pedido(int id, Estado estado, Usuario usuario, String direccion, float monto, List<Pizza> pizzas, List<Producto> productos) {
         this.id = id;
         this.estado = estado;
-        this.username = username;
+        this.usuario = usuario;
         this.direccion = direccion;
         this.monto = monto;
         this.pizzas = pizzas;
-        this.productos = productos;
+        this.productos=productos;
     }
 
     public int getId() {
@@ -40,12 +43,12 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public String getUsername() {
-        return username;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getDireccion() {
@@ -71,7 +74,7 @@ public class Pedido {
     public void setPizzas(List<Pizza> pizzas) {
         this.pizzas = pizzas;
     }
-    
+
     public List<Producto> getProductos() {
         return productos;
     }
@@ -79,4 +82,6 @@ public class Pedido {
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
+    
+    
 }

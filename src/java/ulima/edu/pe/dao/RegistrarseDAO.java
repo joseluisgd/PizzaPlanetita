@@ -28,7 +28,7 @@ public class RegistrarseDAO {
             docCliente.put("edad", cliente.getEdad());
 
             BasicDBObject docUsuario = new BasicDBObject();
-            docUsuario.put("usu", cliente.getUsuario().getUsername());
+            docUsuario.put("usu", cliente.getUsuario().getUsuario());
             docUsuario.put("pass", cliente.getUsuario().getPassword());
             docUsuario.put("correo", cliente.getUsuario().getCorreo());
             docUsuario.put("puntos", cliente.getUsuario().getPuntos());

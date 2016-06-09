@@ -15,6 +15,7 @@ import ulima.edu.pe.beans.Pizza;
 import ulima.edu.pe.beans.Producto;
 import ulima.edu.pe.beans.Pedido;
 import ulima.edu.pe.beans.Tamano;
+import ulima.edu.pe.dao.LoginDAO;
 import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.util.Util;
 
@@ -33,7 +34,9 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         
         //usuario
         String username = String.valueOf(ses.getAttribute("username"));
+        LoginDAO logDao= new LoginDAO();
         String direccion = request.getParameter("direccion");
+        
         ses.setAttribute("direccion", direccion);
         
         //ingredientes
@@ -57,7 +60,7 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         
         Pedido pedido = new Pedido();
         pedido.setEstado(estado);
-        pedido.setUsername(username);
+        pedido.setUsuario(logDao.buscarUsuario(username));
         pedido.setDireccion(direccion);
         pedido.setPizzas(pizzas);
         pedido.setProductos(productos);
