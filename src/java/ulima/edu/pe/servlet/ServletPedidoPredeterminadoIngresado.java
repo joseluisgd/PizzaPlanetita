@@ -15,6 +15,12 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
             throws ServletException, IOException {
         //INGRESAR PEDIDO PREDETERMINADO A LA BD.
         HttpSession ses = request.getSession(true);
+        String direccion = request.getParameter("direccion");
+        
+        //Estructura tiene que ser iugal a la de pedidos personalizados.
+        //Si un campo no se llena, pongan null y a la hora de llamarlo
+        // para mostrar los datos, no consideramos esos campos.
+        //Ingresen estos pedidso en el mismo documento que los personalizados.
         
         
 

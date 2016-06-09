@@ -5,6 +5,8 @@
  */
 package ulima.edu.pe.servlet;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.DBObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,37 +29,63 @@ public class ServletPedidoPredeterminado extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
         String[] idPizzas = request.getParameterValues("pizzaId");
-        
+//<editor-fold defaultstate="collapsed" desc="... Just in case.">
         //Estoy en busca de como gettear todos los radio button en el jsp.
-        String idTamano= request.getParameter("tamanoId");
-        
-        List<Pizza> p=(List<Pizza>)ses.getAttribute("pizzas");
-        List<Pizza> pAux=new ArrayList<>();
-        
-        Tamano t=new Tamano();
-        
-        for (Pizza pizza : p) {
-            for (int i = 0; i < idPizzas.length; i++) {
-                if(pizza.getId()==Integer.parseInt(idPizzas[i])){
-                    pAux.add(pizza);
-                    //No puedo avanzar.... Cuando lo jalo, esta como BasicDBObject
-                    //y no me deja castearlo a Tamano
-                    List<Tamano> listTam = pizza.getTam();
-                    for (Tamano tam : listTam) {
-                            if(tam.getId()==Integer.parseInt(idTamano)){
-                                t.setId(tam.getId());
-                                t.setNombre(tam.getNombre());
-                                t.setPrecio(tam.getPrecio());
-                                t.setSlices(tam.getSlices());
-                            }
-                    }
-                }
+//        String idTamano1 = request.getParameter("tamanoId1");
+//        String idTamano2 = request.getParameter("tamanoId2");
+//        String idTamano3 = request.getParameter("tamanoId3");
+//        
+// </editor-fold>
+        List<String> tamanos = new ArrayList<>();
+        for (int i = 0; i <= idPizzas.length; i++) {
+            if (request.getParameter("tamanoId" + i) != null) {
+                tamanos.add(request.getParameter("tamanoId" + i));
             }
         }
-        
+/* <editor-fold defaultstate="collapsed" desc="Codigo porsiacaso vaya a servir...">
+        int[] idTamanos = new int[idPizzas.length];>>
+//        int a = 0;
+//        for (int i = 0; i < idPizzas.length; i++) {
+//            for (int j = 1; j <= 3; j++) {
+//                if (Integer.parseInt(idPizzas[i]) == j) {
+//                    idTamanos[a] = j;
+//                    a++;
+//                }
+//            }
+//        }
+        */
+// </editor-fold>
+        List<Pizza> p = (List<Pizza>) ses.getAttribute("pizzas");
+        List<Pizza> pAux = new ArrayList<>();
+
+        Tamano t = null;
+        List<Tamano> tLista = new ArrayList<>();
+        int b = 0;
+        for (Pizza pizza : p) {
+            for (int i = 0; i < idPizzas.length; i++) {
+                if (pizza.getId() == Integer.parseInt(idPizzas[i])) {
+                    List<Tamano> listTam = pizza.getTam();
+                    for (Object tam : listTam) {
+                        DBObject dbo = DBObject.class.cast(tam);
+                        if ((Integer) dbo.get("id") == Integer.parseInt(tamanos.get(b))) {
+                            t = new Tamano();
+                            t.setId((Integer) dbo.get("id"));
+                            t.setNombre((String) dbo.get("NombreTamano"));
+                            t.setPrecio((Integer) dbo.get("Slices"));
+                            t.setSlices((Integer) dbo.get("Precio"));
+                            pAux.add(pizza);
+                            tLista.add(t);                     
+                        }
+                    }
+                    b++;
+                }
+            }
+
+        }
+
         ses.setAttribute("pizzasOrdenadas", pAux);
-        ses.setAttribute("tamanoEscogico", t);
-        
+        ses.setAttribute("tamanoEscogico", tLista);
+
         RequestDispatcher rd = request.getRequestDispatcher("pedidoPredeterminadoIngresado.jsp");
         rd.forward(request, response);
 

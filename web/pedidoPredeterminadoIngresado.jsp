@@ -13,13 +13,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form>
+        <c:set var="i" value="${0}"/>
+        <form action="sPedidoPredeterminadoIngresado" method="post">
             <c:forEach var="x" items="${sessionScope.pizzasOrdenadas}">
                 <c:out value="${x.nombrePizza}"/><br>
-                <c:out value="${sessionScope.tamanoEscogico.NombreTamano}"/><br>
-                <c:out value="${sessionScope.tamanoEscogico.Precio}"/><br>
-            </c:forEach><br>
-
+                <c:out value="${sessionScope.tamanoEscogico[i].nombre}"/><br>
+                <c:out value="${sessionScope.tamanoEscogico[i].precio}"/><br>
+                <c:out value="${sessionScope.tamanoEscogico[i].slices}"/><br>
+                <c:set var="i" value="${i+1}"/>
+                <br>
+            </c:forEach>
+            Direccion : <input type="text" name="direccion"/>
+            <button type="submit"> Ok? </button>
         </form>
 
     </body>

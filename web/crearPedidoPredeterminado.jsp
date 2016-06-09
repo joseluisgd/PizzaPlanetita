@@ -20,7 +20,7 @@
                 </c:forEach>
                 -------------PIZZA PRECIO POR TAMANOS------<br>
                 <c:forEach var="b" items="${x.tam}">
-                    <input type="radio" value="<c:out value="${b.id}"/>" name="tamanoId<c:out value="${b.id}"/>">
+                    <input type="radio" value="<c:out value="${b.id}"/>" name="tamanoId<c:out value="${x.id}"/>">
                     Tamano: <c:out value="${b.NombreTamano}"/><br>
                     Precio: <c:out value="${b.Precio}"/><br>
                     Slices: <c:out value="${b.Slices}"/><br>
