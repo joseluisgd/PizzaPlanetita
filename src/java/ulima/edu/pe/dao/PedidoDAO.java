@@ -49,6 +49,7 @@ public class PedidoDAO {
             for (Pizza pizza : pizzas) {
                 docPizza = new BasicDBObject();
                 ingredientes = pizza.getIng();
+                //ERROR EN ESTA LINEA PARA INGRESAR UN PEDIDO PREDETERMINADO. FALTA CASTEAR
                 for (Ingrediente ingrediente : ingredientes) {
                     docIngrediente = new BasicDBObject();
                     docIngrediente.put("id", ingrediente.getId());
