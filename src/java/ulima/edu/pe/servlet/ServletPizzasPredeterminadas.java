@@ -33,7 +33,7 @@ public class ServletPizzasPredeterminadas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
-        MostrarCartaPizzaDAO mostrarCarta=new MostrarCartaPizzaDAO();
+        MostrarCartaPizzaDAO mostrarCarta = new MostrarCartaPizzaDAO();
         ses.setAttribute("pizzas", mostrarCarta.getPizzas());
         RequestDispatcher rd = request.getRequestDispatcher("crearPedidoPredeterminado.jsp");
         rd.forward(request, response);

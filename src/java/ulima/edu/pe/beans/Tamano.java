@@ -59,6 +59,8 @@ public class Tamano implements Serializable{
         this.precio = precio;
     }
     
-    
+    public Tamano clonar() {
+        return new Tamano(id, nombre, slices, precio);
+    }
     
 }

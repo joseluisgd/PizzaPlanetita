@@ -42,7 +42,7 @@ public class ServletPedidoPredeterminado extends HttpServlet {
                 tamanos.add(request.getParameter("tamanoId" + i));
             }
         }
-/* <editor-fold defaultstate="collapsed" desc="Codigo porsiacaso vaya a servir...">
+        /* <editor-fold defaultstate="collapsed" desc="Codigo porsiacaso vaya a servir...">
         int[] idTamanos = new int[idPizzas.length];>>
 //        int a = 0;
 //        for (int i = 0; i < idPizzas.length; i++) {
@@ -53,7 +53,7 @@ public class ServletPedidoPredeterminado extends HttpServlet {
 //                }
 //            }
 //        }
-        */
+         */
 // </editor-fold>
         List<Pizza> p = (List<Pizza>) ses.getAttribute("pizzas");
         List<Pizza> pAux = new ArrayList<>();
@@ -61,20 +61,26 @@ public class ServletPedidoPredeterminado extends HttpServlet {
         Tamano t = null;
         List<Tamano> tLista = new ArrayList<>();
         int b = 0;
+        //ChF: No entiendo bien qué se hace aquí, así que he cambiado y agregado
+        //cosas puntuales de acuerdo al cambio que hice en MostrarCartaPizzaDAO.java
+        //Líneas: 72, 75, 76
         for (Pizza pizza : p) {
             for (int i = 0; i < idPizzas.length; i++) {
                 if (pizza.getId() == Integer.parseInt(idPizzas[i])) {
                     List<Tamano> listTam = pizza.getTam();
-                    for (Object tam : listTam) {
-                        DBObject dbo = DBObject.class.cast(tam);
-                        if ((Integer) dbo.get("id") == Integer.parseInt(tamanos.get(b))) {
-                            t = new Tamano();
-                            t.setId((Integer) dbo.get("id"));
-                            t.setNombre((String) dbo.get("NombreTamano"));
-                            t.setPrecio((Integer) dbo.get("Slices"));
-                            t.setSlices((Integer) dbo.get("Precio"));
+//                    for (Object tam : listTam) {
+                    for (Tamano tamano : listTam) {
+//                        DBObject dbo = DBObject.class.cast(tam);
+//                        if ((Integer) dbo.get("id") == Integer.parseInt(tamanos.get(b))) {
+                        if (tamano.getId() == Integer.parseInt(tamanos.get(b))) {
+                            t = tamano.clonar();
+//                            t = new Tamano();
+//                            t.setId((Integer) dbo.get("id"));
+//                            t.setNombre((String) dbo.get("NombreTamano"));
+//                            t.setPrecio((Integer) dbo.get("Slices"));
+//                            t.setSlices((Integer) dbo.get("Precio"));
                             pAux.add(pizza);
-                            tLista.add(t);                     
+                            tLista.add(t);
                         }
                     }
                     b++;

@@ -17,7 +17,6 @@ import ulima.edu.pe.beans.Producto;
 import ulima.edu.pe.beans.Usuario;
 import ulima.edu.pe.util.ConexionMLab;
 
-
 public class PedidoDAO {
 
     public void agregarPedido(Pedido pedido) {
@@ -50,6 +49,7 @@ public class PedidoDAO {
                 docPizza = new BasicDBObject();
                 ingredientes = pizza.getIng();
                 //ERROR EN ESTA LINEA PARA INGRESAR UN PEDIDO PREDETERMINADO. FALTA CASTEAR
+                //ChF: Corregido 12/06/16
                 for (Ingrediente ingrediente : ingredientes) {
                     docIngrediente = new BasicDBObject();
                     docIngrediente.put("id", ingrediente.getId());
@@ -63,17 +63,19 @@ public class PedidoDAO {
             }
             docPedido.put("Pizzas", arrayPizzas);
 
-            BasicDBObject docProducto;
-            ArrayList arrayProductos = new ArrayList();
             List<Producto> productos = pedido.getProductos();
-            for (Producto producto : productos) {
-                docProducto = new BasicDBObject();
-                docProducto.put("id", producto.getId());
-                docProducto.put("nombre", producto.getNombre());
-                docProducto.put("precio", producto.getPrecio());
-                arrayProductos.add(docProducto);
+            if (productos != null) {
+                BasicDBObject docProducto;
+                ArrayList arrayProductos = new ArrayList();
+                for (Producto producto : productos) {
+                    docProducto = new BasicDBObject();
+                    docProducto.put("id", producto.getId());
+                    docProducto.put("nombre", producto.getNombre());
+                    docProducto.put("precio", producto.getPrecio());
+                    arrayProductos.add(docProducto);
+                }
+                docPedido.put("Productos", arrayProductos);
             }
-            docPedido.put("Productos", arrayProductos);
 
             coleccion.insert(docPedido);
         } catch (Exception e) {
@@ -82,7 +84,7 @@ public class PedidoDAO {
             mongo.close();
         }
     }
-       
+
     private Integer contar() {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
@@ -102,7 +104,7 @@ public class PedidoDAO {
         }
         return cont;
     }
-    
+
     public Pedido buscarPedidoPorID(int id) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
@@ -113,9 +115,9 @@ public class PedidoDAO {
         List<Pizza> pizzas = null;
         List<Ingrediente> ingredientes = null;
         List<Producto> productos = null;
-        Ingrediente ingred=null;
+        Ingrediente ingred = null;
         Pizza pizzita = null;
-        Producto produ=null;
+        Producto produ = null;
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("pedido");
@@ -126,50 +128,53 @@ public class PedidoDAO {
             DBCursor cursor = coleccion.find(query);
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                DBObject dbo2 = (BasicDBObject)dbo.get("Estado");
+                DBObject dbo2 = (BasicDBObject) dbo.get("Estado");
                 estado = new Estado();
-                estado.setFechaHora((String)dbo2.get("fechahora"));
-                estado.setId((Integer)dbo2.get("id"));
-                estado.setEstado((String)dbo2.get("estado"));
-                
-                pedido=new Pedido();
-                pedido.setId((Integer)dbo.get("id"));
+                estado.setFechaHora((String) dbo2.get("fechahora"));
+                estado.setId((Integer) dbo2.get("id"));
+                estado.setEstado((String) dbo2.get("estado"));
+
+                pedido = new Pedido();
+                pedido.setId((Integer) dbo.get("id"));
                 pedido.setEstado(estado);
-                usuario= new Usuario();
+                usuario = new Usuario();
                 login = new LoginDAO();
-                usuario=login.buscarUsuario((String)dbo.get("usu"));
+                usuario = login.buscarUsuario((String) dbo.get("usu"));
                 pedido.setUsuario(usuario);
-                pedido.setDireccion((String)dbo.get("direccion"));
-                BasicDBList dbo3 = (BasicDBList)dbo.get("Pizzas");
-                pizzas=new ArrayList<>();
-                for (Object piz : dbo3){
-                    pizzita= new Pizza();
-                    DBObject dbb = DBObject.class.cast(piz);
-                    BasicDBList dbo4 = (BasicDBList)dbb.get("Ingredientes");
-                    ingredientes= new ArrayList<>();
-                    for (Object ing : dbo4){
-                        ingred=new Ingrediente();
-                        DBObject dbo5 = DBObject.class.cast(ing);
-                        ingred.setId((Integer)dbo5.get("id"));
-                        ingred.setNombre((String)dbo5.get("nombre"));
+                pedido.setDireccion((String) dbo.get("direccion"));
+                BasicDBList dbo3 = (BasicDBList) dbo.get("Pizzas");
+                pizzas = new ArrayList<>();
+                for (Object piz : dbo3) {
+                    pizzita = new Pizza();
+                    DBObject dbb = DBObject.class
+                            .cast(piz);
+                    BasicDBList dbo4 = (BasicDBList) dbb.get("Ingredientes");
+                    ingredientes = new ArrayList<>();
+                    for (Object ing : dbo4) {
+                        ingred = new Ingrediente();
+                        DBObject dbo5 = DBObject.class
+                                .cast(ing);
+                        ingred.setId((Integer) dbo5.get("id"));
+                        ingred.setNombre((String) dbo5.get("nombre"));
                         ingredientes.add(ingred);
                     }
                     pizzita.setIng(ingredientes);
                     pizzas.add(pizzita);
                 }
-                BasicDBList dbo6 = (BasicDBList)dbo.get("Productos");
-                productos=new ArrayList<>();
-                for (Object pro : dbo6){
-                    produ=new Producto();
-                    DBObject dbo7 = DBObject.class.cast(pro);
-                    produ.setId((Integer)dbo7.get("id"));
-                    produ.setNombre((String)dbo7.get("nombre"));
-                    produ.setPrecio((Double)dbo7.get("precio"));
+                BasicDBList dbo6 = (BasicDBList) dbo.get("Productos");
+                productos = new ArrayList<>();
+                for (Object pro : dbo6) {
+                    produ = new Producto();
+                    DBObject dbo7 = DBObject.class
+                            .cast(pro);
+                    produ.setId((Integer) dbo7.get("id"));
+                    produ.setNombre((String) dbo7.get("nombre"));
+                    produ.setPrecio((Double) dbo7.get("precio"));
                     productos.add(produ);
                 }
                 pedido.setPizzas(pizzas);
                 pedido.setProductos(productos);
-                
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,6 +184,7 @@ public class PedidoDAO {
         return pedido;
 
     }
+
     public List<Pedido> buscarPedidoPorUsuario(String usu) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
@@ -190,9 +196,9 @@ public class PedidoDAO {
         List<Pizza> pizzas = null;
         List<Ingrediente> ingredientes = null;
         List<Producto> productos = null;
-        Ingrediente ingred=null;
+        Ingrediente ingred = null;
         Pizza pizzita = null;
-        Producto produ=null;
+        Producto produ = null;
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("pedido");
@@ -201,49 +207,51 @@ public class PedidoDAO {
             query1.put("$eq", usu);
             query.put("usu", query1);
             DBCursor cursor = coleccion.find(query);
-            pedidos=new ArrayList<>();
+            pedidos = new ArrayList<>();
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                DBObject dbo2 = (BasicDBObject)dbo.get("Estado");
+                DBObject dbo2 = (BasicDBObject) dbo.get("Estado");
                 estado = new Estado();
-                estado.setFechaHora((String)dbo2.get("fechahora"));
-                estado.setId((Integer)dbo2.get("id"));
-                estado.setEstado((String)dbo2.get("estado"));
-                
-                
-                pedido=new Pedido();
-                pedido.setId((Integer)dbo.get("id"));
+                estado.setFechaHora((String) dbo2.get("fechahora"));
+                estado.setId((Integer) dbo2.get("id"));
+                estado.setEstado((String) dbo2.get("estado"));
+
+                pedido = new Pedido();
+                pedido.setId((Integer) dbo.get("id"));
                 pedido.setEstado(estado);
-                usuario= new Usuario();
+                usuario = new Usuario();
                 login = new LoginDAO();
-                usuario=login.buscarUsuario((String)dbo.get("usu"));
+                usuario = login.buscarUsuario((String) dbo.get("usu"));
                 pedido.setUsuario(usuario);
-                pedido.setDireccion((String)dbo.get("direccion"));
-                BasicDBList dbo3 = (BasicDBList)dbo.get("Pizzas");
-                pizzas=new ArrayList<>();
-                for (Object piz : dbo3){
-                    pizzita= new Pizza();
-                    DBObject dbb = DBObject.class.cast(piz);
-                    BasicDBList dbo4 = (BasicDBList)dbb.get("Ingredientes");
-                    ingredientes= new ArrayList<>();
-                    for (Object ing : dbo4){
-                        ingred=new Ingrediente();
-                        DBObject dbo5 = DBObject.class.cast(ing);
-                        ingred.setId((Integer)dbo5.get("id"));
-                        ingred.setNombre((String)dbo5.get("nombre"));
+                pedido.setDireccion((String) dbo.get("direccion"));
+                BasicDBList dbo3 = (BasicDBList) dbo.get("Pizzas");
+                pizzas = new ArrayList<>();
+                for (Object piz : dbo3) {
+                    pizzita = new Pizza();
+                    DBObject dbb = DBObject.class
+                            .cast(piz);
+                    BasicDBList dbo4 = (BasicDBList) dbb.get("Ingredientes");
+                    ingredientes = new ArrayList<>();
+                    for (Object ing : dbo4) {
+                        ingred = new Ingrediente();
+                        DBObject dbo5 = DBObject.class
+                                .cast(ing);
+                        ingred.setId((Integer) dbo5.get("id"));
+                        ingred.setNombre((String) dbo5.get("nombre"));
                         ingredientes.add(ingred);
                     }
                     pizzita.setIng(ingredientes);
                     pizzas.add(pizzita);
                 }
-                BasicDBList dbo6 = (BasicDBList)dbo.get("Productos");
-                productos=new ArrayList<>();
-                for (Object pro : dbo6){
-                    produ=new Producto();
-                    DBObject dbo7 = DBObject.class.cast(pro);
-                    produ.setId((Integer)dbo7.get("id"));
-                    produ.setNombre((String)dbo7.get("nombre"));
-                    produ.setPrecio((Double)dbo7.get("precio"));
+                BasicDBList dbo6 = (BasicDBList) dbo.get("Productos");
+                productos = new ArrayList<>();
+                for (Object pro : dbo6) {
+                    produ = new Producto();
+                    DBObject dbo7 = DBObject.class
+                            .cast(pro);
+                    produ.setId((Integer) dbo7.get("id"));
+                    produ.setNombre((String) dbo7.get("nombre"));
+                    produ.setPrecio((Double) dbo7.get("precio"));
                     productos.add(produ);
                 }
                 pedido.setPizzas(pizzas);
@@ -258,8 +266,8 @@ public class PedidoDAO {
         return pedidos;
 
     }
-    
-    public List<Pedido> getPedidos(){
+
+    public List<Pedido> getPedidos() {
         List<Pedido> pedidos = null;
         Pedido pedido = null;
         ConexionMLab con = new ConexionMLab();
@@ -268,11 +276,11 @@ public class PedidoDAO {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("pedido");
             DBCursor cursor = coleccion.find();
-            pedidos= new ArrayList<>();
+            pedidos = new ArrayList<>();
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                pedido= new Pedido();
-                pedido=this.buscarPedidoPorID((Integer)dbo.get("id"));
+                pedido = new Pedido();
+                pedido = this.buscarPedidoPorID((Integer) dbo.get("id"));
                 pedidos.add(pedido);
             }
         } catch (Exception e) {
@@ -282,7 +290,8 @@ public class PedidoDAO {
         }
         return pedidos;
     }
-    public void actualizarEstado(){
-        
+
+    public void actualizarEstado() {
+
     }
 }
