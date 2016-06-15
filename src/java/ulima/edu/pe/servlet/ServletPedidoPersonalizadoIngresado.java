@@ -52,7 +52,9 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         //pizza
         List<Pizza> pizzas = new ArrayList<>();
         Tamano t = (Tamano)ses.getAttribute("tamanoIngresado");
-        pizzas.add(new Pizza(ingr,t.getNombre(),precio));    
+      
+        
+        pizzas.add(new Pizza("Predeterminado",ingr,t.getNombre(),precio));
         ses.setAttribute("pizza", pizzas);
         
         //productos
@@ -61,12 +63,13 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         Pedido pedido = new Pedido();
         pedido.setEstado(estado);
         pedido.setUsuario(logDao.buscarUsuario(username));
+        pedido.setMonto(precio);
         pedido.setDireccion(direccion);
         pedido.setPizzas(pizzas);
         pedido.setProductos(productos);
         
         PedidoDAO daoPedido = new PedidoDAO();
-        daoPedido.agregarPedido(pedido);
+        daoPedido.agregarPedido(pedido,1);
 
         //rd
         RequestDispatcher rd = request.getRequestDispatcher("pedidoRegistrado.jsp");

@@ -36,8 +36,9 @@ public class ServletPedidoPredeterminado extends HttpServlet {
 //        String idTamano3 = request.getParameter("tamanoId3");
 //        
 // </editor-fold>
+        List<Pizza> p = (List<Pizza>) ses.getAttribute("pizzas");
         List<String> tamanos = new ArrayList<>();
-        for (int i = 0; i <= idPizzas.length; i++) {
+        for (int i = 0; i <= p.size(); i++) {
             if (request.getParameter("tamanoId" + i) != null) {
                 tamanos.add(request.getParameter("tamanoId" + i));
             }
@@ -55,7 +56,7 @@ public class ServletPedidoPredeterminado extends HttpServlet {
 //        }
          */
 // </editor-fold>
-        List<Pizza> p = (List<Pizza>) ses.getAttribute("pizzas");
+
         List<Pizza> pAux = new ArrayList<>();
 
         Tamano t = null;

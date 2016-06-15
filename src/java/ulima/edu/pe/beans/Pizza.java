@@ -18,7 +18,8 @@ public class Pizza {
     public Pizza() {
     }
 
-    public Pizza(List<Ingrediente> ing, String tamano, float precio) {
+    public Pizza(String nombrePizza, List<Ingrediente> ing, String tamano, float precio) {
+        this.nombrePizza=nombrePizza;
         this.ing = ing;
         this.tamano = tamano;
         this.precio = precio;

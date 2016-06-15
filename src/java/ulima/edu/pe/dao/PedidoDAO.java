@@ -19,7 +19,7 @@ import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoDAO {
 
-    public void agregarPedido(Pedido pedido) {
+    public void agregarPedido(Pedido pedido, int identificador) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
         try {
@@ -39,28 +39,80 @@ public class PedidoDAO {
             docPedido.put("usu", pedido.getUsuario().getUsuario());
             docPedido.put("direccion", pedido.getDireccion());
 
+            docPedido.put("montoTotal", pedido.getMonto());
+
             BasicDBObject docPizza;
             BasicDBObject docIngrediente;
+            BasicDBObject docIngrediente2;
             ArrayList arrayPizzas = new ArrayList();
             ArrayList arrayIngredientes = new ArrayList();
-            List<Ingrediente> ingredientes;
+
             List<Pizza> pizzas = pedido.getPizzas();
-            for (Pizza pizza : pizzas) {
-                docPizza = new BasicDBObject();
-                ingredientes = pizza.getIng();
-                //ERROR EN ESTA LINEA PARA INGRESAR UN PEDIDO PREDETERMINADO. FALTA CASTEAR
-                //ChF: Corregido 12/06/16
-                for (Ingrediente ingrediente : ingredientes) {
-                    docIngrediente = new BasicDBObject();
-                    docIngrediente.put("id", ingrediente.getId());
-                    docIngrediente.put("nombre", ingrediente.getNombre());
-                    arrayIngredientes.add(docIngrediente);
+            int a = 0;
+            if (identificador == 1) {
+                List<Ingrediente> ingredientes;
+                for (Pizza pizza : pizzas) {
+                    docPizza = new BasicDBObject();
+                    ingredientes = pizza.getIng();
+                    //ERROR EN ESTA LINEA PARA INGRESAR UN PEDIDO PREDETERMINADO. FALTA CASTEAR
+                    //ChF: Corregido 12/06/16
+                    for (Ingrediente ingrediente : ingredientes) {
+                        docIngrediente = new BasicDBObject();
+                        docIngrediente.put("id", ingrediente.getId());
+                        docIngrediente.put("nombre", ingrediente.getNombre());
+                        arrayIngredientes.add(docIngrediente);
+                    }
+                    a++;
+                    docPizza.put("idPi", a);
+                    docPizza.put("nombrePizza", pizza.getNombrePizza());
+                    docPizza.put("url", " ");
+                    docPizza.put("Tamano", pizza.getTamano());
+                    docPizza.put("precio", pizza.getPrecio());
+                    docPizza.put("Ingredientes", arrayIngredientes);
+
+                    arrayPizzas.add(docPizza);
                 }
-                docPizza.put("Ingredientes", arrayIngredientes);
-                docPizza.put("Tamano", pizza.getTamano());
-                docPizza.put("precio", pizza.getPrecio());
-                arrayPizzas.add(docPizza);
+            } else {
+                List<Ingrediente> ingredientes = null;
+                int i = 0;
+                for (Pizza pizza : pizzas) {
+                    ingredientes = new ArrayList<>();
+                    docPizza = new BasicDBObject();
+                    ingredientes = pizza.getIng();
+                    //ERROR EN ESTA LINEA PARA INGRESAR UN PEDIDO PREDETERMINADO. FALTA CASTEAR
+                    //ChF: Corregido 12/06/16
+                    
+                    //pepe :me rindo.
+                    Ingrediente ing= ingredientes.get(0);
+                    Ingrediente ing2= ingredientes.get(1);
+                        docIngrediente = new BasicDBObject();
+                        docIngrediente.put("id", ing.getId());
+                        docIngrediente.put("nombre", ing.getNombre());
+                        docIngrediente2 = new BasicDBObject();
+                        docIngrediente2.put("id", ing2.getId());
+                        docIngrediente2.put("nombre", ing2.getNombre());
+                        arrayIngredientes.add(docIngrediente);
+                        arrayIngredientes.add(docIngrediente2);
+                    
+
+                    
+                    
+                    
+                    i++;
+
+                    
+                    a++;
+                    docPizza.put("idPi", a);
+                    docPizza.put("nombrePizza", pizza.getNombrePizza());
+                    docPizza.put("url", " ");
+                    docPizza.put("Tamano", pizza.getTamano());
+                    docPizza.put("precio", pizza.getPrecio());
+                    docPizza.put("Ingredientes", arrayIngredientes);
+
+                    arrayPizzas.add(docPizza);
+                }
             }
+
             docPedido.put("Pizzas", arrayPizzas);
 
             List<Producto> productos = pedido.getProductos();
@@ -228,14 +280,12 @@ public class PedidoDAO {
                 pizzas = new ArrayList<>();
                 for (Object piz : dbo3) {
                     pizzita = new Pizza();
-                    DBObject dbb = DBObject.class
-                            .cast(piz);
+                    DBObject dbb = DBObject.class.cast(piz);
                     BasicDBList dbo4 = (BasicDBList) dbb.get("Ingredientes");
                     ingredientes = new ArrayList<>();
                     for (Object ing : dbo4) {
                         ingred = new Ingrediente();
-                        DBObject dbo5 = DBObject.class
-                                .cast(ing);
+                        DBObject dbo5 = DBObject.class.cast(ing);
                         ingred.setId((Integer) dbo5.get("id"));
                         ingred.setNombre((String) dbo5.get("nombre"));
                         ingredientes.add(ingred);
@@ -247,8 +297,7 @@ public class PedidoDAO {
                 productos = new ArrayList<>();
                 for (Object pro : dbo6) {
                     produ = new Producto();
-                    DBObject dbo7 = DBObject.class
-                            .cast(pro);
+                    DBObject dbo7 = DBObject.class.cast(pro);
                     produ.setId((Integer) dbo7.get("id"));
                     produ.setNombre((String) dbo7.get("nombre"));
                     produ.setPrecio((Double) dbo7.get("precio"));

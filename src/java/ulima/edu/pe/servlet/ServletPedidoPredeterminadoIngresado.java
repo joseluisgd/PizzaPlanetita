@@ -35,6 +35,8 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         for (Pizza pizza : pAux) {
             ingAux.add(pizza.getIng());
         }
+        
+        ses.setAttribute("ingredientes", ingAux);
 
         //tamano, precio
         List<Tamano> tLista = (List<Tamano>) ses.getAttribute("tamanoEscogico");
@@ -42,20 +44,23 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         List<String> tamanos = new ArrayList<>();
         for (Tamano tamano : tLista) {
             tamanos.add(tamano.getNombre());
-            precios.add(tamano.getSlices());
+            precios.add(tamano.getPrecio());
         }
+        ses.setAttribute("tamanoIngresado", tamanos);
         //organizadas para el pedido DAO
         List<Pizza> pizzas = new ArrayList<>();
         Pizza p = null;
         int a = 0;
         for (Pizza pizza1 : pAux) {
             p= new Pizza();
+            p.setNombrePizza(pizza1.getNombrePizza());
             p.setIng(ingAux.get(a));
             p.setTamano(tamanos.get(a));
             p.setPrecio(precios.get(a));
             pizzas.add(p);
             a++;
         }
+        ses.setAttribute("pizza", pizzas);
         //estado
         Estado estado = new Estado();
         estado.setFechaHora(Util.obtenerFechaHoraActual());
@@ -68,9 +73,20 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         String direccion = request.getParameter("direccion");
         ses.setAttribute("direccion", direccion);
 
+        
+        //monto
+        float monto=0;
+        for (int i = 0; i < precios.size(); i++) {
+            monto=monto + precios.get(i);
+        }
+        ses.setAttribute("precio", monto);
+        
+        
+        
         Pedido pedido = new Pedido();
         pedido.setEstado(estado);
         pedido.setUsuario(logDao.buscarUsuario(username));
+        pedido.setMonto(monto);
         pedido.setDireccion(direccion);
         pedido.setPizzas(pizzas);
         pedido.setProductos(null);
@@ -80,9 +96,9 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         //Ingresen estos pedidso en el mismo documento que los personalizados.
 
         PedidoDAO daoPedido = new PedidoDAO();
-        daoPedido.agregarPedido(pedido);
+        daoPedido.agregarPedido(pedido,2);
 
-        RequestDispatcher rd = request.getRequestDispatcher("pedidoRegistrado.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("pedidoRegistradoPredeterminado.jsp");
         rd.forward(request, response);
     }
 

@@ -32,6 +32,10 @@
         <servlet-name>ServletPedidoPredeterminadoIngresado</servlet-name>
         <servlet-class>ulima.edu.pe.servlet.ServletPedidoPredeterminadoIngresado</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletMostrarPedidos</servlet-name>
+        <servlet-class>ulima.edu.pe.servlet.ServletMostrarPedidos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletPizzaPersonalizada</servlet-name>
         <url-pattern>/sPizzaPersonalizada</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ServletPedidoPredeterminadoIngresado</servlet-name>
         <url-pattern>/sPedidoPredeterminadoIngresado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletMostrarPedidos</servlet-name>
+        <url-pattern>/sMostrarPedidos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
