@@ -47,6 +47,12 @@ public class PedidoDAO {
             ArrayList arrayPizzas = new ArrayList();
             ArrayList arrayIngredientes = new ArrayList();
 
+            //ChF: Me parece que la solución planteada solo soporta el que todas las pizzas
+            //del pedido sean personalizadas o predeterminadas, no se pueden mezclar (por ahora).
+            //Se me ocurre poner el identificador como un atributo de la pizza, así, al recorrer
+            //las pizzas del pedido, se evalúa de qué tipo es y en base a eso se hace una u otra
+            //acción.
+            
             List<Pizza> pizzas = pedido.getPizzas();
             int a = 0;
             if (identificador == 1) {
