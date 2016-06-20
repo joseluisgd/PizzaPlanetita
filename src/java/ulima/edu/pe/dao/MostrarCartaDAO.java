@@ -7,15 +7,16 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Pizza;
+import ulima.edu.pe.beans.Adicional;
+import ulima.edu.pe.beans.Promocion;
 import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.util.ConexionMLab;
 
-public class MostrarCartaPizzaDAO {
+public class MostrarCartaDAO {
 
     public List<Pizza> getPizzas() {
         ConexionMLab con = new ConexionMLab();
@@ -28,7 +29,7 @@ public class MostrarCartaPizzaDAO {
             
             //ChF: Declaración de variables que se necesitan para llenar el objeto pizza.
             int id;
-            String nombrePizza;
+            String nombre;
 
             List<Ingrediente> ingredientes;
             Ingrediente ingrediente;
@@ -44,7 +45,7 @@ public class MostrarCartaPizzaDAO {
                 DBObject dbo = cursor.next();
                 
                 id = (Integer) dbo.get("id");
-                nombrePizza = (String) dbo.get("NombrePizza");
+                nombre = (String) dbo.get("NombrePizza");
                 
                 //ChF: Anteriormente, esto se pasaba al constructor como (List<Ingrediente>) dbo.get("Ingredientes"),
                 //ahora se ingresa al array que contiene los documentos ingredientes y se obtienen correctamente
@@ -62,11 +63,11 @@ public class MostrarCartaPizzaDAO {
                 for (Object objTamano : docArrayTamano) {
                     docTamano = (BasicDBObject) objTamano;
                     tamano = new Tamano((Integer) docTamano.get("id"), (String) docTamano.get("NombreTamano"), 
-                                        (Integer) docTamano.get("Slices"), (Integer) docTamano.get("Precio"));
+                                        (Integer) docTamano.get("Slices"), 1.0f*((Integer) docTamano.get("Precio")));
                     tamanos.add(tamano);
                 }
                 
-                pizzas.add(new Pizza(id, nombrePizza, ingredientes, tamanos));
+                pizzas.add(new Pizza(id, nombre, ingredientes, tamanos));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,5 +75,69 @@ public class MostrarCartaPizzaDAO {
             mongo.close();
         }
         return pizzas;
+    }
+    
+    public List<Adicional> obtenerProductos() {
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
+        List<Adicional> productos = new ArrayList<>();
+        try {
+            DB db = mongo.getDB("basededatos");
+            DBCollection coleccion = db.getCollection("producto");
+            DBCursor cursor = coleccion.find();
+            
+            //ChF: Declaración de variables que se necesitan para llenar el objeto producto.
+            int id;
+            String nombre;
+            Float precio;
+            
+            while (cursor.hasNext()) {
+                DBObject dbo = cursor.next();
+                
+                id = (Integer) dbo.get("id");
+                nombre = (String) dbo.get("nombre");
+                precio = (Float) dbo.get("precio");
+                
+                productos.add(new Adicional(id, nombre, precio));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mongo.close();
+        }
+        return productos;
+    }
+    
+    
+    //ChF: Método incompleto, no usar.
+    public List<Promocion> obtenerPromociones() {
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
+        List<Promocion> promociones = new ArrayList<>();
+        try {
+            DB db = mongo.getDB("basededatos");
+            DBCollection coleccion = db.getCollection("producto");
+            DBCursor cursor = coleccion.find();
+            
+            //ChF: Declaración de variables que se necesitan para llenar el objeto producto.
+            int id;
+            String nombre;
+            Float precio;
+            
+            while (cursor.hasNext()) {
+                DBObject dbo = cursor.next();
+                
+                id = (Integer) dbo.get("id");
+                nombre = (String) dbo.get("nombre");
+                precio = (Float) dbo.get("precio");
+                
+                //promociones.add();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mongo.close();
+        }
+        return promociones;
     }
 }

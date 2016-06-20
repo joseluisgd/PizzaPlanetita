@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.Estado;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Pizza;
-import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.beans.Adicional;
 import ulima.edu.pe.beans.Pedido;
 import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.dao.LoginDAO;
@@ -58,7 +58,7 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         ses.setAttribute("pizza", pizzas);
         
         //productos
-        List<Producto> productos = (List<Producto>) ses.getAttribute("productosIngresados");
+        List<Adicional> productos = (List<Adicional>) ses.getAttribute("productosIngresados");
         
         Pedido pedido = new Pedido();
         pedido.setEstado(estado);

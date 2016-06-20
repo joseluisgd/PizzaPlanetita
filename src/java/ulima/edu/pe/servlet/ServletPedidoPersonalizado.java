@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.beans.Adicional;
 import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.dao.IngredienteDAO;
 import ulima.edu.pe.dao.PedidoPersonalizadoDAO;
@@ -29,7 +29,7 @@ public class ServletPedidoPersonalizado extends HttpServlet {
         
         //Productos
         ProductoDAO daoProducto= new ProductoDAO();
-        List<Producto> listaProductos = new ArrayList<>();
+        List<Adicional> listaProductos = new ArrayList<>();
         for (String producto : productos) {
             listaProductos.add(daoProducto.buscarProducto(Integer.parseInt(producto)));
         }

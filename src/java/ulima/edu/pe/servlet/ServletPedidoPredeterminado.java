@@ -64,7 +64,7 @@ public class ServletPedidoPredeterminado extends HttpServlet {
         int b = 0;
         //ChF: No entiendo bien qué se hace aquí, así que he cambiado y agregado
         //cosas puntuales de acuerdo al cambio que hice en MostrarCartaPizzaDAO.java
-        //Líneas: 72, 75, 76
+        //Líneas: 72, 74, 75
         for (Pizza pizza : p) {
             for (int i = 0; i < idPizzas.length; i++) {
                 if (pizza.getId() == Integer.parseInt(idPizzas[i])) {

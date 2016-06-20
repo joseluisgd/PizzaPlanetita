@@ -13,7 +13,7 @@ import ulima.edu.pe.beans.Estado;
 import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Pedido;
 import ulima.edu.pe.beans.Pizza;
-import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.beans.Adicional;
 import ulima.edu.pe.beans.Usuario;
 import ulima.edu.pe.util.ConexionMLab;
 
@@ -70,7 +70,7 @@ public class PedidoDAO {
                     }
                     a++;
                     docPizza.put("idPi", a);
-                    docPizza.put("nombrePizza", pizza.getNombrePizza());
+                    docPizza.put("nombrePizza", pizza.getNombre());
                     docPizza.put("url", " ");
                     docPizza.put("Tamano", pizza.getTamano());
                     docPizza.put("precio", pizza.getPrecio());
@@ -109,7 +109,7 @@ public class PedidoDAO {
                     
                     a++;
                     docPizza.put("idPi", a);
-                    docPizza.put("nombrePizza", pizza.getNombrePizza());
+                    docPizza.put("nombrePizza", pizza.getNombre());
                     docPizza.put("url", " ");
                     docPizza.put("Tamano", pizza.getTamano());
                     docPizza.put("precio", pizza.getPrecio());
@@ -121,11 +121,11 @@ public class PedidoDAO {
 
             docPedido.put("Pizzas", arrayPizzas);
 
-            List<Producto> productos = pedido.getProductos();
-            if (productos != null) {
+            List<Adicional> adicionales = pedido.getAdicionales();
+            if (adicionales != null) {
                 BasicDBObject docProducto;
                 ArrayList arrayProductos = new ArrayList();
-                for (Producto producto : productos) {
+                for (Adicional producto : adicionales) {
                     docProducto = new BasicDBObject();
                     docProducto.put("id", producto.getId());
                     docProducto.put("nombre", producto.getNombre());
@@ -134,7 +134,6 @@ public class PedidoDAO {
                 }
                 docPedido.put("Productos", arrayProductos);
             }
-
             coleccion.insert(docPedido);
         } catch (Exception e) {
             e.printStackTrace();
@@ -172,10 +171,10 @@ public class PedidoDAO {
         LoginDAO login = null;
         List<Pizza> pizzas = null;
         List<Ingrediente> ingredientes = null;
-        List<Producto> productos = null;
+        List<Adicional> productos = null;
         Ingrediente ingred = null;
         Pizza pizzita = null;
-        Producto produ = null;
+        Adicional produ = null;
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("pedido");
@@ -222,12 +221,12 @@ public class PedidoDAO {
                 BasicDBList dbo6 = (BasicDBList) dbo.get("Productos");
                 productos = new ArrayList<>();
                 for (Object pro : dbo6) {
-                    produ = new Producto();
+                    produ = new Adicional();
                     DBObject dbo7 = DBObject.class
                             .cast(pro);
                     produ.setId((Integer) dbo7.get("id"));
                     produ.setNombre((String) dbo7.get("nombre"));
-                    produ.setPrecio((Double) dbo7.get("precio"));
+                    produ.setPrecio((Float) dbo7.get("precio"));
                     productos.add(produ);
                 }
                 pedido.setPizzas(pizzas);
@@ -253,10 +252,10 @@ public class PedidoDAO {
         LoginDAO login = null;
         List<Pizza> pizzas = null;
         List<Ingrediente> ingredientes = null;
-        List<Producto> productos = null;
+        List<Adicional> productos = null;
         Ingrediente ingred = null;
         Pizza pizzita = null;
-        Producto produ = null;
+        Adicional produ = null;
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("pedido");
@@ -302,11 +301,11 @@ public class PedidoDAO {
                 BasicDBList dbo6 = (BasicDBList) dbo.get("Productos");
                 productos = new ArrayList<>();
                 for (Object pro : dbo6) {
-                    produ = new Producto();
+                    produ = new Adicional();
                     DBObject dbo7 = DBObject.class.cast(pro);
                     produ.setId((Integer) dbo7.get("id"));
                     produ.setNombre((String) dbo7.get("nombre"));
-                    produ.setPrecio((Double) dbo7.get("precio"));
+                    produ.setPrecio((Float) dbo7.get("precio"));
                     productos.add(produ);
                 }
                 pedido.setPizzas(pizzas);

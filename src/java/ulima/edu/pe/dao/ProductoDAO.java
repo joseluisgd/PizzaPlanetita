@@ -9,21 +9,21 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
-import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.beans.Adicional;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class ProductoDAO {
-    public List<Producto> getProductos() {
+    public List<Adicional> getProductos() {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
-        List<Producto> producto = new ArrayList<>();
+        List<Adicional> producto = new ArrayList<>();
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("producto");
             DBCursor cursor = coleccion.find();
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                producto.add(new Producto((Integer) dbo.get("id"), String.valueOf(dbo.get("nombre")), (Double) dbo.get("precio")));
+                producto.add(new Adicional((Integer) dbo.get("id"), String.valueOf(dbo.get("nombre")), (Float) dbo.get("precio")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,10 +33,10 @@ public class ProductoDAO {
         return producto;
     }
     
-     public Producto buscarProducto(int id) {
+     public Adicional buscarProducto(int id) {
         ConexionMLab con = new ConexionMLab();
         MongoClient mongo = con.getConexion();
-        Producto producto = new Producto();
+        Adicional producto = new Adicional();
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("producto");
@@ -47,7 +47,7 @@ public class ProductoDAO {
             DBCursor cursor = coleccion.find(query);
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                producto = new Producto((Integer) dbo.get("id"), String.valueOf(dbo.get("nombre")), (Double) dbo.get("precio"));
+                producto = new Adicional((Integer) dbo.get("id"), String.valueOf(dbo.get("nombre")), (Float) dbo.get("precio"));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,7 +8,7 @@ public class Tamano implements Serializable{
     private int id;
     private String nombre;
     private int slices;
-    private int precio;
+    private float precio;
 
     public Tamano() {
     }
@@ -20,7 +20,7 @@ public class Tamano implements Serializable{
     }
     
 
-    public Tamano(int id, String nombre, int slices, int precio) {
+    public Tamano(int id, String nombre, int slices, float precio) {
         this.id = id;
         this.nombre = nombre;
         this.slices = slices;
@@ -51,11 +51,11 @@ public class Tamano implements Serializable{
         this.slices = slices;
     }
 
-    public int getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
     

@@ -1,22 +1,11 @@
 package ulima.edu.pe.beans;
 
-/**
- * Created by fixt on 10/05/16.
- */
-public class Producto {
-    private  int id;
-    private  String nombre;
-    private double precio;
+public abstract class Producto {
 
-    public Producto() {
-    }
-
-    public Producto(int id, String nombre, double precio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-    }
-
+    protected int id;
+    protected String nombre;
+    protected float precio;
+    
     public int getId() {
         return id;
     }
@@ -33,11 +22,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 }

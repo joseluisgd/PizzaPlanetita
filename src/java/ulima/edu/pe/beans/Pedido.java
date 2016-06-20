@@ -12,19 +12,19 @@ public class Pedido {
     private String direccion;
     private float monto;
     private List<Pizza> pizzas;
-    private List<Producto> productos;
+    private List<Adicional> adicionales;
 
     public Pedido() {
     }
 
-    public Pedido(int id, Estado estado, Usuario usuario, String direccion, float monto, List<Pizza> pizzas, List<Producto> productos) {
+    public Pedido(int id, Estado estado, Usuario usuario, String direccion, float monto, List<Pizza> pizzas, List<Adicional> adicionales) {
         this.id = id;
         this.estado = estado;
         this.usuario = usuario;
         this.direccion = direccion;
         this.monto = monto;
         this.pizzas = pizzas;
-        this.productos=productos;
+        this.adicionales=adicionales;
     }
 
     public int getId() {
@@ -75,12 +75,12 @@ public class Pedido {
         this.pizzas = pizzas;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public List<Adicional> getAdicionales() {
+        return adicionales;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setProductos(List<Adicional> adicionales) {
+        this.adicionales = adicionales;
     }
     
     

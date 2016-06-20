@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.dao.IngredienteDAO;
-import ulima.edu.pe.dao.MostrarCartaPizzaDAO;
+import ulima.edu.pe.dao.MostrarCartaDAO;
 import ulima.edu.pe.dao.ProductoDAO;
 import ulima.edu.pe.dao.TamanoDAO;
 

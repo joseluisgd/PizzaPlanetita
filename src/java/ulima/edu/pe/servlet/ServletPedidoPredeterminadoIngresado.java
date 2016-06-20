@@ -40,7 +40,7 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
 
         //tamano, precio
         List<Tamano> tLista = (List<Tamano>) ses.getAttribute("tamanoEscogico");
-        List<Integer> precios = new ArrayList<>();
+        List<Float> precios = new ArrayList<>();
         List<String> tamanos = new ArrayList<>();
         for (Tamano tamano : tLista) {
             tamanos.add(tamano.getNombre());
@@ -53,7 +53,7 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         int a = 0;
         for (Pizza pizza1 : pAux) {
             p= new Pizza();
-            p.setNombrePizza(pizza1.getNombrePizza());
+            p.setNombre(pizza1.getNombre());
             p.setIng(ingAux.get(a));
             p.setTamano(tamanos.get(a));
             p.setPrecio(precios.get(a));
@@ -80,8 +80,6 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
             monto=monto + precios.get(i);
         }
         ses.setAttribute("precio", monto);
-        
-        
         
         Pedido pedido = new Pedido();
         pedido.setEstado(estado);

@@ -9,7 +9,7 @@ import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.Producto;
+import ulima.edu.pe.beans.Adicional;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class IngredienteDAO {

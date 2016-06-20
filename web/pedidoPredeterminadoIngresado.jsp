@@ -16,7 +16,7 @@
         <c:set var="i" value="${0}"/>
         <form action="sPedidoPredeterminadoIngresado" method="post">
             <c:forEach var="x" items="${sessionScope.pizzasOrdenadas}">
-                <c:out value="${x.nombrePizza}"/><br>
+                <c:out value="${x.nombre}"/><br>
                 <c:out value="${sessionScope.tamanoEscogico[i].nombre}"/><br>
                 <c:out value="${sessionScope.tamanoEscogico[i].precio}"/><br>
                 <c:out value="${sessionScope.tamanoEscogico[i].slices}"/><br>

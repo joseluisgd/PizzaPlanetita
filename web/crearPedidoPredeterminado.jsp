@@ -12,7 +12,7 @@
             <c:forEach var="x" items="${sessionScope.pizzas}">
                 -----------------PIZZA GENERAL-----------------<br>
                 <input type="checkbox" value="<c:out value="${x.id}"/>" name="pizzaId">
-                <c:out value="${x.nombrePizza}"/><br>
+                <c:out value="${x.nombre}"/><br>
                 -----------------PIZZA INGREDIENTES------------<br>
                 <c:forEach var="a" items="${x.ing}">
                     <c:out value="${a.id}"/><br>
