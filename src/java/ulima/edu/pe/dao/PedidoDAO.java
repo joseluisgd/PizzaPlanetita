@@ -59,7 +59,7 @@ public class PedidoDAO {
                 List<Ingrediente> ingredientes;
                 for (Pizza pizza : pizzas) {
                     docPizza = new BasicDBObject();
-                    ingredientes = pizza.getIng();
+                    ingredientes = pizza.getIngredientes();
                     //ERROR EN ESTA LINEA PARA INGRESAR UN PEDIDO PREDETERMINADO. FALTA CASTEAR
                     //ChF: Corregido 12/06/16
                     for (Ingrediente ingrediente : ingredientes) {
@@ -84,7 +84,7 @@ public class PedidoDAO {
                 for (Pizza pizza : pizzas) {
                     ingredientes = new ArrayList<>();
                     docPizza = new BasicDBObject();
-                    ingredientes = pizza.getIng();
+                    ingredientes = pizza.getIngredientes();
                     //ERROR EN ESTA LINEA PARA INGRESAR UN PEDIDO PREDETERMINADO. FALTA CASTEAR
                     //ChF: Corregido 12/06/16
                     

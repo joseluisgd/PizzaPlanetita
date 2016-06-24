@@ -33,7 +33,7 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         //------ingredientes de cada pizza
         List<List<Ingrediente>> ingAux = new ArrayList<>();
         for (Pizza pizza : pAux) {
-            ingAux.add(pizza.getIng());
+            ingAux.add(pizza.getIngredientes());
         }
         
         ses.setAttribute("ingredientes", ingAux);

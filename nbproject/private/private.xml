@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/web/pedidoRegistradoPredeterminado.jsp</file>
-            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletPedidoPersonalizadoIngresado.java</file>
-            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletPedidoPredeterminadoIngresado.java</file>
-            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/web/pedidoRegistrado.jsp</file>
-            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletPedidoPredeterminado.java</file>
+            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/Pizza.java</file>
+            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/Producto.java</file>
+            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/util/ConexionMLab.java</file>
+            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/Pedido.java</file>
         </group>
     </open-files>
 </project-private>

@@ -11,6 +11,7 @@ import java.util.List;
 import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.util.ConexionMLab;
 
+//ChF: Se eliminará la clase.
 public class TamanoDAO {
     public List<Tamano> getTamanos() {
         ConexionMLab con = new ConexionMLab();
