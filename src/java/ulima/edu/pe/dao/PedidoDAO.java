@@ -28,15 +28,20 @@ public class PedidoDAO {
 
             BasicDBObject docPedido = new BasicDBObject();
 
-            docPedido.put("id", contar());
+            docPedido.put("id", obtenerSiguienteId());
+            //docPedido.put("username", pedido.getUsuario().getUsername());
 
             BasicDBObject docEstado = new BasicDBObject();
             docEstado.put("fechahora", pedido.getEstado().getFechaHora());
             docEstado.put("id", pedido.getEstado().getId());
             docEstado.put("estado", pedido.getEstado().getEstado());
 
+            docEstado.put("fechahora", pedido.getEstado().getFechaHora());
+            docEstado.put("id", pedido.getEstado().getId());
+            docEstado.put("estado", pedido.getEstado().getEstado());
+
             docPedido.put("Estado", docEstado);
-            docPedido.put("usu", pedido.getUsuario().getUsuario());
+            docPedido.put("usu", pedido.getUsuario().getUsername()); //ChF: Cambiar usu por username
             docPedido.put("direccion", pedido.getDireccion());
 
             docPedido.put("montoTotal", pedido.getMonto());
@@ -52,7 +57,6 @@ public class PedidoDAO {
             //Se me ocurre poner el identificador como un atributo de la pizza, así, al recorrer
             //las pizzas del pedido, se evalúa de qué tipo es y en base a eso se hace una u otra
             //acción.
-            
             List<Pizza> pizzas = pedido.getPizzas();
             int a = 0;
             if (identificador == 1) {
@@ -87,26 +91,21 @@ public class PedidoDAO {
                     ingredientes = pizza.getIngredientes();
                     //ERROR EN ESTA LINEA PARA INGRESAR UN PEDIDO PREDETERMINADO. FALTA CASTEAR
                     //ChF: Corregido 12/06/16
-                    
-                    //pepe :me rindo.
-                    Ingrediente ing= ingredientes.get(0);
-                    Ingrediente ing2= ingredientes.get(1);
-                        docIngrediente = new BasicDBObject();
-                        docIngrediente.put("id", ing.getId());
-                        docIngrediente.put("nombre", ing.getNombre());
-                        docIngrediente2 = new BasicDBObject();
-                        docIngrediente2.put("id", ing2.getId());
-                        docIngrediente2.put("nombre", ing2.getNombre());
-                        arrayIngredientes.add(docIngrediente);
-                        arrayIngredientes.add(docIngrediente2);
-                    
 
-                    
-                    
-                    
+                    //pepe :me rindo.
+                    Ingrediente ing = ingredientes.get(0);
+                    Ingrediente ing2 = ingredientes.get(1);
+                    docIngrediente = new BasicDBObject();
+                    docIngrediente.put("id", ing.getId());
+                    docIngrediente.put("nombre", ing.getNombre());
+                    docIngrediente2 = new BasicDBObject();
+                    docIngrediente2.put("id", ing2.getId());
+                    docIngrediente2.put("nombre", ing2.getNombre());
+                    arrayIngredientes.add(docIngrediente);
+                    arrayIngredientes.add(docIngrediente2);
+
                     i++;
 
-                    
                     a++;
                     docPizza.put("idPi", a);
                     docPizza.put("nombrePizza", pizza.getNombre());
@@ -140,26 +139,6 @@ public class PedidoDAO {
         } finally {
             mongo.close();
         }
-    }
-
-    private Integer contar() {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
-        int cont = 0;
-        try {
-            DB db = mongo.getDB("basededatos");
-            DBCollection coleccion = db.getCollection("pedido");
-            DBCursor cursor = coleccion.find();
-            while (cursor.hasNext()) {
-                DBObject dbo = cursor.next();
-                cont = cont + 1;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            mongo.close();
-        }
-        return cont;
     }
 
     public Pedido buscarPedidoPorID(int id) {
@@ -347,5 +326,25 @@ public class PedidoDAO {
 
     public void actualizarEstado() {
 
+    }
+
+    private int obtenerSiguienteId() {
+        ConexionMLab con = new ConexionMLab();
+        MongoClient mongo = con.getConexion();
+        int contador = 0;
+        try {
+            DB db = mongo.getDB("basededatos");
+            DBCollection coleccion = db.getCollection("pedido");
+            DBCursor cursor = coleccion.find();
+            while (cursor.hasNext()) {
+                DBObject dbo = cursor.next();
+                contador = contador + 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mongo.close();
+        }
+        return contador + 1;
     }
 }

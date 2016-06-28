@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Tamano implements Serializable {
 
+    //ChF: Quizá las constantes deberían ser private
     public static final String NOMBRE_ID1 = "Pequeña";
     public static final String NOMBRE_ID2 = "Mediana";
     public static final String NOMBRE_ID3 = "Grande";
@@ -20,23 +21,13 @@ public class Tamano implements Serializable {
     public static final int MULTIPLICADOR_FIESTA_PERSONALIZADA = 12;
 
     private int id;
-    private String nombre;
-    private int slices;
     private float precio;
 
     public Tamano() {
     }
 
-    public Tamano(int id, String nombre, int slices) {
-        this.id = id;
-        this.nombre = nombre;
-        this.slices = slices;
-    }
-
     public Tamano(int id, float precio) {
         this.id = id;
-        nombreSegunId();
-        slicesSegunId();
         this.precio = precio;
     }
 
@@ -49,19 +40,48 @@ public class Tamano implements Serializable {
     }
 
     public String getNombre() {
-        return nombre;
-    }
-
-    private void setNombre(String nombre) {
-        this.nombre = nombre;
+        switch (id) {
+            case 1:
+                return NOMBRE_ID1;
+            case 2:
+                return NOMBRE_ID2;
+            case 3:
+                return NOMBRE_ID3;
+            case 4:
+                return NOMBRE_ID4;
+            default:
+                return "";
+        }
     }
 
     public int getSlices() {
-        return slices;
+        switch (id) {
+            case 1:
+                return SLICES_PEQUENA;
+            case 2:
+                return SLICES_MEDIANA;
+            case 3:
+                return SLICES_GRANDE;
+            case 4:
+                return SLICES_FIESTA;
+            default:
+                return 0;
+        }
     }
 
-    private void setSlices(int slices) {
-        this.slices = slices;
+    public int getMultiplicador() {
+        switch (id) {
+            case 1:
+                return MULTIPLICADOR_PEQUENA_PERSONALIZADA;
+            case 2:
+                return MULTIPLICADOR_MEDIANA_PERSONALIZADA;
+            case 3:
+                return MULTIPLICADOR_GRANDE_PERSONALIZADA;
+            case 4:
+                return MULTIPLICADOR_FIESTA_PERSONALIZADA;
+            default:
+                return 0;
+        }
     }
 
     public float getPrecio() {
@@ -73,45 +93,6 @@ public class Tamano implements Serializable {
     }
 
     public Tamano clonar() {
-        Tamano clon = new Tamano();
-        clon.setId(id);
-        clon.setNombre(nombre);
-        clon.setSlices(slices);
-        clon.setPrecio(precio);
-        return clon;
-    }
-
-    private void nombreSegunId() {
-        switch (id) {
-            case 1:
-                nombre = NOMBRE_ID1;
-                break;
-            case 2:
-                nombre = NOMBRE_ID2;
-                break;
-            case 3:
-                nombre = NOMBRE_ID3;
-                break;
-            case 4:
-                nombre = NOMBRE_ID4;
-                break;
-        }
-    }
-
-    private void slicesSegunId() {
-        switch (id) {
-            case 1:
-                slices = SLICES_PEQUENA;
-                break;
-            case 2:
-                slices = SLICES_MEDIANA;
-                break;
-            case 3:
-                slices = SLICES_GRANDE;
-                break;
-            case 4:
-                slices = SLICES_FIESTA;
-                break;
-        }
+        return new Tamano(id, precio);
     }
 }

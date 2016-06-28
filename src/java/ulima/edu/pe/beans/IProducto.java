@@ -1,6 +1,6 @@
 package ulima.edu.pe.beans;
 
-public interface Producto {
+public interface IProducto {
     public String getNombre();
     public float getPrecio();
 }

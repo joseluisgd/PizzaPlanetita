@@ -1,14 +1,14 @@
 package ulima.edu.pe.beans;
 
-public class ProductoPromocion {
-
+public class ProductoPedido {
+    //ChF: Continuar aquí :V
     private IProducto producto;
     private int cantidad;
 
-    public ProductoPromocion() {
+    public ProductoPedido() {
     }
 
-    public ProductoPromocion(IProducto producto, int cantidad) {
+    public ProductoPedido(IProducto producto, int cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
     }

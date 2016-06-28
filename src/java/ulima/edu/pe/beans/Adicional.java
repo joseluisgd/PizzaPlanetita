@@ -1,6 +1,6 @@
 package ulima.edu.pe.beans;
 
-public class Adicional implements Producto {
+public class Adicional implements IProducto {
     private int id;
     private String nombre;
     private float precio;
@@ -12,6 +12,14 @@ public class Adicional implements Producto {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

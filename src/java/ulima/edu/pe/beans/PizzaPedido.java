@@ -2,7 +2,7 @@ package ulima.edu.pe.beans;
 
 import java.util.List;
 
-public class PizzaPedido extends Pizza implements Producto {
+public class PizzaPedido extends Pizza implements IProducto {
     Tamano tamano;
 
     public PizzaPedido() {

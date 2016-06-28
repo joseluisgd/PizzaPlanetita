@@ -3,7 +3,7 @@ package ulima.edu.pe.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Promocion implements Producto{
+public class Promocion implements IProducto{
     private int id;
     private String nombre;
     private float precio;
