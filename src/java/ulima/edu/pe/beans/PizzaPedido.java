@@ -3,19 +3,25 @@ package ulima.edu.pe.beans;
 import java.util.List;
 
 public class PizzaPedido extends Pizza implements IProducto {
-    Tamano tamano;
+    private Tamano tamano;
+    private boolean personalizada;
 
     public PizzaPedido() {
     }
 
-    public PizzaPedido(int id, String nombre, List<Ingrediente> ingredientes, Tamano tamano) {
+    public PizzaPedido(int id, String nombre, List<Ingrediente> ingredientes, Tamano tamano, boolean personalizada) {
         super(id, nombre, ingredientes);
         this.tamano = tamano;
+        this.personalizada = personalizada;
     }
 
     @Override
     public float getPrecio() {
-        return tamano.getPrecio();
+        if (personalizada){
+            return ingredientes.size() * tamano.getMultiplicador();
+        } else {
+            return tamano.getPrecio();
+        }
     }
 
     public Tamano getTamano() {
@@ -24,6 +30,14 @@ public class PizzaPedido extends Pizza implements IProducto {
 
     public void setTamano(Tamano tamano) {
         this.tamano = tamano;
+    }
+
+    public boolean esPersonalizada() {
+        return personalizada;
+    }
+
+    public void setPersonalizada(boolean personalizada) {
+        this.personalizada = personalizada;
     }
     
     

@@ -5,9 +5,9 @@ import java.util.List;
 
 public abstract class Pizza {
 
-    private int id;
-    private String nombre;
-    private List<Ingrediente> ingredientes;
+    protected int id;
+    protected String nombre;
+    protected List<Ingrediente> ingredientes;
 
     public Pizza() {
         ingredientes = new ArrayList<>();
