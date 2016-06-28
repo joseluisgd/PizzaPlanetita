@@ -29,22 +29,26 @@ public class PedidoDAO {
             BasicDBObject docPedido = new BasicDBObject();
 
             docPedido.put("id", obtenerSiguienteId());
-            //docPedido.put("username", pedido.getUsuario().getUsername());
+            docPedido.put("username", pedido.getUsername());
 
+            BasicDBObject docDireccion = new BasicDBObject();
+            docDireccion.put("calle", pedido.getDireccion().getCalle());
+            docDireccion.put("distrito", pedido.getDireccion().getDistrito());
+            
             BasicDBObject docEstado = new BasicDBObject();
-            docEstado.put("fechahora", pedido.getEstado().getFechaHora());
             docEstado.put("id", pedido.getEstado().getId());
-            docEstado.put("estado", pedido.getEstado().getEstado());
-
             docEstado.put("fechahora", pedido.getEstado().getFechaHora());
-            docEstado.put("id", pedido.getEstado().getId());
-            docEstado.put("estado", pedido.getEstado().getEstado());
+            docEstado.put("username", pedido.getEstado().getUsername());
 
-            docPedido.put("Estado", docEstado);
-            docPedido.put("usu", pedido.getUsuario().getUsername()); //ChF: Cambiar usu por username
+//            docEstado.put("fechahora", pedido.getEstado().getFechaHora());
+//            docEstado.put("id", pedido.getEstado().getId());
+//            docEstado.put("estado", pedido.getEstado().getEstado());
+
+            docPedido.put("estados", docEstado); //ChF: Antes era "Estado"
+            docPedido.put("username", pedido.getUsername()); //ChF: Cambiar usu por username
             docPedido.put("direccion", pedido.getDireccion());
 
-            docPedido.put("montoTotal", pedido.getMonto());
+            docPedido.put("montoTotal", pedido.getPrecioPedido());
 
             BasicDBObject docPizza;
             BasicDBObject docIngrediente;
