@@ -14,17 +14,16 @@ import ulima.edu.pe.beans.PizzaPedido;
 import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.util.ConexionMLab;
 
-public class PizzaDAO {
+public class PizzaDAO { 
 
     public PizzaPedido obtenerPizza(int id, int tamanoId) {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         PizzaPedido pizza = null;
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("pizza");
             BasicDBObject query = new BasicDBObject();
-            query.put("id", id);
+            query.put("_id", id);
 
             DBCursor cursor = coleccion.find(query);
 
@@ -65,12 +64,12 @@ public class PizzaDAO {
                         break;
                     }
                 }
-                pizza = new PizzaPedido(id, nombre, ingredientes, tamano);
+                pizza = new PizzaPedido(id, nombre, ingredientes, tamano, false);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return pizza;
     }

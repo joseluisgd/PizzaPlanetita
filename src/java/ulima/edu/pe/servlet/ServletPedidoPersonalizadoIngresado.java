@@ -15,7 +15,7 @@ import ulima.edu.pe.beans.Pizza;
 import ulima.edu.pe.beans.Adicional;
 import ulima.edu.pe.beans.Pedido;
 import ulima.edu.pe.beans.Tamano;
-import ulima.edu.pe.dao.LoginDAO;
+import ulima.edu.pe.dao.UsuarioDAO;
 import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.util.Util;
 
@@ -34,7 +34,7 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         
         //usuario
         String username = String.valueOf(ses.getAttribute("username"));
-        LoginDAO logDao= new LoginDAO();
+        UsuarioDAO logDao= new UsuarioDAO();
         String direccion = request.getParameter("direccion");
         
         ses.setAttribute("direccion", direccion);

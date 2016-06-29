@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.dao.IngredienteDAO;
 import ulima.edu.pe.dao.MostrarCartaDAO;
-import ulima.edu.pe.dao.ProductoDAO;
-import ulima.edu.pe.dao.TamanoDAO;
+import ulima.edu.pe.dao.AdicionalDAO;
 
 public class ServletPizzaPersonalizada extends HttpServlet {
 
@@ -20,9 +19,9 @@ public class ServletPizzaPersonalizada extends HttpServlet {
         HttpSession ses = request.getSession(true);
 
         IngredienteDAO daoIngrediente = new IngredienteDAO();
-        ses.setAttribute("ingredientes", daoIngrediente.getIngredientes());
+        ses.setAttribute("ingredientes", daoIngrediente.obtenerIngredientes());
         
-        ProductoDAO daoProducto = new ProductoDAO();
+        AdicionalDAO daoProducto = new AdicionalDAO();
         ses.setAttribute("productos", daoProducto.getProductos());
         //Agregue esta parte -----
         TamanoDAO daoTamano= new TamanoDAO();

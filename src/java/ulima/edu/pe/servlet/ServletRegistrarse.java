@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.Usuario;
 import ulima.edu.pe.beans.Cliente;
-import ulima.edu.pe.dao.RegistrarseDAO;
+import ulima.edu.pe.dao.ClienteDAO;
 
 public class ServletRegistrarse extends HttpServlet {
 
@@ -24,7 +24,7 @@ public class ServletRegistrarse extends HttpServlet {
         String edad = request.getParameter("edad");
         Usuario usuario = new Usuario(request.getParameter("usuario"), request.getParameter("password"), request.getParameter("correo"));
 
-        RegistrarseDAO daoRegistro = new RegistrarseDAO();
+        ClienteDAO daoRegistro = new ClienteDAO();
         Cliente cliente = new Cliente();
         cliente.setNombre(nombre);
         cliente.setApellido(apellidos);

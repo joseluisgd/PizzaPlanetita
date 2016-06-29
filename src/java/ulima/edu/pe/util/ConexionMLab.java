@@ -6,57 +6,31 @@ import java.net.UnknownHostException;
 
 public class ConexionMLab {
 
-    private final String username = "grupo01";
-    private final String password = "progra";
-    private final String database = "basededatos";
-    //private final String username = "pizza";
-    //private final String password = "pizza";
-    //private final String database = "pizzaplanetatest";
-    private MongoClient cliente;
-    private MongoClientURI uri;
+    private static final String USERNAME = "pizza";
+    private static final String PASSWORD = "planeta";
+    private static final String ADDRESS = "ds023714.mlab.com";
+    private static final String PORT = "23714";
+    private static final String DATABASE = "pizzaplaneta";
 
-    public ConexionMLab() {
-        uri = new MongoClientURI("mongodb://" + username + ":" + password + "@ds063124.mlab.com:63124/" + database);
-        //uri = new MongoClientURI("mongodb://" + username + ":" + password + "@ds025742.mlab.com:25742/" + database);
+    private static final MongoClientURI URI = new MongoClientURI("mongodb://" + USERNAME + ":" + PASSWORD + "@" + ADDRESS + ":" + PORT + "/" + DATABASE);
+
+    private static MongoClient cliente;
+
+    private ConexionMLab() {
+    }
+
+    public static MongoClient getMongoClient() {
         try {
-            cliente = new MongoClient(uri);
+            cliente = new MongoClient(URI);
+            return cliente;
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
+            return null;
         }
     }
-
-    public MongoClient getConexion() {
-        return cliente;
-    }
-}
-
-/*
-package ulima.edu.pe.util;
-
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import java.net.UnknownHostException;
-
-public class ConexionMLab {
     
-    //probar funcionamiento urgente
-    private static final String username = "grupo01";
-    private static final String password = "progra";
-    private static final String database = "basededatos";
-    //private static final String username = "pizza";
-    //private static final String password = "pizza";
-    //private static final String database = "pizzaplanetatest";
-    private static final MongoClientURI uri = new MongoClientURI("mongodb://" + username + ":" + password + "@ds063124.mlab.com:63124/" + database);
-    //private static final MongoClientURI uri = new MongoClientURI("mongodb://" + username + ":" + password + "@ds025742.mlab.com:25742/" + database);
-    private MongoClient cliente;
-
-    public MongoClient getConexion() {
-        try {
-            cliente = new MongoClient(uri);
-        } catch (UnknownHostException ex) {
-            ex.printStackTrace();
-        }
-        return cliente;
+    public static void closeMongoClient() {
+        cliente.close();
+        cliente = null;
     }
 }
-*/

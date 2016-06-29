@@ -21,11 +21,10 @@ import ulima.edu.pe.util.ConexionMLab;
 public class MostrarCartaDAO {
 
     public List<PizzaCarta> obtenerPizzas() {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         List<PizzaCarta> pizzas = new ArrayList<>();
         try {
-            DB db = mongo.getDB("basededatos");
+            DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("pizza");
             DBCursor cursor = coleccion.find();
 
@@ -74,14 +73,15 @@ public class MostrarCartaDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return pizzas;
     }
 
+    //ChF: Se movió a AdicionalDAO.java
+    /*
     public List<Adicional> obtenerAdicionales() {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         List<Adicional> adicionales = new ArrayList<>();
         try {
             DB db = mongo.getDB("basededatos");
@@ -106,17 +106,16 @@ public class MostrarCartaDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return adicionales;
-    }
+    }*/
 
     public List<Promocion> obtenerPromociones() {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         List<Promocion> promociones = new ArrayList<>();
         try {
-            DB db = mongo.getDB("basededatos");
+            DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("promocion");
             DBCursor cursor = coleccion.find();
 
@@ -187,7 +186,7 @@ public class MostrarCartaDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return promociones;
     }

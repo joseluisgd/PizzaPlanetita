@@ -9,17 +9,15 @@ import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.Adicional;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class IngredienteDAO {
 
-    public List<Ingrediente> getIngredientes() {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+    public List<Ingrediente> obtenerIngredientes() {
+        MongoClient mongo = ConexionMLab.getMongoClient();
         List<Ingrediente> ingrediente = new ArrayList<>();
         try {
-            DB db = mongo.getDB("basededatos");
+            DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("ingrediente");
             DBCursor cursor = coleccion.find();
             while (cursor.hasNext()) {
@@ -29,14 +27,13 @@ public class IngredienteDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return ingrediente;
     }
 
     public Ingrediente buscarIngrediente(int id) {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         Ingrediente ingrediente = new Ingrediente();
         try {
             DB db = mongo.getDB("basededatos");
@@ -55,7 +52,7 @@ public class IngredienteDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return ingrediente;
     }

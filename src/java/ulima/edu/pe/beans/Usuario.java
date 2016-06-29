@@ -3,11 +3,11 @@ package ulima.edu.pe.beans;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
-
+    
     private String username;
     private String password;
     private String correo;
-    private int puntos;
+    private int puntos; //ChF: Si el usuario pertenece a un empleado, debería siempre tener 0 puntos
 
     public Usuario() {
     }
@@ -17,6 +17,13 @@ public class Usuario implements Serializable {
         this.password = password;
         this.correo = correo;
         this.puntos = 0;
+    }
+
+    public Usuario(String username, String password, String correo, int puntos) {
+        this.username = username;
+        this.password = password;
+        this.correo = correo;
+        this.puntos = puntos;
     }
 
     public String getUsername() {

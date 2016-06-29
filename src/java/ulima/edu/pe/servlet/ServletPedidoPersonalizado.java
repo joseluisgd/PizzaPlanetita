@@ -14,7 +14,7 @@ import ulima.edu.pe.beans.Adicional;
 import ulima.edu.pe.beans.Tamano;
 import ulima.edu.pe.dao.IngredienteDAO;
 import ulima.edu.pe.dao.PedidoPersonalizadoDAO;
-import ulima.edu.pe.dao.ProductoDAO;
+import ulima.edu.pe.dao.AdicionalDAO;
 import ulima.edu.pe.dao.TamanoDAO;
 
 public class ServletPedidoPersonalizado extends HttpServlet {
@@ -28,7 +28,7 @@ public class ServletPedidoPersonalizado extends HttpServlet {
         String id= request.getParameter("idTamano");
         
         //Productos
-        ProductoDAO daoProducto= new ProductoDAO();
+        AdicionalDAO daoProducto= new AdicionalDAO();
         List<Adicional> listaProductos = new ArrayList<>();
         for (String producto : productos) {
             listaProductos.add(daoProducto.buscarProducto(Integer.parseInt(producto)));

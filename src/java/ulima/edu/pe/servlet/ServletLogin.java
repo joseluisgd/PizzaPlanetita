@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import ulima.edu.pe.dao.LoginDAO;
+import ulima.edu.pe.dao.UsuarioDAO;
 
 public class ServletLogin extends HttpServlet {
 
@@ -18,10 +18,10 @@ public class ServletLogin extends HttpServlet {
         String username = request.getParameter("usuario");
         String password = request.getParameter("password");
 
-        LoginDAO daoLogin = new LoginDAO();
+        UsuarioDAO daoLogin = new UsuarioDAO();
 
         RequestDispatcher rd;
-        if (daoLogin.login(username, password) == 1) {
+        if (daoLogin.login(username, password)) {
             rd = request.getRequestDispatcher("logincorrecto.html");
             ses.setAttribute("username", username);
         } else {

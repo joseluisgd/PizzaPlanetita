@@ -14,6 +14,7 @@ import ulima.edu.pe.beans.Ingrediente;
 import ulima.edu.pe.beans.Pedido;
 import ulima.edu.pe.beans.Pizza;
 import ulima.edu.pe.beans.Adicional;
+import ulima.edu.pe.beans.PizzaPedido;
 import ulima.edu.pe.beans.Usuario;
 import ulima.edu.pe.util.ConexionMLab;
 
@@ -28,27 +29,17 @@ public class PedidoDAO {
 
             BasicDBObject docPedido = new BasicDBObject();
 
-            docPedido.put("id", obtenerSiguienteId());
+            docPedido.put("_id", obtenerSiguienteId());
             docPedido.put("username", pedido.getUsername());
 
             BasicDBObject docDireccion = new BasicDBObject();
             docDireccion.put("calle", pedido.getDireccion().getCalle());
             docDireccion.put("distrito", pedido.getDireccion().getDistrito());
-            
+
             BasicDBObject docEstado = new BasicDBObject();
             docEstado.put("id", pedido.getEstado().getId());
             docEstado.put("fechahora", pedido.getEstado().getFechaHora());
             docEstado.put("username", pedido.getEstado().getUsername());
-
-//            docEstado.put("fechahora", pedido.getEstado().getFechaHora());
-//            docEstado.put("id", pedido.getEstado().getId());
-//            docEstado.put("estado", pedido.getEstado().getEstado());
-
-            docPedido.put("estados", docEstado); //ChF: Antes era "Estado"
-            docPedido.put("username", pedido.getUsername()); //ChF: Cambiar usu por username
-            docPedido.put("direccion", pedido.getDireccion());
-
-            docPedido.put("montoTotal", pedido.getPrecioPedido());
 
             BasicDBObject docPizza;
             BasicDBObject docIngrediente;
@@ -61,7 +52,7 @@ public class PedidoDAO {
             //Se me ocurre poner el identificador como un atributo de la pizza, así, al recorrer
             //las pizzas del pedido, se evalúa de qué tipo es y en base a eso se hace una u otra
             //acción.
-            List<Pizza> pizzas = pedido.getPizzas();
+            List<PizzaPedido> pizzas = pedido.getPizzas();
             int a = 0;
             if (identificador == 1) {
                 List<Ingrediente> ingredientes;
@@ -137,6 +128,7 @@ public class PedidoDAO {
                 }
                 docPedido.put("Productos", arrayProductos);
             }
+            docPedido.put("montoTotal", pedido.getPrecioPedido());
             coleccion.insert(docPedido);
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,7 +143,7 @@ public class PedidoDAO {
         Pedido pedido = null;
         Estado estado = null;
         Usuario usuario = null;
-        LoginDAO login = null;
+        UsuarioDAO login = null;
         List<Pizza> pizzas = null;
         List<Ingrediente> ingredientes = null;
         List<Adicional> productos = null;
@@ -178,7 +170,7 @@ public class PedidoDAO {
                 pedido.setId((Integer) dbo.get("id"));
                 pedido.setEstado(estado);
                 usuario = new Usuario();
-                login = new LoginDAO();
+                login = new UsuarioDAO();
                 usuario = login.buscarUsuario((String) dbo.get("usu"));
                 pedido.setUsuario(usuario);
                 pedido.setDireccion((String) dbo.get("direccion"));
@@ -232,7 +224,7 @@ public class PedidoDAO {
         Pedido pedido = null;
         Estado estado = null;
         Usuario usuario = null;
-        LoginDAO login = null;
+        UsuarioDAO login = null;
         List<Pizza> pizzas = null;
         List<Ingrediente> ingredientes = null;
         List<Adicional> productos = null;
@@ -260,7 +252,7 @@ public class PedidoDAO {
                 pedido.setId((Integer) dbo.get("id"));
                 pedido.setEstado(estado);
                 usuario = new Usuario();
-                login = new LoginDAO();
+                login = new UsuarioDAO();
                 usuario = login.buscarUsuario((String) dbo.get("usu"));
                 pedido.setUsuario(usuario);
                 pedido.setDireccion((String) dbo.get("direccion"));
@@ -332,23 +324,27 @@ public class PedidoDAO {
 
     }
 
+    //ChF: Devolver a private
     private int obtenerSiguienteId() {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
-        int contador = 0;
+        MongoClient mongo = ConexionMLab.getMongoClient();
+        int mayor = 0;
+        int idRecibido = 0;
         try {
-            DB db = mongo.getDB("basededatos");
+            DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("pedido");
             DBCursor cursor = coleccion.find();
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                contador = contador + 1;
+                idRecibido = (int) dbo.get("_id");
+                if (idRecibido > mayor) {
+                    mayor = idRecibido;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             mongo.close();
         }
-        return contador + 1;
+        return mayor + 1;
     }
 }
