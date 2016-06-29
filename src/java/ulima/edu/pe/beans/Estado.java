@@ -3,9 +3,9 @@ package ulima.edu.pe.beans;
 public class Estado {
 
     public static final String NOMBRE_ID1 = "En cola";
-    public static final String NOMBRE_ID2 = "Estado 2";
-    public static final String NOMBRE_ID3 = "Estado 3";
-    public static final String NOMBRE_ID4 = "Estado 4";
+    public static final String NOMBRE_ID2 = "En proceso";
+    public static final String NOMBRE_ID3 = "Terminado";
+    public static final String NOMBRE_ID4 = "En camino";
     public static final String NOMBRE_ID5 = "Entregado";
 
     private int id;
