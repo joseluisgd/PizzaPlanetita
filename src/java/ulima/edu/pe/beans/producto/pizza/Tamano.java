@@ -1,4 +1,4 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.producto.pizza;
 
 import java.io.Serializable;
 
@@ -40,6 +40,10 @@ public class Tamano implements Serializable {
     }
 
     public String getNombre() {
+        return getNombrePorId(id);
+    }
+
+    public static String getNombrePorId(int id) {
         switch (id) {
             case 1:
                 return NOMBRE_ID1;

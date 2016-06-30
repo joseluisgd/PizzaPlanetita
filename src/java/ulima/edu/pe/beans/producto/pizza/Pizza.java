@@ -1,6 +1,5 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.producto.pizza;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Pizza {
@@ -10,7 +9,6 @@ public abstract class Pizza {
     protected List<Ingrediente> ingredientes;
 
     public Pizza() {
-        ingredientes = new ArrayList<>();
     }
 
     public Pizza(int id, String nombre, List<Ingrediente> ingredientes) {

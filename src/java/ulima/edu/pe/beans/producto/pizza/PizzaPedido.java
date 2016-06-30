@@ -1,6 +1,7 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.producto.pizza;
 
 import java.util.List;
+import ulima.edu.pe.beans.producto.IProducto;
 
 public class PizzaPedido extends Pizza implements IProducto {
     private Tamano tamano;

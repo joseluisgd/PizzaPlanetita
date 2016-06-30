@@ -1,4 +1,4 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.pedido;
 
 public class Estado {
 
@@ -30,6 +30,10 @@ public class Estado {
     }
 
     public String getNombre() {
+        return getNombrePorId(id);
+    }
+    
+    public static String getNombrePorId(int id) {
         switch (id) {
             case 1:
                 return NOMBRE_ID1;

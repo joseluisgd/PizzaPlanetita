@@ -1,14 +1,16 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.pedido;
 
-public class ProductoPromocion {
+import ulima.edu.pe.beans.producto.IProducto;
 
+public class ProductoPedido {
+    //ChF: Continuar aquí :V
     private IProducto producto;
     private int cantidad;
 
-    public ProductoPromocion() {
+    public ProductoPedido() {
     }
 
-    public ProductoPromocion(IProducto producto, int cantidad) {
+    public ProductoPedido(IProducto producto, int cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
     }
@@ -27,6 +29,14 @@ public class ProductoPromocion {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+    
+    public float getPrecioUnitario(){
+        return producto.getPrecio();
+    }
+    
+    public float getPrecioTotal(){
+        return producto.getPrecio() * cantidad;
     }
 
 }

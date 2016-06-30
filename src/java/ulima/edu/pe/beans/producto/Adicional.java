@@ -1,6 +1,7 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.producto;
 
 public class Adicional implements IProducto {
+
     private int id;
     private String nombre;
     private float precio;
@@ -27,9 +28,17 @@ public class Adicional implements IProducto {
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public float getPrecio() {
         return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
     }
 
 }

@@ -9,9 +9,9 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
-import ulima.edu.pe.beans.Cliente;
-import ulima.edu.pe.beans.Direccion;
-import ulima.edu.pe.beans.Usuario;
+import ulima.edu.pe.beans.usuario.Cliente;
+import ulima.edu.pe.beans.pedido.Direccion;
+import ulima.edu.pe.beans.usuario.Usuario;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class ClienteDAO {
@@ -87,7 +87,9 @@ public class ClienteDAO {
                 docArrayDirecciones = (BasicDBList) dbo.get("direcciones");
                 for (Object objDireccion : docArrayDirecciones) {
                     docDireccion = (BasicDBObject) objDireccion;
-                    direccion = new Direccion((String) docDireccion.get("calle"), (String) docDireccion.get("distrito"));
+                    direccion = new Direccion();
+                    direccion.setCalle((String) docDireccion.get("calle"));
+                    direccion.setDistrito((String) docDireccion.get("distrito"));
                     direcciones.add(direccion);
                 }
                 cliente.setDirecciones(direcciones);

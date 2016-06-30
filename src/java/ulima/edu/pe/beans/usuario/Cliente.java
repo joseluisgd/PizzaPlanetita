@@ -1,5 +1,6 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.usuario;
 
+import ulima.edu.pe.beans.pedido.Direccion;
 import java.util.List;
 
 public class Cliente {

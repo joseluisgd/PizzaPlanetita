@@ -1,8 +1,12 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.pedido;
 
 public class Direccion {
+
     private String calle;
     private String distrito;
+
+    public Direccion() {
+    }
 
     public Direccion(String calle, String distrito) {
         this.calle = calle;
@@ -24,6 +28,5 @@ public class Direccion {
     public void setDistrito(String distrito) {
         this.distrito = distrito;
     }
-    
-    
+
 }

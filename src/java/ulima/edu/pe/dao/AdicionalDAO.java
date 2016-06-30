@@ -8,12 +8,12 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
-import ulima.edu.pe.beans.Adicional;
+import ulima.edu.pe.beans.producto.Adicional;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class AdicionalDAO {
 
-    public Adicional obtenerAdicional(int id) {
+    public Adicional buscarAdicional(int id) {
         MongoClient mongo = ConexionMLab.getMongoClient();
         Adicional adicional = null;
         try {
@@ -24,17 +24,14 @@ public class AdicionalDAO {
 
             DBCursor cursor = coleccion.find(query);
 
-            //ChF: Declaración de variables necesarias para llenar el objeto adicional.
-            String nombre;
-            float precio;
-
             DBObject dbo;
             while (cursor.hasNext()) {
                 dbo = cursor.next();
 
-                nombre = (String) dbo.get("nombre");
-                precio = (float) ((double) dbo.get("precio"));
-                adicional = new Adicional(id, nombre, precio);
+                adicional = new Adicional();
+                adicional.setId(id);
+                adicional.setNombre((String) dbo.get("nombre"));
+                adicional.setPrecio((float) ((double) dbo.get("precio")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,27 +43,24 @@ public class AdicionalDAO {
 
     public List<Adicional> obtenerAdicionales() {
         MongoClient mongo = ConexionMLab.getMongoClient();
-        Adicional adicional;
         List<Adicional> adicionales = null;
+        Adicional adicional;
         try {
             DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("adicional");
             DBCursor cursor = coleccion.find();
-
-            int id;
-            String nombre;
-            float precio;
 
             adicionales = new ArrayList<>();
 
             DBObject dbo;
             while (cursor.hasNext()) {
                 dbo = cursor.next();
+                
+                adicional = new Adicional();
+                adicional.setId((int) dbo.get("id"));
+                adicional.setNombre((String) dbo.get("nombre"));
+                adicional.setPrecio((float) ((double) dbo.get("precio")));
 
-                id = (int) dbo.get("_id");
-                nombre = (String) dbo.get("nombre");
-                precio = (float) ((double) dbo.get("precio"));
-                adicional = new Adicional(id, nombre, precio);
                 adicionales.add(adicional);
             }
         } catch (Exception e) {

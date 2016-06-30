@@ -1,28 +1,30 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.producto.promocion;
 
-import java.util.ArrayList;
 import java.util.List;
+import ulima.edu.pe.beans.producto.IProducto;
 
-public class Promocion implements IProducto{
+public class Promocion implements IProducto {
+
     private int id;
     private String nombre;
     private float precio;
     private String fechaInicio;
     private String fechaFin;
-    private List<ProductoPromocion> productos;
+    private List<PizzaPromocion> pizzas;
+    private List<AdicionalPromocion> adicionales;
     private String descripcion;
 
     public Promocion() {
-        productos = new ArrayList<>();
     }
-        
-    public Promocion(int id, String nombre, float precio, String fechaInicio, String fechaFin, List<ProductoPromocion> productos, String descripcion) {
+
+    public Promocion(int id, String nombre, float precio, String fechaInicio, String fechaFin, List<PizzaPromocion> pizzas, List<AdicionalPromocion> adicionales, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.productos = productos;
+        this.pizzas = pizzas;
+        this.adicionales = adicionales;
         this.descripcion = descripcion;
     }
 
@@ -68,12 +70,20 @@ public class Promocion implements IProducto{
         this.fechaFin = fechaFin;
     }
 
-    public List<ProductoPromocion> getProductos() {
-        return productos;
+    public List<PizzaPromocion> getPizzas() {
+        return pizzas;
     }
 
-    public void setProductos(List<ProductoPromocion> productos) {
-        this.productos = productos;
+    public void setPizzas(List<PizzaPromocion> pizzas) {
+        this.pizzas = pizzas;
+    }
+
+    public List<AdicionalPromocion> getAdicionales() {
+        return adicionales;
+    }
+
+    public void setAdicionales(List<AdicionalPromocion> adicionales) {
+        this.adicionales = adicionales;
     }
 
     public String getDescripcion() {
@@ -83,6 +93,5 @@ public class Promocion implements IProducto{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
+
 }

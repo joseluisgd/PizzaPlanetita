@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import ulima.edu.pe.beans.Usuario;
-import ulima.edu.pe.beans.Cliente;
+import ulima.edu.pe.beans.usuario.Usuario;
+import ulima.edu.pe.beans.usuario.Cliente;
 import ulima.edu.pe.dao.ClienteDAO;
+import ulima.edu.pe.dao.UsuarioDAO;
 
 public class ServletRegistrarse extends HttpServlet {
 
@@ -17,24 +18,35 @@ public class ServletRegistrarse extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
         
-        String nombre = request.getParameter("nombre");
+        RequestDispatcher rd;
+
+        String nombres = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");
         String dni = request.getParameter("dni");
-        int telefono = Integer.parseInt(request.getParameter("telefono"));
+        //int telefono = Integer.parseInt(request.getParameter("telefono"));
+        String telefono = request.getParameter("telefono");
         String edad = request.getParameter("edad");
         Usuario usuario = new Usuario(request.getParameter("usuario"), request.getParameter("password"), request.getParameter("correo"));
 
-        ClienteDAO daoRegistro = new ClienteDAO();
-        Cliente cliente = new Cliente();
-        cliente.setNombre(nombre);
-        cliente.setApellido(apellidos);
-        cliente.setDni(dni);
-        cliente.setTelefono(telefono);
-        cliente.setEdad(edad);
-        cliente.setUsuario(usuario);
-        daoRegistro.registrar(cliente);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("login.html");
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        if (usuarioDAO.registrarUsuario(usuario)) {
+            ClienteDAO clienteDAO = new ClienteDAO();
+            Cliente cliente = new Cliente();
+            cliente.setNombres(nombres);
+            cliente.setApellidos(apellidos);
+            cliente.setDni(dni);
+            //cliente.setTelefono(telefono);
+            cliente.setTelefono(telefono);
+            cliente.setEdad(edad);
+            cliente.setUsuario(usuario);
+            
+            clienteDAO.registrarCliente(cliente);
+            rd = request.getRequestDispatcher("login.html");
+        } else {
+            //ChF: 
+            rd = request.getRequestDispatcher("algunaOtraPaginaDeErrorQueAunNoEstaCreada.html");
+        }
+
         rd.forward(request, response);
     }
 

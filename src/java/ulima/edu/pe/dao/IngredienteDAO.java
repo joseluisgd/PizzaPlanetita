@@ -8,7 +8,7 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
-import ulima.edu.pe.beans.Ingrediente;
+import ulima.edu.pe.beans.producto.pizza.Ingrediente;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class IngredienteDAO {

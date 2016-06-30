@@ -3,10 +3,11 @@ import java.util.Date;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import ulima.edu.pe.beans.Adicional;
-import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.PizzaPedido;
-import ulima.edu.pe.beans.Tamano;
+import ulima.edu.pe.beans.producto.Adicional;
+import ulima.edu.pe.beans.producto.IProducto;
+import ulima.edu.pe.beans.producto.pizza.Ingrediente;
+import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
+import ulima.edu.pe.beans.producto.pizza.Tamano;
 import ulima.edu.pe.dao.AdicionalDAO;
 import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.dao.PizzaDAO;
@@ -34,7 +35,7 @@ public class JUnitTest {
     public void testObtenerPizza() {
         //Real
         PizzaDAO pDAO = new PizzaDAO();
-        PizzaPedido pizzaR = pDAO.obtenerPizza(1, 1);
+        PizzaPedido pizzaR = pDAO.buscarPizza(1, 1);
         
         //Esperado
         Tamano tamanoE = new Tamano(1, 39.9f);
@@ -53,16 +54,28 @@ public class JUnitTest {
         //assertEquals("La pizza no se está obteniendo correctamente.", 3, idR);
     }
     
-    @Test
+    
     public void testConexionMLab() {
         AdicionalDAO aDAO = new AdicionalDAO();
         
         Adicional adicionalR1, adicionalE1, adicionalR2, adicionalE2;
         adicionalE1 = new Adicional(1, "Coca Cola 500ml", 4.99f);
-        adicionalR1 = aDAO.obtenerAdicional(1);
+        adicionalR1 = aDAO.buscarAdicional(1);
         
         adicionalE2 = new Adicional(2, "Inca Kola 500ml", 3.99f);
-        adicionalR2 = aDAO.obtenerAdicional(2);
+        adicionalR2 = aDAO.buscarAdicional(2);
         assertEquals("El segundo adicional no se está obteniendo correctamente.", adicionalE2, adicionalR2);
+    }
+    
+    @Test
+    public void testEvaluacionDeNombresDeClases() {
+        IProducto pizza = new PizzaPedido();
+        
+        System.out.println(pizza.getClass().getName());
+        System.out.println(PizzaPedido.class.getName());
+        
+        if (pizza.getClass().getName().equals(PizzaPedido.class.getName())){
+            System.out.println("Son iguales");
+        }
     }
 }

@@ -9,14 +9,79 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
-import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.PizzaPedido;
-import ulima.edu.pe.beans.Tamano;
+import ulima.edu.pe.beans.producto.pizza.Ingrediente;
+import ulima.edu.pe.beans.producto.pizza.PizzaCarta;
+import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
+import ulima.edu.pe.beans.producto.pizza.Tamano;
 import ulima.edu.pe.util.ConexionMLab;
 
-public class PizzaDAO { 
+public class PizzaDAO {
 
-    public PizzaPedido obtenerPizza(int id, int tamanoId) {
+    public List<PizzaCarta> obtenerPizzas() {
+        MongoClient mongo = ConexionMLab.getMongoClient();
+        List<PizzaCarta> pizzas = null;
+        PizzaCarta pizza;
+        try {
+            DB db = mongo.getDB("pizzaplaneta");
+            DBCollection coleccion = db.getCollection("pizza");
+            DBCursor cursor = coleccion.find();
+
+            pizzas = new ArrayList<>();
+
+            //ChF: Declaración de variables necesarias para llenar el objeto pizza.
+            List<Ingrediente> ingredientes;
+            Ingrediente ingrediente;
+            BasicDBList docArrayIngredientes;
+            BasicDBObject docIngrediente;
+
+            List<Tamano> tamanos;
+            Tamano tamano;
+            BasicDBList docArrayTamanos;
+            BasicDBObject docTamano;
+
+            DBObject dbo;
+            while (cursor.hasNext()) {
+                dbo = cursor.next();
+
+                pizza = new PizzaCarta();
+                pizza.setId((int) dbo.get("_id"));
+                pizza.setNombre((String) dbo.get("nombre"));
+
+                //ChF: Lista de tamaños de la pizza
+                docArrayTamanos = (BasicDBList) dbo.get("tamanos");
+                tamanos = new ArrayList<>();
+                for (Object objTamano : docArrayTamanos) {
+                    docTamano = (BasicDBObject) objTamano;
+                    tamano = new Tamano();
+                    tamano.setId((int) docTamano.get("id"));
+                    tamano.setPrecio((float) ((double) docTamano.get("precio")));
+                    tamanos.add(tamano);
+                }
+                pizza.setTamanos(tamanos);
+
+                //ChF: Lista de ingredientes de la pizza
+                docArrayIngredientes = (BasicDBList) dbo.get("ingredientes");
+                ingredientes = new ArrayList<>();
+                for (Object objIngrediente : docArrayIngredientes) {
+                    docIngrediente = (BasicDBObject) objIngrediente;
+                    ingrediente = new Ingrediente();
+                    ingrediente.setId((int) docIngrediente.get("id"));
+                    ingrediente.setNombre((String) docIngrediente.get("nombre"));
+                    ingredientes.add(ingrediente);
+                }
+                pizza.setIngredientes(ingredientes);
+
+                pizzas.add(pizza);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConexionMLab.closeMongoClient();
+        }
+        return pizzas;
+    }
+
+    public PizzaPedido buscarPizza(int id, int tamanoId) {
         MongoClient mongo = ConexionMLab.getMongoClient();
         PizzaPedido pizza = null;
         try {
@@ -28,16 +93,13 @@ public class PizzaDAO {
             DBCursor cursor = coleccion.find(query);
 
             //ChF: Declaración de variables necesarias para llenar el objeto pizza.
-            String nombre = null;
 
             List<Ingrediente> ingredientes = new ArrayList<>();
             Ingrediente ingrediente;
             BasicDBList docArrayIngredientes;
             BasicDBObject docIngrediente;
-            
-            List<Tamano> tamanos = new ArrayList<>();
-            Tamano tamano = null;
-            float precio;
+
+            Tamano tamano;
             BasicDBList docArrayTamanos;
             BasicDBObject docTamano;
 
@@ -45,26 +107,33 @@ public class PizzaDAO {
             while (cursor.hasNext()) {
                 dbo = cursor.next();
 
-                nombre = (String) dbo.get("NombrePizza"); //ChF: "NombrePizza" cambiará a "nombre"
+                pizza = new PizzaPedido();
+                pizza.setId(id);
+                pizza.setNombre((String) dbo.get("nombre"));
 
-                docArrayIngredientes = (BasicDBList) dbo.get("Ingredientes"); //ChF: "Ingredientes" cambiará a "ingredientes", de acuerdo a lo siguiente: https://google.github.io/styleguide/jsoncstyleguide.xml
-                for (Object objIngrediente : docArrayIngredientes) {
-                    docIngrediente = (BasicDBObject) objIngrediente;
-                    ingrediente = new Ingrediente((Integer) docIngrediente.get("id"), (String) docIngrediente.get("nombre"));
-                    ingredientes.add(ingrediente);
-                }
-
-                docArrayTamanos = (BasicDBList) dbo.get("Tamano");
-                //ChF: Se busca en el array "Tamano" el id que coincida con el del parámetro (tamanoId)
+                //ChF: Lista de tamaños de la pizza
+                docArrayTamanos = (BasicDBList) dbo.get("tamanos");
                 for (Object objTamano : docArrayTamanos) {
                     docTamano = (BasicDBObject) objTamano;
-                    if (tamanoId == (Integer) docTamano.get("id")){
-                        precio = (float)((double) docTamano.get("precio"));
-                        tamano = new Tamano(tamanoId, precio);
+                    //ChF: Se busca en el array "tamanos" el id que coincida con el del parámetro (tamanoId)
+                    if (tamanoId == (int) docTamano.get("id")) {
+                        tamano = new Tamano();
+                        tamano.setId(tamanoId);
+                        tamano.setPrecio((float) ((double) docTamano.get("precio")));
                         break;
                     }
                 }
-                pizza = new PizzaPedido(id, nombre, ingredientes, tamano, false);
+
+                //ChF: Lista de ingredientes de la pizza
+                docArrayIngredientes = (BasicDBList) dbo.get("ingredientes");
+                for (Object objIngrediente : docArrayIngredientes) {
+                    docIngrediente = (BasicDBObject) objIngrediente;
+                    ingrediente = new Ingrediente();
+                    ingrediente.setId((int) docIngrediente.get("id"));
+                    ingrediente.setNombre((String) docIngrediente.get("nombre"));
+                    ingredientes.add(ingrediente);
+                }
+                pizza.setIngredientes(ingredientes);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,20 +8,22 @@ public class ConexionMLab {
 
     private static final String USERNAME = "pizza";
     private static final String PASSWORD = "planeta";
-    private static final String ADDRESS = "ds023714.mlab.com";
+    private static final String HOST = "ds023714.mlab.com";
     private static final String PORT = "23714";
     private static final String DATABASE = "pizzaplaneta";
 
-    private static final MongoClientURI URI = new MongoClientURI("mongodb://" + USERNAME + ":" + PASSWORD + "@" + ADDRESS + ":" + PORT + "/" + DATABASE);
+    private static final MongoClientURI URI = new MongoClientURI("mongodb://" + USERNAME + ":" + PASSWORD + "@" + HOST + ":" + PORT + "/" + DATABASE);
 
-    private static MongoClient cliente;
+    private static MongoClient cliente = null;
 
     private ConexionMLab() {
     }
 
     public static MongoClient getMongoClient() {
         try {
-            cliente = new MongoClient(URI);
+            if (cliente == null) {
+                cliente = new MongoClient(URI);
+            }
             return cliente;
         } catch (UnknownHostException ex) {
             ex.printStackTrace();

@@ -1,4 +1,4 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.producto;
 
 public interface IProducto {
     public String getNombre();

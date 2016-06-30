@@ -6,33 +6,36 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import ulima.edu.pe.beans.Cliente;
-import ulima.edu.pe.beans.Usuario;
+import ulima.edu.pe.beans.usuario.Usuario;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class UsuarioDAO {
 
-    public void registrarUsuario(Usuario usuario) {
+    public boolean registrarUsuario(Usuario usuario) {
         MongoClient mongo = ConexionMLab.getMongoClient();
+        boolean registrado = false;
         try {
             DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("cliente");
 
             BasicDBObject docUsuario = new BasicDBObject();
 
-            docUsuario.put("_id", obtenerSiguienteId());
-            docUsuario.put("username", usuario.getUsername());
-            docUsuario.put("password", usuario.getPassword());
-            docUsuario.put("correo", usuario.getCorreo());
-;
-            coleccion.insert(docUsuario);
+            if (existeUsername(usuario.getUsername()) == false) {
+                docUsuario.put("_id", obtenerSiguienteId());
+                docUsuario.put("username", usuario.getUsername());
+                docUsuario.put("password", usuario.getPassword());
+                docUsuario.put("correo", usuario.getCorreo());
+                coleccion.insert(docUsuario);
+                registrado = true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             ConexionMLab.closeMongoClient();
         }
+        return registrado;
     }
-    
+
     public boolean login(String username, String password) {
         MongoClient mongo = ConexionMLab.getMongoClient();
         boolean ingreso = false;
@@ -63,14 +66,14 @@ public class UsuarioDAO {
             DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("usuario");
             BasicDBObject query = new BasicDBObject();
-            
+
             query.put("username", username);
             DBCursor cursor = coleccion.find(query);
-            
+
             DBObject dbo;
             while (cursor.hasNext()) {
                 dbo = cursor.next();
-                
+
                 usuario = new Usuario();
                 usuario.setUsername(username);
                 usuario.setPassword((String) dbo.get("password")); //ChF: Considerar no hacer esto
@@ -83,7 +86,30 @@ public class UsuarioDAO {
             ConexionMLab.closeMongoClient();
         }
         return usuario;
+    }
 
+    public boolean existeUsername(String username) {
+        MongoClient mongo = ConexionMLab.getMongoClient();
+        boolean existe = false;
+        try {
+            DB db = mongo.getDB("pizzaplaneta");
+            DBCollection coleccion = db.getCollection("usuario");
+            BasicDBObject query = new BasicDBObject();
+
+            query.put("username", username);
+            DBCursor cursor = coleccion.find(query);
+
+            DBObject dbo;
+            while (cursor.hasNext()) {
+                dbo = cursor.next();
+                existe = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConexionMLab.closeMongoClient();
+        }
+        return existe;
     }
 
     private int obtenerSiguienteId() {
@@ -108,7 +134,7 @@ public class UsuarioDAO {
         }
         return mayor + 1;
     }
-    
+
 //    public Cliente buscarCliente(int id) {
 //        MongoClient mongo = ConexionMLab.getMongoClient();
 //        Cliente cliente = null;

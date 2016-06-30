@@ -9,20 +9,21 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
-import ulima.edu.pe.beans.Estado;
-import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.Pedido;
-import ulima.edu.pe.beans.Pizza;
-import ulima.edu.pe.beans.Adicional;
-import ulima.edu.pe.beans.PizzaPedido;
-import ulima.edu.pe.beans.Usuario;
+import ulima.edu.pe.beans.pedido.Estado;
+import ulima.edu.pe.beans.producto.pizza.Ingrediente;
+import ulima.edu.pe.beans.pedido.Pedido;
+import ulima.edu.pe.beans.pedido.ProductoPedido;
+import ulima.edu.pe.beans.producto.pizza.Pizza;
+import ulima.edu.pe.beans.producto.Adicional;
+import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
+import ulima.edu.pe.beans.producto.promocion.Promocion;
+import ulima.edu.pe.beans.usuario.Usuario;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoDAO {
 
     public void agregarPedido(Pedido pedido, int identificador) {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("pedido");
@@ -32,14 +33,68 @@ public class PedidoDAO {
             docPedido.put("_id", obtenerSiguienteId());
             docPedido.put("username", pedido.getUsername());
 
+            //ChF: Direccion del pedido
             BasicDBObject docDireccion = new BasicDBObject();
             docDireccion.put("calle", pedido.getDireccion().getCalle());
             docDireccion.put("distrito", pedido.getDireccion().getDistrito());
+            docPedido.put("direccion", docDireccion);
 
+            //ChF: Estados del pedido
             BasicDBObject docEstado = new BasicDBObject();
-            docEstado.put("id", pedido.getEstado().getId());
-            docEstado.put("fechahora", pedido.getEstado().getFechaHora());
-            docEstado.put("username", pedido.getEstado().getUsername());
+            //ChF: Ya que es un pedido nuevo, el único estado que debería tener es "En camino"
+            docEstado.put("id", pedido.getEstados().get(0).getId());
+            docEstado.put("fechaHora", pedido.getEstados().get(0).getFechaHora());
+            docEstado.put("username", pedido.getEstados().get(0).getUsername()); //pedido.getUsername()
+            docPedido.put("estados", docEstado);
+
+            //ChF: Lista de productos del pedido
+            BasicDBObject docProductoPedido;
+            ArrayList arrayPizzas = new ArrayList();
+            ArrayList arrayAdicionales = new ArrayList();
+            ArrayList arrayPromociones = new ArrayList();
+            for (ProductoPedido productoPedido : pedido.getProductos()) {
+                docProductoPedido = new BasicDBObject();
+                
+                docProductoPedido.put("nombre", productoPedido.getProducto().getNombre());
+                docProductoPedido.put("precioUnitario", productoPedido.getPrecioUnitario());
+                docProductoPedido.put("cantidad", productoPedido.getCantidad());
+                docProductoPedido.put("precioTotal", productoPedido.getPrecioTotal());
+                
+                if (productoPedido.getClass().getName().equals(PizzaPedido.class.getName())) {
+                    docProductoPedido.put("tamanoId", ((PizzaPedido) productoPedido.getProducto()).getTamano().getId());
+                    arrayPizzas.add(docProductoPedido);
+                } else if (productoPedido.getClass().getName().equals(Adicional.class.getName())) {
+                    arrayAdicionales.add(docProductoPedido);
+                } else if (productoPedido.getClass().getName().equals(Promocion.class.getName())) {
+                    arrayPromociones.add(docProductoPedido);
+                }
+            }
+            
+            BasicDBObject docProducto = new BasicDBObject();
+            if (arrayPizzas.size() > 0 ) {
+                docProducto.put("pizzas", arrayPizzas);
+            }
+            
+            if (arrayAdicionales.size() > 0 ) {
+                docProducto.put("adicionales", arrayAdicionales);
+            }
+            
+            if (arrayPromociones.size() > 0 ) {
+                docProducto.put("promociones", arrayPromociones);
+            }
+            docPedido.put("productos", docProducto); 
+            
+            //pedido.calcularPrecioPedido();
+            docPedido.put("precioPedido", pedido.getPrecioPedido());
+            
+            // Ewwwwwww:
+            /*
+            docProductoPedido = new BasicDBObject();
+            docProductoPedido.put("calle", direccion.getCalle());
+            docProductoPedido.put("distrito", direccion.getDistrito());
+            arrayPizzas.add(docProductoPedido);
+
+            docCliente.put("direcciones", arrayDirecciones);
 
             BasicDBObject docPizza;
             BasicDBObject docIngrediente;
@@ -128,18 +183,18 @@ public class PedidoDAO {
                 }
                 docPedido.put("Productos", arrayProductos);
             }
-            docPedido.put("montoTotal", pedido.getPrecioPedido());
+            docPedido.put("montoTotal", pedido.getPrecioPedido());*/
             coleccion.insert(docPedido);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
+
     }
 
     public Pedido buscarPedidoPorID(int id) {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         Pedido pedido = null;
         Estado estado = null;
         Usuario usuario = null;
@@ -211,7 +266,7 @@ public class PedidoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return pedido;
 
