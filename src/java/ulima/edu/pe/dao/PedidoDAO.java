@@ -9,6 +9,7 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
+import ulima.edu.pe.beans.pedido.Direccion;
 import ulima.edu.pe.beans.pedido.Estado;
 import ulima.edu.pe.beans.producto.pizza.Ingrediente;
 import ulima.edu.pe.beans.pedido.Pedido;
@@ -54,12 +55,13 @@ public class PedidoDAO {
             ArrayList arrayPromociones = new ArrayList();
             for (ProductoPedido productoPedido : pedido.getProductos()) {
                 docProductoPedido = new BasicDBObject();
-                
+
+                docProductoPedido.put("id", productoPedido.getProducto().getId());
                 docProductoPedido.put("nombre", productoPedido.getProducto().getNombre());
                 docProductoPedido.put("precioUnitario", productoPedido.getPrecioUnitario());
                 docProductoPedido.put("cantidad", productoPedido.getCantidad());
                 docProductoPedido.put("precioTotal", productoPedido.getPrecioTotal());
-                
+
                 if (productoPedido.getClass().getName().equals(PizzaPedido.class.getName())) {
                     docProductoPedido.put("tamanoId", ((PizzaPedido) productoPedido.getProducto()).getTamano().getId());
                     arrayPizzas.add(docProductoPedido);
@@ -69,24 +71,24 @@ public class PedidoDAO {
                     arrayPromociones.add(docProductoPedido);
                 }
             }
-            
+
             BasicDBObject docProducto = new BasicDBObject();
-            if (arrayPizzas.size() > 0 ) {
+            if (arrayPizzas.size() > 0) {
                 docProducto.put("pizzas", arrayPizzas);
             }
-            
-            if (arrayAdicionales.size() > 0 ) {
+
+            if (arrayAdicionales.size() > 0) {
                 docProducto.put("adicionales", arrayAdicionales);
             }
-            
-            if (arrayPromociones.size() > 0 ) {
+
+            if (arrayPromociones.size() > 0) {
                 docProducto.put("promociones", arrayPromociones);
             }
-            docPedido.put("productos", docProducto); 
-            
+            docPedido.put("productos", docProducto);
+
             //pedido.calcularPrecioPedido();
             docPedido.put("precioPedido", pedido.getPrecioPedido());
-            
+
             // Ewwwwwww:
             /*
             docProductoPedido = new BasicDBObject();
@@ -196,25 +198,88 @@ public class PedidoDAO {
     public Pedido buscarPedidoPorID(int id) {
         MongoClient mongo = ConexionMLab.getMongoClient();
         Pedido pedido = null;
-        Estado estado = null;
-        Usuario usuario = null;
-        UsuarioDAO login = null;
-        List<Pizza> pizzas = null;
-        List<Ingrediente> ingredientes = null;
-        List<Adicional> productos = null;
-        Ingrediente ingred = null;
-        Pizza pizzita = null;
-        Adicional produ = null;
+//        Estado estado = null;
+//        Usuario usuario = null;
+//        UsuarioDAO login = null;
+//        List<Pizza> pizzas = null;
+//        List<Ingrediente> ingredientes = null;
+//        List<Adicional> productos = null;
+//        Ingrediente ingred = null;
+//        Pizza pizzita = null;
+//        Adicional produ = null;
         try {
-            DB db = mongo.getDB("basededatos");
+            DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("pedido");
+
             BasicDBObject query = new BasicDBObject();
-            BasicDBObject query1 = new BasicDBObject();
-            query1.put("$eq", id);
-            query.put("id", query1);
+            query.put("_id", id);
             DBCursor cursor = coleccion.find(query);
+
+            //ChF: Declaración de variables necesarias para llenar el objeto pedido.
+            Direccion direccion;
+
+            List<Estado> estados = new ArrayList<>();
+            Estado estado;
+            BasicDBList docArrayEstados;
+            BasicDBObject docEstado;
+
+            List<ProductoPedido> productos = new ArrayList<>();
+            ProductoPedido producto;
+                PizzaPedido pizza;
+                Adicional adicional;
+                Promocion promocion;
+            BasicDBList docArrayProductos;
+            BasicDBObject docProducto;
+
+            DBObject dbo;
             while (cursor.hasNext()) {
-                DBObject dbo = cursor.next();
+                dbo = cursor.next();
+
+                pedido = new Pedido();
+
+                pedido.setId(id);
+                pedido.setUsername((String) dbo.get("username"));
+
+                //ChF: Objeto dirección del objeto pedido.
+                direccion = new Direccion();
+                direccion.setCalle((String) ((DBObject) dbo.get("direccion")).get("calle"));
+                direccion.setDistrito((String) ((DBObject) dbo.get("direccion")).get("distrito"));
+                pedido.setDireccion(direccion);
+
+                //ChF: Lista de estados del objeto pedido.
+                docArrayEstados = (BasicDBList) dbo.get("estados");
+                for (Object objEstado : docArrayEstados) {
+                    docEstado = (BasicDBObject) objEstado;
+                    estado = new Estado();
+                    estado.setId((int) docEstado.get("id"));
+                    estado.setFechaHora((String) docEstado.get("fechaHora"));
+                    estado.setUsername((String) docEstado.get("username"));
+                    estados.add(estado);
+                }
+                pedido.setEstados(estados);
+
+                //ChF: Lista de productos del objeto pedido.
+                //ChF: Array pizzas del documento productos.
+                docArrayProductos = (BasicDBList) ((DBObject) dbo.get("productos")).get("pizzas");
+                for (Object objProducto : docArrayProductos) {
+                    docProducto = (BasicDBObject) objProducto;
+                    producto = new ProductoPedido();
+                    producto.set((int) docProducto.get("id"));
+                    producto.setFechaHora((String) docProducto.get("fechaHora"));
+                    producto.setUsername((String) docProducto.get("username"));
+                    productos.add(producto);
+                }
+                
+                
+                
+                pedido.setProductos(productos);
+                
+                
+                
+                
+                
+                
+                
                 DBObject dbo2 = (BasicDBObject) dbo.get("Estado");
                 estado = new Estado();
                 estado.setFechaHora((String) dbo2.get("fechahora"));

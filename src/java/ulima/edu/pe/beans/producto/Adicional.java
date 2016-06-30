@@ -15,6 +15,7 @@ public class Adicional implements IProducto {
         this.precio = precio;
     }
 
+    @Override
     public int getId() {
         return id;
     }

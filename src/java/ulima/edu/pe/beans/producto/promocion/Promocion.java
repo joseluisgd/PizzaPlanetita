@@ -28,6 +28,7 @@ public class Promocion implements IProducto {
         this.descripcion = descripcion;
     }
 
+    @Override
     public int getId() {
         return id;
     }
