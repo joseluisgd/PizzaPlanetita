@@ -9,14 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+//import ulima.edu.pe.beans.Estado;
+//import ulima.edu.pe.beans.Ingrediente;
+//import ulima.edu.pe.beans.Pizza;
+//import ulima.edu.pe.beans.Producto;
+//import ulima.edu.pe.beans.Pedido;
+//import ulima.edu.pe.beans.Tamano;
+//import ulima.edu.pe.dao.LoginDAO;
+//import ulima.edu.pe.dao.PedidoDAO;
+//ChF: Los imports sí los actualicé :v
 import ulima.edu.pe.beans.pedido.Estado;
 import ulima.edu.pe.beans.producto.pizza.Ingrediente;
 import ulima.edu.pe.beans.producto.pizza.Pizza;
 import ulima.edu.pe.beans.producto.Adicional;
 import ulima.edu.pe.beans.pedido.Pedido;
+import ulima.edu.pe.beans.pedido.ProductoPedido;
+import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
 import ulima.edu.pe.beans.producto.pizza.Tamano;
-import ulima.edu.pe.dao.UsuarioDAO;
-import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.util.Util;
 
 public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
@@ -30,13 +39,17 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         Estado estado = new Estado();
         estado.setFechaHora(Util.obtenerFechaHoraActual());
         estado.setEstado("En cola");
+//        estado.setId(1);
         ses.setAttribute("estado", estado);
         
         //usuario
         String username = String.valueOf(ses.getAttribute("username"));
-        UsuarioDAO logDao= new UsuarioDAO();
+        LoginDAO logDao= new LoginDAO();
         String direccion = request.getParameter("direccion");
-        
+        //ChF: Ahora se necesita tanto calle como distrito para llenar el objeto direccion
+//        Direccion direccion = new Direccion();
+//        direccion.setCalle("");
+//        direccion.setDistrito("");
         ses.setAttribute("direccion", direccion);
         
         //ingredientes
@@ -47,7 +60,12 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         for (Ingrediente ingrediente : ingr) {
             precio *= precio;
         }
+        //ChF: El siguiente método se debería ejecutar luego de tener cargada la lista de productos
+        //del pedido (pizzas, adicionales, promociones)
+        //pedido.calcularPrecioPedido();
         ses.setAttribute("precio", precio);
+        
+        //ChF: A partir de aquí ya no entiendo mucho :v
         
         //pizza
         List<Pizza> pizzas = new ArrayList<>();
@@ -58,7 +76,7 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         ses.setAttribute("pizza", pizzas);
         
         //productos
-        List<Adicional> productos = (List<Adicional>) ses.getAttribute("productosIngresados");
+        List<Producto> productos = (List<Producto>) ses.getAttribute("productosIngresados");
         
         Pedido pedido = new Pedido();
         pedido.setEstado(estado);

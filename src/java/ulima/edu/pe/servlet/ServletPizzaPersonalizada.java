@@ -23,8 +23,10 @@ public class ServletPizzaPersonalizada extends HttpServlet {
         
         AdicionalDAO daoProducto = new AdicionalDAO();
         ses.setAttribute("productos", daoProducto.getProductos());
+//        ses.setAttribute("productos", daoProducto.obtenerAdicionales());
         //Agregue esta parte -----
         TamanoDAO daoTamano= new TamanoDAO();
+        //ChF: Los nombres de tamaños y demás ahora se obtienen mediante la clase Tamano
         ses.setAttribute("tamanos", daoTamano.getTamanos());
         //-----
         RequestDispatcher rd = request.getRequestDispatcher("crearPedidoPersonalizado.jsp");

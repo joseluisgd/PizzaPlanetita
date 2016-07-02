@@ -15,7 +15,6 @@ import ulima.edu.pe.beans.producto.pizza.Tamano;
 import ulima.edu.pe.dao.IngredienteDAO;
 import ulima.edu.pe.dao.PedidoPersonalizadoDAO;
 import ulima.edu.pe.dao.AdicionalDAO;
-import ulima.edu.pe.dao.TamanoDAO;
 
 public class ServletPedidoPersonalizado extends HttpServlet {
 
@@ -25,41 +24,41 @@ public class ServletPedidoPersonalizado extends HttpServlet {
 
         String productos[] = request.getParameterValues("productos");
         String ingredientes[] = request.getParameterValues("ingredientes");
-        String id= request.getParameter("idTamano");
-        
+        int tamanoId = Integer.parseInt(request.getParameter("idTamano"));
+
         //Productos
-        AdicionalDAO daoProducto= new AdicionalDAO();
+        AdicionalDAO daoAdicional = new AdicionalDAO();
         List<Adicional> listaProductos = new ArrayList<>();
         for (String producto : productos) {
-            listaProductos.add(daoProducto.buscarProducto(Integer.parseInt(producto)));
+            //listaProductos.add(daoProducto.buscarProducto(Integer.parseInt(producto)));
+            listaProductos.add(daoAdicional.buscarAdicional(Integer.parseInt(producto)));
         }
         ses.setAttribute("productosIngresados", listaProductos);
-        
+
         //Ingredientes
         IngredienteDAO daoIngrediente = new IngredienteDAO();
         List<Ingrediente> listaIngredientes = new ArrayList<>();
         for (String ingrediente : ingredientes) {
             listaIngredientes.add(daoIngrediente.buscarIngrediente(Integer.parseInt(ingrediente)));
         }
-        
 
         ses.setAttribute("ingredientesIngresados", listaIngredientes);
         //Tamano DAO ES EXCLUSIVAMENTE USADO PARA PIZZAS PERSONALIZADAS
-        TamanoDAO daoTamano=new TamanoDAO();
-        List<Tamano> tamanos= daoTamano.getTamanos();
-        Tamano t= new Tamano();
-        for (Tamano tamano1 : tamanos) {
-            if(tamano1.getId()==Integer.parseInt(id)){
-                t.setId(tamano1.getId());
-                t.setNombre(tamano1.getNombre());
-                t.setSlices(tamano1.getSlices());
-            }
-        }
-        
-        ses.setAttribute("tamanoIngresado", t);
-        
-        //usuario ???
+//        TamanoDAO daoTamano = new TamanoDAO();
+//        List<Tamano> tamanos = daoTamano.getTamanos();
+        Tamano tamano = new Tamano();
+        tamano.setId(tamanoId);
+//        for (Tamano tamano1 : tamanos) {
+//            if (tamano1.getId() == Integer.parseInt(tamanoId)) {
+//                t.setId(tamano1.getId());
+//                t.setNombre(tamano1.getNombre());
+//                t.setSlices(tamano1.getSlices());
+//            }
+//        }
 
+        ses.setAttribute("tamanoIngresado", tamano);
+
+        //usuario ???
         PedidoPersonalizadoDAO daoPedidoPersonalizado = new PedidoPersonalizadoDAO();
         daoPedidoPersonalizado.ingresarPedidoxUsuario(listaIngredientes, String.valueOf(ses.getAttribute("username")));
 

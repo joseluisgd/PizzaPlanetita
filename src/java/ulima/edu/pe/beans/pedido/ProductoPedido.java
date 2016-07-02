@@ -3,7 +3,7 @@ package ulima.edu.pe.beans.pedido;
 import ulima.edu.pe.beans.producto.IProducto;
 
 public class ProductoPedido {
-    //ChF: Continuar aquí :V
+
     private IProducto producto;
     private int cantidad;
 
@@ -30,12 +30,12 @@ public class ProductoPedido {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    public float getPrecioUnitario(){
+
+    public float getPrecioUnitario() {
         return producto.getPrecio();
     }
-    
-    public float getPrecioTotal(){
+
+    public float getPrecioTotal() {
         return producto.getPrecio() * cantidad;
     }
 

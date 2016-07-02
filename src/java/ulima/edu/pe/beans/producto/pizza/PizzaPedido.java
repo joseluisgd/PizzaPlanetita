@@ -4,6 +4,7 @@ import java.util.List;
 import ulima.edu.pe.beans.producto.IProducto;
 
 public class PizzaPedido extends Pizza implements IProducto {
+
     private Tamano tamano;
     private boolean personalizada;
 
@@ -18,7 +19,7 @@ public class PizzaPedido extends Pizza implements IProducto {
 
     @Override
     public float getPrecio() {
-        if (personalizada){
+        if (personalizada) {
             return ingredientes.size() * tamano.getMultiplicador();
         } else {
             return tamano.getPrecio();
@@ -40,6 +41,5 @@ public class PizzaPedido extends Pizza implements IProducto {
     public void setPersonalizada(boolean personalizada) {
         this.personalizada = personalizada;
     }
-    
-    
+
 }

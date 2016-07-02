@@ -22,6 +22,7 @@
             </c:forEach>
             <c:forEach var="z" items="${sessionScope.tamanos}">
                 <input type="radio" value="<c:out value="${z.id}"/>" name="idTamano">
+                <%-- http://stackoverflow.com/questions/20537648/jstl-call-a-method-thats-not-a-setter-or-a-getter --%>
                 <c:out value="${z.nombre}"/><br>
                 <c:out value="${z.slices}"/><br> Slices
             </c:forEach>

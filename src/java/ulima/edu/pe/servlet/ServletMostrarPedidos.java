@@ -21,7 +21,7 @@ public class ServletMostrarPedidos extends HttpServlet {
         HttpSession ses = request.getSession(true);
         PedidoDAO dao= new PedidoDAO();
         String username= String.valueOf(ses.getAttribute("username"));
-        List<Pedido> pedidos = dao.buscarPedidoPorUsuario(username);
+        List<Pedido> pedidos = dao.obtenerPedidosDeUsername(username);
         ses.setAttribute("pedidos", pedidos);
         
         

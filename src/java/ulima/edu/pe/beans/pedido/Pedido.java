@@ -1,8 +1,5 @@
 package ulima.edu.pe.beans.pedido;
 
-//import ulima.edu.pe.beans.producto.Adicional;
-//import ulima.edu.pe.beans.producto.promocion.Promocion;
-//import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
 import java.util.List;
 
 public class Pedido {
