@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/src/java/ulima/edu/pe/dao/PedidoDAO.java</file>
+            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/web/logincorrecto.html</file>
             <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/web/pedidoRegistradoPredeterminado.jsp</file>
             <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletPedidoPersonalizadoIngresado.java</file>
+            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletMostrarPedidos.java</file>
             <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletPedidoPredeterminadoIngresado.java</file>
+            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/web/pedidos.jsp</file>
             <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/web/pedidoRegistrado.jsp</file>
-            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletPedidoPredeterminado.java</file>
+            <file>file:/C:/Users/Jose%20Luis/Documents/GITHUB/PizzaPlanetita/web/login.html</file>
         </group>
     </open-files>
 </project-private>
