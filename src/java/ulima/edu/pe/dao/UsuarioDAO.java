@@ -130,7 +130,7 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return mayor + 1;
     }

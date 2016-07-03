@@ -388,7 +388,7 @@ public class PedidoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return pedidos;
 
@@ -552,7 +552,7 @@ public class PedidoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return mayor + 1;
     }
