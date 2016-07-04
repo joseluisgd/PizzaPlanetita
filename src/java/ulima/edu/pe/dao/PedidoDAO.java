@@ -41,9 +41,9 @@ public class PedidoDAO {
             //ChF: Estados del pedido
             BasicDBObject docEstado = new BasicDBObject();
             //ChF: Ya que es un pedido nuevo, el único estado que debería tener es "En camino"
-            docEstado.put("id", pedido.getEstados().get(0).getId());
-            docEstado.put("fechaHora", pedido.getEstados().get(0).getFechaHora());
-            docEstado.put("username", pedido.getEstados().get(0).getUsername()); //pedido.getUsername()
+            docEstado.put("id", pedido.getEstado().getId());
+            docEstado.put("fechaHora", pedido.getEstado().getFechaHora());
+            docEstado.put("username", pedido.getEstado().getUsername()); //pedido.getUsername()
             docPedido.put("estados", docEstado);
 
             //ChF: Lista de productos del pedido
@@ -424,6 +424,8 @@ public class PedidoDAO {
         direccion.setDistrito((String) ((DBObject) dbo.get("direccion")).get("distrito"));
         pedido.setDireccion(direccion);
 
+        //ChF: Flojera hacer un query para traer el documento con el máximo id en 
+        //el array estados del pedido así que los traigo todos y lo evalúo aquí
         //ChF: Lista de estados del objeto pedido.
         docArrayEstados = (BasicDBList) dbo.get("estados");
         for (Object objEstado : docArrayEstados) {
@@ -434,7 +436,7 @@ public class PedidoDAO {
             estado.setUsername((String) docEstado.get("username"));
             estados.add(estado);
         }
-        pedido.setEstados(estados);
+        pedido.setEstado(obtenerUltimoEstado(estados));
 
         //ChF: Lista de productos del objeto pedido.
         //ChF: Array pizzas del documento productos.
@@ -500,6 +502,18 @@ public class PedidoDAO {
         pedido.setProductos(productos);
 
         return pedido;
+    }
+
+    private Estado obtenerUltimoEstado(List<Estado> estados) {
+        Estado ultimoEstado = new Estado();
+
+        for (Estado estado : estados) {
+            if (estado.getId() > ultimoEstado.getId()) {
+                ultimoEstado = estado;
+            }
+        }
+        
+        return ultimoEstado;
     }
 
     //ChF: Para qué?

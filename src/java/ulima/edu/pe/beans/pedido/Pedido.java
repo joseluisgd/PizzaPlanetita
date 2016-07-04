@@ -7,18 +7,18 @@ public class Pedido {
     private int id;
     private String username;
     private Direccion direccion;
-    private List<Estado> estados;
+    private Estado estado;
     private List<ProductoPedido> productos;
     private float precioPedido;
 
     public Pedido() {
     }
 
-    public Pedido(int id, String username, Direccion direccion, List<Estado> estados, List<ProductoPedido> productos,/*List<PizzaPedido> pizzas, List<Adicional> adicionales, List<Promocion> promociones,*/ float precioPedido) {
+    public Pedido(int id, String username, Direccion direccion, Estado estado, List<ProductoPedido> productos, float precioPedido) {
         this.id = id;
         this.username = username;
         this.direccion = direccion;
-        this.estados = estados;
+        this.estado = estado;
         this.productos = productos;
         this.precioPedido = precioPedido;
     }
@@ -47,12 +47,12 @@ public class Pedido {
         this.direccion = direccion;
     }
 
-    public List<Estado> getEstados() {
-        return estados;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setEstados(List<Estado> estados) {
-        this.estados = estados;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     public List<ProductoPedido> getProductos() {

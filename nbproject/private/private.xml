@@ -2,25 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/test/JUnitTest.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/dao/PromocionDAO.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/pedido/Pedido.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/dao/ClienteDAO.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletPedidoPersonalizado.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletLogin.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/pedido/ProductoPedido.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/producto/pizza/Pizza.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/dao/PizzaDAO.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/producto/pizza/PizzaPedido.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/dao/MostrarCartaDAO.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/producto/pizza/PizzaCarta.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/pedido/Estado.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/dao/PedidoPersonalizadoDAO.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/dao/IngredienteDAO.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/dao/AdicionalDAO.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/beans/producto/pizza/Tamano.java</file>
-            <file>file:/C:/Users/Christopher/Documents/Repositorio/PizzaPlanetita/src/java/ulima/edu/pe/servlet/ServletPedidoPredeterminado.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

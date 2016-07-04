@@ -9,15 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-//import ulima.edu.pe.beans.Estado;
-//import ulima.edu.pe.beans.Ingrediente;
-//import ulima.edu.pe.beans.Pizza;
-//import ulima.edu.pe.beans.Producto;
-//import ulima.edu.pe.beans.Pedido;
-//import ulima.edu.pe.beans.Tamano;
-//import ulima.edu.pe.dao.LoginDAO;
-//import ulima.edu.pe.dao.PedidoDAO;
-//ChF: Los imports sí los actualicé :v
 import ulima.edu.pe.beans.pedido.Estado;
 import ulima.edu.pe.beans.producto.pizza.Ingrediente;
 import ulima.edu.pe.beans.producto.pizza.Pizza;
