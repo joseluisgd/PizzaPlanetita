@@ -8,15 +8,14 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
-import ulima.edu.pe.beans.Ingrediente;
+import ulima.edu.pe.beans.producto.pizza.Ingrediente;
 import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoPersonalizadoDAO {
 //Lista de ingredientes por usuario. (ingredientes, Usuario usuario)
 
     public void ingresarPedidoxUsuario(List<Ingrediente> ingredientes, String usuario) {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         try {
             DB db = mongo.getDB("basededatos");
             DBCollection coleccion = db.getCollection("ingredientesxusuario");
@@ -40,13 +39,12 @@ public class PedidoPersonalizadoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
     }
 
     private int obtenerSiguienteId() {
-        ConexionMLab con = new ConexionMLab();
-        MongoClient mongo = con.getConexion();
+        MongoClient mongo = ConexionMLab.getMongoClient();
         int cont = 0;
         try {
             DB db = mongo.getDB("basededatos");
@@ -59,7 +57,7 @@ public class PedidoPersonalizadoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mongo.close();
+            ConexionMLab.closeMongoClient();
         }
         return cont + 1;
     }

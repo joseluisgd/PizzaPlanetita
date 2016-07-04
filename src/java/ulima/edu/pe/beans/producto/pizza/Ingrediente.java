@@ -1,4 +1,4 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.producto.pizza;
 
 import java.io.Serializable;
 

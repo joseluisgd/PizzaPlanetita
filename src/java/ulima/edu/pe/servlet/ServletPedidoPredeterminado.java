@@ -5,8 +5,6 @@
  */
 package ulima.edu.pe.servlet;
 
-import com.mongodb.BasicDBList;
-import com.mongodb.DBObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import ulima.edu.pe.beans.Pizza;
-import ulima.edu.pe.beans.Tamano;
+import ulima.edu.pe.beans.producto.pizza.Pizza;
+import ulima.edu.pe.beans.producto.pizza.PizzaCarta;
+import ulima.edu.pe.beans.producto.pizza.Tamano;
 
 /**
  *
@@ -36,7 +35,7 @@ public class ServletPedidoPredeterminado extends HttpServlet {
 //        String idTamano3 = request.getParameter("tamanoId3");
 //        
 // </editor-fold>
-        List<Pizza> p = (List<Pizza>) ses.getAttribute("pizzas");
+        List<PizzaCarta> p = (List<PizzaCarta>) ses.getAttribute("pizzas");
         List<String> tamanos = new ArrayList<>();
         for (int i = 0; i <= p.size(); i++) {
             if (request.getParameter("tamanoId" + i) != null) {
@@ -57,18 +56,18 @@ public class ServletPedidoPredeterminado extends HttpServlet {
          */
 // </editor-fold>
 
-        List<Pizza> pAux = new ArrayList<>();
+        List<PizzaCarta> pAux = new ArrayList<>();
 
         Tamano t = null;
         List<Tamano> tLista = new ArrayList<>();
         int b = 0;
         //ChF: No entiendo bien qué se hace aquí, así que he cambiado y agregado
         //cosas puntuales de acuerdo al cambio que hice en MostrarCartaPizzaDAO.java
-        //Líneas: 72, 75, 76
-        for (Pizza pizza : p) {
+        //Líneas: 72, 74, 75
+        for (PizzaCarta pizza : p) {
             for (int i = 0; i < idPizzas.length; i++) {
                 if (pizza.getId() == Integer.parseInt(idPizzas[i])) {
-                    List<Tamano> listTam = pizza.getTam();
+                    List<Tamano> listTam = pizza.getTamanos();
 //                    for (Object tam : listTam) {
                     for (Tamano tamano : listTam) {
 //                        DBObject dbo = DBObject.class.cast(tam);

@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import ulima.edu.pe.beans.Estado;
-import ulima.edu.pe.beans.Ingrediente;
-import ulima.edu.pe.beans.Pedido;
-import ulima.edu.pe.beans.Pizza;
-import ulima.edu.pe.beans.Tamano;
-import ulima.edu.pe.dao.LoginDAO;
+import ulima.edu.pe.beans.pedido.Direccion;
+import ulima.edu.pe.beans.pedido.Estado;
+import ulima.edu.pe.beans.producto.pizza.Ingrediente;
+import ulima.edu.pe.beans.pedido.Pedido;
+import ulima.edu.pe.beans.pedido.ProductoPedido;
+import ulima.edu.pe.beans.producto.pizza.Pizza;
+import ulima.edu.pe.beans.producto.pizza.PizzaCarta;
+import ulima.edu.pe.beans.producto.pizza.Tamano;
+import ulima.edu.pe.dao.UsuarioDAO;
 import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.util.Util;
 
@@ -33,14 +36,14 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         //------ingredientes de cada pizza
         List<List<Ingrediente>> ingAux = new ArrayList<>();
         for (Pizza pizza : pAux) {
-            ingAux.add(pizza.getIng());
+            ingAux.add(pizza.getIngredientes());
         }
         
         ses.setAttribute("ingredientes", ingAux);
 
         //tamano, precio
         List<Tamano> tLista = (List<Tamano>) ses.getAttribute("tamanoEscogico");
-        List<Integer> precios = new ArrayList<>();
+        List<Float> precios = new ArrayList<>();
         List<String> tamanos = new ArrayList<>();
         for (Tamano tamano : tLista) {
             tamanos.add(tamano.getNombre());
@@ -48,30 +51,32 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         }
         ses.setAttribute("tamanoIngresado", tamanos);
         //organizadas para el pedido DAO
-        List<Pizza> pizzas = new ArrayList<>();
+        List<ProductoPedido> pizzas = new ArrayList<>();
         Pizza p = null;
         int a = 0;
         for (Pizza pizza1 : pAux) {
-            p= new Pizza();
-            p.setNombrePizza(pizza1.getNombrePizza());
-            p.setIng(ingAux.get(a));
-            p.setTamano(tamanos.get(a));
-            p.setPrecio(precios.get(a));
-            pizzas.add(p);
+            p= new PizzaCarta();
+            p.setNombre(pizza1.getNombre());
+            p.setIngredientes(ingAux.get(a));
+            pizzas.add(1,p);
             a++;
         }
         ses.setAttribute("pizza", pizzas);
         //estado
         Estado estado = new Estado();
-        estado.setFechaHora(Util.obtenerFechaHoraActual());
-        estado.setEstado("En cola");
-        ses.setAttribute("estado", estado);
+        estado.setFechaHora(Util.obtenerFechaHoraActual());        
+        
+        ses.setAttribute("estado", estado.getNombrePorId(1));
         //usuario
         String username = String.valueOf(ses.getAttribute("username"));
-        LoginDAO logDao = new LoginDAO();
+
         //direccion
         String direccion = request.getParameter("direccion");
+        String distrito = request.getParameter("distrito");
         ses.setAttribute("direccion", direccion);
+        Direccion di= new Direccion();
+        di.setCalle(direccion);
+        di.setCalle(distrito);
 
         
         //monto
@@ -81,14 +86,12 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         }
         ses.setAttribute("precio", monto);
         
-        
-        
         Pedido pedido = new Pedido();
-        pedido.setEstado(estado);
-        pedido.setUsuario(logDao.buscarUsuario(username));
-        pedido.setMonto(monto);
-        pedido.setDireccion(direccion);
-        pedido.setPizzas(pizzas);
+        pedido.setEstados(estado.getNombrePorId(1));
+        pedido.setUsername(username);
+        pedido.setPrecioPedido(monto);
+        pedido.setDireccion(di);
+        pedido.setProductos(pizzas);
         pedido.setProductos(null);
         //Estructura tiene que ser iugal a la de pedidos personalizados.
         //Si un campo no se llena, pongan null y a la hora de llamarlo

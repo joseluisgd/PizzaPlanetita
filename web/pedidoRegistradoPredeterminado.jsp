@@ -13,7 +13,7 @@
 
         -------------------------------------------------<br>
         <c:forEach var="x" items="${sessionScope.pizza}">
-            <c:out value="${x.nombrePizza}"/><br>
+            <c:out value="${x.nombre}"/><br>
             <c:out value="${sessionScope.tamanoIngresado[i]}"/><br>
             <c:set var="i" value="${i+1}"/><br>
         </c:forEach><br>

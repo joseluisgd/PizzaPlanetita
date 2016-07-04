@@ -1,22 +1,21 @@
-package ulima.edu.pe.beans;
+package ulima.edu.pe.beans.producto;
 
-/**
- * Created by fixt on 10/05/16.
- */
-public class Producto {
-    private  int id;
-    private  String nombre;
-    private double precio;
+public class Adicional implements IProducto {
 
-    public Producto() {
+    private int id;
+    private String nombre;
+    private float precio;
+
+    public Adicional() {
     }
 
-    public Producto(int id, String nombre, double precio) {
+    public Adicional(int id, String nombre, float precio) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -25,6 +24,7 @@ public class Producto {
         this.id = id;
     }
 
+    @Override
     public String getNombre() {
         return nombre;
     }
@@ -33,11 +33,13 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
+    @Override
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
+
 }

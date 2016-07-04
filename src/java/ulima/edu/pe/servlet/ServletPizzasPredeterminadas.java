@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import ulima.edu.pe.dao.MostrarCartaPizzaDAO;
+import ulima.edu.pe.dao.MostrarCartaDAO;
+import ulima.edu.pe.dao.PizzaDAO;
 
 /**
  *
@@ -33,8 +34,8 @@ public class ServletPizzasPredeterminadas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
-        MostrarCartaPizzaDAO mostrarCarta = new MostrarCartaPizzaDAO();
-        ses.setAttribute("pizzas", mostrarCarta.getPizzas());
+        PizzaDAO mostrarCarta = new PizzaDAO();
+        ses.setAttribute("pizzas", mostrarCarta.obtenerPizzas());
         RequestDispatcher rd = request.getRequestDispatcher("crearPedidoPredeterminado.jsp");
         rd.forward(request, response);
     }

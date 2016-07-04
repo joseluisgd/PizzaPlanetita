@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import ulima.edu.pe.beans.Pedido;
+import ulima.edu.pe.beans.pedido.Pedido;
 import ulima.edu.pe.dao.PedidoDAO;
 
 
@@ -21,7 +21,7 @@ public class ServletMostrarPedidos extends HttpServlet {
         HttpSession ses = request.getSession(true);
         PedidoDAO dao= new PedidoDAO();
         String username= String.valueOf(ses.getAttribute("username"));
-        List<Pedido> pedidos = dao.buscarPedidoPorUsuario(username);
+        List<Pedido> pedidos = dao.obtenerPedidosDeUsername(username);
         ses.setAttribute("pedidos", pedidos);
         
         
