@@ -2,11 +2,11 @@ package ulima.edu.pe.beans.pedido;
 
 public class Estado {
 
-    public static final String NOMBRE_ID1 = "En cola";
-    public static final String NOMBRE_ID2 = "En proceso";
-    public static final String NOMBRE_ID3 = "Terminado";
-    public static final String NOMBRE_ID4 = "En camino";
-    public static final String NOMBRE_ID5 = "Entregado";
+    public static final String NOMBRE_ID0 = "En cola";
+    public static final String NOMBRE_ID1 = "En proceso";
+    public static final String NOMBRE_ID2 = "Terminado";
+    public static final String NOMBRE_ID3 = "En camino";
+    public static final String NOMBRE_ID4 = "Entregado";
 
     private int id;
     private String fechaHora;
@@ -35,6 +35,8 @@ public class Estado {
     
     public static String getNombrePorId(int id) {
         switch (id) {
+            case 0:
+                return NOMBRE_ID0;
             case 1:
                 return NOMBRE_ID1;
             case 2:
@@ -43,8 +45,6 @@ public class Estado {
                 return NOMBRE_ID3;
             case 4:
                 return NOMBRE_ID4;
-            case 5:
-                return NOMBRE_ID5;
             default:
                 return "";
         }
