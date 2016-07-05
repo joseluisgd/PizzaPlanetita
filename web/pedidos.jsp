@@ -1,4 +1,6 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="ulima.edu.pe.beans.pedido.Pedido"%>
+<%@page import="java.util.List"%>
+<%@ page session="true" %>
 <%-- 
     Document   : pedidos
     Created on : 15-jun-2016, 2:47:12
@@ -10,14 +12,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Lista de pedidos</title>
     </head>
     <body>
-        <c:forEach var="pedido" items="${sessionScope.pedidos}">
-            <%-- ChF: Continuar aquí --%>
-            <c:out value="${pedido.id}"/><br>
-            <c:out value="${pedido.montoTotal}"/><br>
-            <c:out value="${pedido.Estado.estado}"/><br>
-        </c:forEach>
+        <%List<Pedido> pedidos = (List<Pedido>) session.getAttribute("pedidos"); %>
+        <%for(Pedido pedido : pedidos) {%>
+        <br>Id: <%out.print(String.valueOf(pedido.getId()));%>
+        <br>Precio: <%out.print(String.valueOf(pedido.getPrecioPedido()));%>
+        <br>Estado: <%out.print(pedido.getEstado().getNombre());%>
+        <br>Fecha y hora del estado: <%out.print(pedido.getEstado().getFechaHora());%>
+        <br>
+        <%}%>
+        <%--ChF: Debería haber un botón para regresar a la pantalla anterior --%>
     </body>
 </html>

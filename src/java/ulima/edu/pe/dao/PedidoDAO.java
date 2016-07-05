@@ -125,7 +125,6 @@ public class PedidoDAO {
     public List<Pedido> obtenerPedidosDeUsername(String username) {
         MongoClient mongo = ConexionMLab.getMongoClient();
         List<Pedido> pedidos = null;
-        Pedido pedido;
         try {
             DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("pedido");
@@ -134,6 +133,8 @@ public class PedidoDAO {
             query.put("username", username);
             DBCursor cursor = coleccion.find(query);
 
+            pedidos = new ArrayList<>();
+            
             DBObject dbo;
             while (cursor.hasNext()) {
                 dbo = cursor.next();
@@ -169,7 +170,7 @@ public class PedidoDAO {
 
         pedido = new Pedido();
 
-        pedido.setId((int) dbo.get("username"));
+        pedido.setId((int) dbo.get("_id"));
         pedido.setUsername((String) dbo.get("username"));
 
         //ChF: Objeto dirección del objeto pedido.
@@ -195,53 +196,59 @@ public class PedidoDAO {
         //ChF: Lista de productos del objeto pedido.
         //ChF: Array pizzas del documento productos.
         docArrayProductos = (BasicDBList) ((DBObject) dbo.get("productos")).get("pizzas");
-        for (Object objProducto : docArrayProductos) {
-            docProducto = (BasicDBObject) objProducto;
+        if (docArrayProductos != null) {
+            for (Object objProducto : docArrayProductos) {
+                docProducto = (BasicDBObject) objProducto;
 
-            productoPedido = new ProductoPedido();
-            pizza = new PizzaPedido();
-            pizza.setId((int) docProducto.get("id"));
-            pizza.setNombre((String) docProducto.getString("nombre"));
-            tamano = new Tamano();
-            tamano.setId((int) docProducto.get("tamanoId"));
-            tamano.setPrecio((float) ((double) docProducto.get("precioUnitario")));
-            pizza.setTamano(tamano);
-            productoPedido.setProducto(pizza);
-            productoPedido.setCantidad((int) docProducto.get("cantidad"));
+                productoPedido = new ProductoPedido();
+                pizza = new PizzaPedido();
+                pizza.setId((int) docProducto.get("id"));
+                pizza.setNombre((String) docProducto.getString("nombre"));
+                tamano = new Tamano();
+                tamano.setId((int) docProducto.get("tamanoId"));
+                tamano.setPrecio((float) ((double) docProducto.get("precioUnitario")));
+                pizza.setTamano(tamano);
+                productoPedido.setProducto(pizza);
+                productoPedido.setCantidad((int) docProducto.get("cantidad"));
 
-            productos.add(productoPedido);
+                productos.add(productoPedido);
+            }
         }
 
         //ChF: Array adicionales del documento productos.
         docArrayProductos = (BasicDBList) ((DBObject) dbo.get("productos")).get("adicionales");
-        for (Object objProducto : docArrayProductos) {
-            docProducto = (BasicDBObject) objProducto;
+        if (docArrayProductos != null) {
+            for (Object objProducto : docArrayProductos) {
+                docProducto = (BasicDBObject) objProducto;
 
-            productoPedido = new ProductoPedido();
-            adicional = new Adicional();
-            adicional.setId((int) docProducto.get("id"));
-            adicional.setNombre((String) docProducto.getString("nombre"));
-            adicional.setPrecio((float) ((double) docProducto.get("precioUnitario")));
-            productoPedido.setProducto(adicional);
-            productoPedido.setCantidad((int) docProducto.get("cantidad"));
+                productoPedido = new ProductoPedido();
+                adicional = new Adicional();
+                adicional.setId((int) docProducto.get("id"));
+                adicional.setNombre((String) docProducto.getString("nombre"));
+                adicional.setPrecio((float) ((double) docProducto.get("precioUnitario")));
+                productoPedido.setProducto(adicional);
+                productoPedido.setCantidad((int) docProducto.get("cantidad"));
 
-            productos.add(productoPedido);
+                productos.add(productoPedido);
+            }
         }
 
         //ChF: Array promociones del documento productos.
         docArrayProductos = (BasicDBList) ((DBObject) dbo.get("productos")).get("promociones");
-        for (Object objProducto : docArrayProductos) {
-            docProducto = (BasicDBObject) objProducto;
+        if (docArrayProductos != null) {
+            for (Object objProducto : docArrayProductos) {
+                docProducto = (BasicDBObject) objProducto;
 
-            productoPedido = new ProductoPedido();
-            promocion = new Promocion();
-            promocion.setId((int) docProducto.get("id"));
-            promocion.setNombre((String) docProducto.getString("nombre"));
-            promocion.setPrecio((float) ((double) docProducto.get("precioUnitario")));
-            productoPedido.setProducto(promocion);
-            productoPedido.setCantidad((int) docProducto.get("cantidad"));
+                productoPedido = new ProductoPedido();
+                promocion = new Promocion();
+                promocion.setId((int) docProducto.get("id"));
+                promocion.setNombre((String) docProducto.getString("nombre"));
+                promocion.setPrecio((float) ((double) docProducto.get("precioUnitario")));
+                productoPedido.setProducto(promocion);
+                productoPedido.setCantidad((int) docProducto.get("cantidad"));
 
-            productos.add(productoPedido);
+                productos.add(productoPedido);
+            }
         }
         //ChF: Son tres for() porque:
         //1. PizzaPedido necesita establecer el precio mediante su objeto Tamano tamano.
@@ -254,6 +261,8 @@ public class PedidoDAO {
         //   contenido de una promoción en el caso de promociones.
 
         pedido.setProductos(productos);
+        
+        pedido.calcularPrecioPedido();
 
         return pedido;
     }
@@ -266,7 +275,7 @@ public class PedidoDAO {
                 ultimoEstado = estado;
             }
         }
-        
+
         return ultimoEstado;
     }
 
