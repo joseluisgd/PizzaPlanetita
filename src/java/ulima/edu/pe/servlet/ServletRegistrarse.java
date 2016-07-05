@@ -1,6 +1,8 @@
 package ulima.edu.pe.servlet;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,29 +19,29 @@ public class ServletRegistrarse extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
-        
+
         RequestDispatcher rd;
 
-        String nombres = request.getParameter("nombre");
-        String apellidos = request.getParameter("apellidos");
-        String dni = request.getParameter("dni");
-        //int telefono = Integer.parseInt(request.getParameter("telefono"));
-        String telefono = request.getParameter("telefono");
-        String edad = request.getParameter("edad");
-        Usuario usuario = new Usuario(request.getParameter("usuario"), request.getParameter("password"), request.getParameter("correo"));
+        Usuario usuario = new Usuario();
+        usuario.setUsername(request.getParameter("username"));
+        usuario.setPassword(request.getParameter("password"));
+        usuario.setCorreo(request.getParameter("correo"));
+//        usuario.setTipo(request.getParameter("spc"));
+//        usuario.setPuntos(request.getParameter("spc"));
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         if (usuarioDAO.registrarUsuario(usuario)) {
-            ClienteDAO clienteDAO = new ClienteDAO();
+
             Cliente cliente = new Cliente();
-            cliente.setNombres(nombres);
-            cliente.setApellidos(apellidos);
-            cliente.setDni(dni);
-            //cliente.setTelefono(telefono);
-            cliente.setTelefono(telefono);
-            cliente.setEdad(edad);
+            cliente.setNombres(request.getParameter("nombres"));
+            cliente.setApellidos(request.getParameter("apellidos"));
+            cliente.setTelefono(request.getParameter("telefono"));
+            cliente.setDni(request.getParameter("dni"));
+            cliente.setEdad(request.getParameter("edad"));
+//        cliente.setDirecciones(request.getParameter("spc"));
             cliente.setUsuario(usuario);
-            
+
+            ClienteDAO clienteDAO = new ClienteDAO();
             clienteDAO.registrarCliente(cliente);
             rd = request.getRequestDispatcher("login.html");
         } else {

@@ -15,13 +15,13 @@ public class ServletLogin extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
 
-        String username = request.getParameter("usuario");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        UsuarioDAO daoLogin = new UsuarioDAO();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
 
         RequestDispatcher rd;
-        if (daoLogin.login(username, password)) {
+        if (usuarioDAO.login(username, password)) {
             rd = request.getRequestDispatcher("logincorrecto.html");
             ses.setAttribute("username", username);
         } else {

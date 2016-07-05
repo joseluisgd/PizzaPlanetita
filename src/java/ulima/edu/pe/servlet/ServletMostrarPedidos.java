@@ -1,4 +1,3 @@
-
 package ulima.edu.pe.servlet;
 
 import java.io.IOException;
@@ -12,20 +11,17 @@ import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.pedido.Pedido;
 import ulima.edu.pe.dao.PedidoDAO;
 
-
 public class ServletMostrarPedidos extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
-        PedidoDAO dao= new PedidoDAO();
-        String username= String.valueOf(ses.getAttribute("username"));
-        List<Pedido> pedidos = dao.obtenerPedidosDeUsername(username);
+        
+        PedidoDAO pedidoDAO = new PedidoDAO();
+        String username = ses.getAttribute("username").toString();
+        List<Pedido> pedidos = pedidoDAO.obtenerPedidosDeUsername(username);
         ses.setAttribute("pedidos", pedidos);
-        
-        
-        
+
         RequestDispatcher rd = request.getRequestDispatcher("pedidos.jsp");
         rd.forward(request, response);
     }

@@ -13,10 +13,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <c:forEach var="x" items="${sessionScope.pedidos}">
-            <c:out value="${x.id}"/><br>
-            <c:out value="${x.montoTotal}"/><br>
-            <c:out value="${x.Estado.estado}"/><br>
+        <c:forEach var="pedido" items="${sessionScope.pedidos}">
+            <%-- ChF: Continuar aquí --%>
+            <c:out value="${pedido.id}"/><br>
+            <c:out value="${pedido.montoTotal}"/><br>
+            <c:out value="${pedido.Estado.estado}"/><br>
         </c:forEach>
     </body>
 </html>
