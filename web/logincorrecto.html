@@ -1,20 +1,76 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>...::Bienvenido::...</title>
+        <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.css" type="text/css"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="css/styles.css" rel="stylesheet">
     </head>
-    <body>
-        <div>TODO write content</div>
-        <form method="post" action="sPizzaPersonalizada">
-            <button type="submit"> Crear pedido Personalizado </button>
-        </form>
-        <form method="post" action="sPizzasPredeterminadas">
-            <button type="submit"> Crear pedido </button>
-        </form>
-        <form method="post" action="sMostrarPedidos">
-            <button type="submit"> Mostrar pedidos </button>
-        </form>
+    <body background="https://loqueva.com/wp-content/uploads/2016/05/pizza-pedidosya-loqueva-argentina.jpeg">
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <img src="imagenes/pizza planeta.jpg" alt="" width="200" height="89"/>  
+
+                </td>
+                <td>
+                    <br>
+                    <form method="post" action="index.html" style="float: right">
+
+                        <button type="submit" class="btn btn-danger"> Cerrar Sesión </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <ul class="nav nav-pills nav-justified" style="background: white">
+            <li class="active"><a href="#">Pedido</a></li>
+            <li><a href="#" style="color:#ec1f26">Carta</a></li>
+            <li><a href="#" style="color:#ec1f26">Ofertas</a></li>
+            <li><a href="#" style="color:#ec1f26">Ubicanos</a></li>
+        </ul>
+        <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top: 200px">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="imagenes/pizza planeta.jpg" alt="" width="150" height="75" style="margin-left: 200px"/>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form col-md-12 center-block">
+                            <div class="form-group">
+                                <form method="post" action="sPizzaPersonalizada">
+                                    <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Crear pedido Personalizado </button>
+                                </form>
+                            </div>
+                            <div class="form-group">
+                                <form method="post" action="sPizzasPredeterminadas">
+                                    <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Crear pedido </button>
+                                </form>
+                            </div>
+                            <div class="form-group">
+                            <form method="post" action="sMostrarPedidos">
+                                <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Mostrar pedidos </button>
+                            </form>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true" style="margin-top: 20px" onclick="history.back()">Regresar</button>
+                        </div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </body>
 </html>
