@@ -1,4 +1,7 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" --%>
+<%@page import="ulima.edu.pe.beans.producto.pizza.Ingrediente"%>
+<%@page import="java.util.List"%>
+<%@page import="ulima.edu.pe.beans.producto.pizza.PizzaCarta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,9 +12,26 @@
     <body>
         <h1>Selecciona tu pedido</h1>
         <form action="sPedidoPredeterminado" method="post">
-            <c:forEach var="x" items="${sessionScope.pizzas}">
+            <%List<PizzaCarta> pizzas = (List<PizzaCarta>) session.getAttribute("pizzasCarta");%>
+            <%for(PizzaCarta pizza : pizzas) {%>
+                <input type="checkbox" value="<%=pizza.getId()%>" name="pizzaId"> <%--ChF: Probar --%>
+                <br>Nombre: <%=pizza.getNombre()%>
+                <br>Ingredientes:
+                <%for(Ingrediente ingrediente : pizza.getIngredientes()) {%>
+                    <br>    - <%=ingrediente.getNombre()%>
+                <%}%>
+                <br>PizzaCarta.
+                <br>Precio: <%=%>
+                <br>Estado: <%=%>
+                <br>Fecha y hora del estado: <%=%>
+                
+
+            <%}%>
+            
+            
+            <c:forEach var="x" items="${sessionScope.pizzasCarta}">
                 -----------------PIZZA GENERAL-----------------<br>
-                <input type="checkbox" value="<c:out value="${x.id}"/>" name="pizzaId">
+                <input type="checkbox" value="<c:out value="${x.id}/>" name="pizzaId">
                 <c:out value="${x.nombre}"/><br>
                 -----------------PIZZA INGREDIENTES------------<br>
                 <c:forEach var="a" items="${x.ing}">

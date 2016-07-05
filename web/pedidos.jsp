@@ -1,4 +1,5 @@
 <%@page import="ulima.edu.pe.beans.pedido.Pedido"%>
+<%@page import="ulima.edu.pe.beans.pedido.ProductoPedido"%>
 <%@page import="java.util.List"%>
 <%@ page session="true" %>
 <%-- 
@@ -15,13 +16,20 @@
         <title>Lista de pedidos</title>
     </head>
     <body>
-        <%List<Pedido> pedidos = (List<Pedido>) session.getAttribute("pedidos"); %>
+        <%List<Pedido> pedidos = (List<Pedido>) session.getAttribute("pedidos");%>
         <%for(Pedido pedido : pedidos) {%>
-        <br>Id: <%out.print(String.valueOf(pedido.getId()));%>
-        <br>Precio: <%out.print(String.valueOf(pedido.getPrecioPedido()));%>
-        <br>Estado: <%out.print(pedido.getEstado().getNombre());%>
-        <br>Fecha y hora del estado: <%out.print(pedido.getEstado().getFechaHora());%>
-        <br>
+            <br>Id: <%=String.valueOf(pedido.getId())%>
+            <br>Precio: <%=String.valueOf(pedido.getPrecioPedido())%>
+            <br>Estado: <%=pedido.getEstado().getNombre()%>
+            <br>Fecha y hora del estado: <%=pedido.getEstado().getFechaHora()%>
+            <br>Detalle de productos:
+            <%for(ProductoPedido producto : pedido.getProductos()) {%>
+                <br>Nombre: <%=producto.getProducto().getNombre()%>
+                <br>Cantidad: <%=String.valueOf(producto.getCantidad())%>
+                <br>Precio unitario: <%=String.valueOf(producto.getProducto().getPrecio())%>
+                <br>Precio total: <%=String.valueOf(producto.getPrecioTotal())%>
+            <%}%>
+            <br>
         <%}%>
         <%--ChF: Debería haber un botón para regresar a la pantalla anterior --%>
     </body>
