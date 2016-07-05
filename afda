@@ -1,0 +1,691 @@
+[33mcommit 9b4d43781fa7e3447e08858328d27e7d007f9a7b[m
+Author: Luis Lopez <Luis Lopez>
+Date:   Tue Jul 5 16:57:04 2016 -0500
+
+    Los botones estan funcionando
+
+[33mcommit fb5a95ae4e1074bb879eeaf3f58c2bd093873609[m
+Author: Armando Begazo Mogrovejo <Armando Begazo Mogrovejo>
+Date:   Tue Jul 5 01:30:04 2016 -0500
+
+    Estilos hasta superposicion en pedido
+
+[33mcommit 062598aece311d290541a49cbeaaa2f8df0fc20d[m
+Author: Armando Begazo Mogrovejo <Armando Begazo Mogrovejo>
+Date:   Tue Jul 5 00:05:52 2016 -0500
+
+    Delete try
+
+[33mcommit 173df8d25af5b2181aa119cb7ae53893905ee392[m
+Author: Armando Begazo Mogrovejo <Armando Begazo Mogrovejo>
+Date:   Mon Jul 4 22:48:33 2016 -0500
+
+    Esto es una puta prueba
+
+[33mcommit 6274f4aa757eda041bf856edf638ec9e9c520a82[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Mon Jul 4 22:33:07 2016 -0500
+
+    Desarrollo front-end
+
+[33mcommit 611618a4ba83c9c5b24d02b8dcf6336a16c69db1[m
+Author: W5209 <W5209@lab.aca>
+Date:   Mon Jul 4 19:46:38 2016 -0500
+
+    Primeros cambios en los servlets y .jsp
+
+[33mcommit f92c08f4c2a4f84150a2301aad126e9953b77bfd[m
+Author: W5209 <W5209@lab.aca>
+Date:   Mon Jul 4 18:29:33 2016 -0500
+
+    Añadido atributo 'tipo' a bean Usuario
+
+[33mcommit cdf028852c27f2bccf0cfc94f3cdb72c735089fc[m
+Author: W5209 <W5209@lab.aca>
+Date:   Mon Jul 4 17:35:55 2016 -0500
+
+    Cambios en el id de Estado
+
+[33mcommit 8895e9b4e284cebd721b5a745281ce8265d3aad7[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun Jul 3 23:42:32 2016 -0500
+
+    Cambio en atributo de bean Pedido
+    - 'List<Estado> estado' ahora es 'Estado estado'.
+    - Se hicieron unos cambios en PedidoDAO como consecuencia de lo anterior.
+
+[33mcommit d90f3d7129fba1037c9d69134d6762c42d016b9a[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun Jul 3 18:19:09 2016 -0500
+
+    Correcciones
+    -Correcciones al finally de los métodos de los DAO.
+
+[33mcommit 1e5f7dd3aea9787311c0e0ff7f4bc52a7751b5f3[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sat Jul 2 14:18:38 2016 -0500
+
+    DAOs corregidos
+    -Falta corregir servlets y archivos .jsp
+
+[33mcommit ac453f7b423f0b398b26282167e227e9bfde58f8[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Thu Jun 30 00:17:28 2016 -0500
+
+    Ligeras modificaciones.
+    -Continuar en la línea 263 de PedidoDAO.java (buscarPedidoPorID)
+    -Realizar las modificaciones necesarias a los elementos de un producto en un documento de la colección pedido (id y acerca de cómo manejar pizzas personalizadas).
+
+[33mcommit d942cf24fe7886ad03ec4b54f652062dddd09715[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Wed Jun 29 21:44:49 2016 -0500
+
+    agregarPedido() de PedidoDAO y otras cosas más fueron arregladas
+
+[33mcommit f7a880b099845e895fec37242b2c14886e49f7ec[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Wed Jun 29 13:10:43 2016 -0500
+
+    Corrección de métodos en ClienteDAO y UsuarioDAO
+
+[33mcommit 3bd57fbecf01ba242a5ecac50841783c01a86b9b[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue Jun 28 21:36:08 2016 -0500
+
+    Nombres de estados actualizados
+
+[33mcommit 584d4e894568e26ee7b417c679e444c8a033985f[m
+Author: Christopher Fernández <chfernandezrios@gmail.com>
+Date:   Tue Jun 28 18:41:28 2016 -0500
+
+    Algunas correcciones en PedidoDAO
+
+[33mcommit a7f82647cb85d1f972a6a8a1e139146c1c75a58a[m
+Author: Christopher Fernández <chfernandezrios@gmail.com>
+Date:   Tue Jun 28 18:31:14 2016 -0500
+
+    Establecido el precio de pizzas personalizadas
+
+[33mcommit 903e34148d1a29bf7a2a1ea44d525df7b4718acf[m
+Author: D2093 <D2093>
+Date:   Tue Jun 28 18:18:39 2016 -0500
+
+    Cambios en los beans y nombres
+
+[33mcommit d57a3c489e851ba4a2ee7ccb48b77b64df80bcae[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Thu Jun 23 23:43:59 2016 -0500
+
+    -La clase Pizza ahora es abstracta. Las clases PizzaCarta y PizzaPedido se añadieron como clases hijas de esta.
+    -Se creó una interfaz Producto. Las clases PizzaPedido, Adicional y Promocion lo implementan. Creo que será util para mostrar el pedido de un usuario.
+    -Se cambió de nombre a algunos métodos por unos más descriptivos.
+    -Se terminó el método obtenerPromociones() de MostrarCartaDAO.
+    -Lo próximo a realizar es arreglar PedidoDAO.
+
+[33mcommit 57ea4bca616893096315378bad85e5c26513ebde[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun Jun 19 22:25:36 2016 -0500
+
+    Añadido el método de obtenerAdicionales en MostrarCartaDAO.java. El bean Productos ahora se llama Adicionales. Se hicieron modificaciones en los beans, aún no estoy seguro si mantendré la clase abstracta Producto.
+
+[33mcommit 6503cd8650ae55579f97eaeabc745d2ff5bb4574[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Thu Jun 16 08:56:51 2016 -0500
+
+    Update PedidoDAO.java
+
+[33mcommit f3604767149d0d240b2ad5afff66dbbe953a526b[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Wed Jun 15 03:04:07 2016 -0500
+
+    Error cuando se guarda los ignredientes de pedidos predeterminados...
+
+[33mcommit ed8f63dbaff6bda3f019d0432ce86c4a7ac43d30[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun Jun 12 19:46:28 2016 -0500
+
+    Problema de casteo solucionado
+
+[33mcommit b77bebabf74ce6f0f21e0539b26b1ea4e07e5585[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Thu Jun 9 21:48:22 2016 -0500
+
+     Intente completar el pedido predeterminado. Aun hay error de casteo en el DAO. Estoy tratando de utilizar el mismo codigo de ingresar pedido.
+
+[33mcommit 018538cdc32fe8d359b9c976d46106e8403ec0b0[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Thu Jun 9 01:43:36 2016 -0500
+
+    Falta ServletPedidoPredeterminadoIngresado. Programar esa clase y luego mostrar que el pedido se efectuo correctamente. Mas correcciones por cambios hechos en otras clases.... CTM
+
+[33mcommit def996cf984501c7a18301659281db8f8151c1e0[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Wed Jun 8 22:10:43 2016 -0500
+
+    Arregle las clases que habian sido modificadas en el WS
+
+[33mcommit 4d49bf0dff015d5b823cd236b158b7cacbd117fe[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Thu Jun 2 00:26:06 2016 -0500
+
+    Intente hacer el CU para que compre pedidos predeterminados y NOUP
+
+[33mcommit 680c2c62dc5571257497819a0a7714f286143004[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Wed Jun 1 00:19:14 2016 -0500
+
+    se muestra la carta
+
+[33mcommit 40d3e4fca5bcdb2329ac650d67cc9b3facb9bcf9[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Tue May 31 21:25:34 2016 -0500
+
+    Se agrego la variable tamano para la parte de personalizar pizza.
+
+[33mcommit 18693f3ba8b3d2afc12fae0cb4bb1e0cebe5452c[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Fri May 20 15:59:58 2016 -0500
+
+    Update ConexionMLab.java
+    
+    - Código comentado con cambios de código, si funciona, se podría usar una línea en vez de dos para poder llamar al cliente en los DAOs.
+    - Quizás el singleton sí funcionaba y era cuestión de cambiar un par de cosas. Averiguar.
+
+[33mcommit d0a8add7e19efe30b548091ec781e117dc311736[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Fri May 20 15:18:27 2016 -0500
+
+    Agregado como comentario la conexión a la bd de pruebas
+
+[33mcommit 1d5b62bfcad8c648d8a43f58f89a42ba7d307a53[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:13:40 2016 -0500
+
+    Update Util.java
+
+[33mcommit 316532dbdf46df94f31eb9c85f1511165f773a08[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:13:09 2016 -0500
+
+    Update ServletRegistrarse.java
+
+[33mcommit 8dcb5f7790de43c88feb989c0109a2981772c6df[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:12:34 2016 -0500
+
+    Update ServletPedidoIngresado.java
+
+[33mcommit 011624642699371092841a99ac80dc8a727adbc2[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:10:53 2016 -0500
+
+    Update ServletIngrediente.java
+
+[33mcommit d64afd21c19ea3d1d2517225ea1a21aef8003882[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:09:26 2016 -0500
+
+    Update RegistrarseDAO.java
+
+[33mcommit 730055219ba83e93474dca8c61dbd66995478374[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:08:59 2016 -0500
+
+    Update ProductoDAO.java
+
+[33mcommit 2c2ce5414da5be03475d3dfb5d4737d7aabd5477[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:08:49 2016 -0500
+
+    Update ProductoDAO.java
+
+[33mcommit 6e5cd9f78c17cee775e29b537f541bfa85917a29[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:08:24 2016 -0500
+
+    Update ProductoDAO.java
+
+[33mcommit 597cd2502ff409abc8ea7c8dc57972f2a41108e9[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:07:37 2016 -0500
+
+    Update PedidoPersonalizadoDAO.java
+
+[33mcommit 2b508ead8c9e10ef7a0da276b7f95bf3b1849c60[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 19:05:51 2016 -0500
+
+    Update IngredienteDAO.java
+
+[33mcommit 27e49547cbc22ce2dea93389bbc136f767e4274f[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:59:26 2016 -0500
+
+    Update ServletPedidoIngresado.java
+
+[33mcommit beb47a40e91ed047a08d64d80dc665580da258a1[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:56:10 2016 -0500
+
+    Update ServletLogin.java
+
+[33mcommit 0b2c20d4178ad0b0b1354165bba366b8129db28e[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:54:06 2016 -0500
+
+    Update ServletPedido.java
+
+[33mcommit 4c2a32b430db1f0396c2ef1646855d50c421dac2[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:52:20 2016 -0500
+
+    Update ServletPedido.java
+
+[33mcommit 099b49378985fa1496b2e2b50b302c6b98c9b742[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:42:47 2016 -0500
+
+    Update ServletPedido.java
+
+[33mcommit 060a811feeac02baf786feeeda93f4a6aceca29c[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:36:45 2016 -0500
+
+    Update ServletPedido.java
+
+[33mcommit 41d13190ec10d7a7c615a974c9b9160fa518335d[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:35:23 2016 -0500
+
+    Update PedidoDAO.java
+
+[33mcommit a5e11f0ffe1bb2267ca56e31642574a89e6162e2[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:32:44 2016 -0500
+
+    Update ServletPedidoIngresado.java
+
+[33mcommit 8e620ef983efe382561efe84550556a5942caaad[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:31:42 2016 -0500
+
+    Ya no es singleton
+
+[33mcommit 86666866ee9b0627732e2c658b18d201e70b1991[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:27:53 2016 -0500
+
+    Update PedidoDAO.java
+
+[33mcommit 2f12a8d2caab18e19f50c02b7f3f4a9017c9687a[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:26:00 2016 -0500
+
+    Update ServletPedido.java
+
+[33mcommit 3dab90b6689745ea645fbfa9e214aeb5bec48b61[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:22:57 2016 -0500
+
+    Update Estado.java
+
+[33mcommit 5495f354aefcfb6790c9b6c411f0df86fa4b31f7[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 18:22:02 2016 -0500
+
+    Update Usuario.java
+
+[33mcommit 9c3089c2523a644acfc016ce21edf13441d6f6cc[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 14:38:42 2016 -0500
+
+    Update ServletPedidoIngresado.java
+
+[33mcommit 1850907032777856ceeee034e62ef798aea9adca[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 14:37:48 2016 -0500
+
+    Update PedidoDAO.java
+
+[33mcommit a027336b9c6da86e7dfec4330819cede8de64baf[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 14:36:42 2016 -0500
+
+    Update Estado.java
+
+[33mcommit 59f632437c0823d64f1fe055dc93f184d748b1d0[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 14:33:29 2016 -0500
+
+    usuario cambió de nombre a username
+
+[33mcommit 6a889245460fd9c0f7d38604ea2f2b0da80555a4[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 14:31:46 2016 -0500
+
+    usuario cambió de nombre a username
+
+[33mcommit b34cf7b283543ab407a9ad8483c3f59daed74396[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 14:28:11 2016 -0500
+
+    Añadida función de Util.java
+
+[33mcommit ced8214b8dd9c2e4fde2f402a6703b9fe3bcfbf8[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 14:25:09 2016 -0500
+
+    Función obtenerFechaHoraActual() añadida.
+
+[33mcommit 9b6fd7f96fe84cde95692ce01379d46333ccd71e[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 14:04:48 2016 -0500
+
+    Update Util.java
+
+[33mcommit 0caa637e9dd35a797f083d24056607b3d530f365[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 12:58:55 2016 -0500
+
+    Creación de Util.java
+    
+    Para poner métodos útiles.
+
+[33mcommit 8bf1ef6e72c054ab7332de3cd9e9dc94ab15dde0[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 10:36:54 2016 -0500
+
+    Algunas huevaditas
+    
+    - Se eliminaron los comentarios autogenerados.
+    - Se cambió el nombre de la variable dao por uno más descriptivo.
+
+[33mcommit 4dbd9807b719ce3ea5c1cabd49b158d97b34e938[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 10:31:55 2016 -0500
+
+    Huevaditas
+    
+    - Eliminación de comentarios autogenerados.
+    - Cambio de nombre de variables dao por uno más descriptivo.
+
+[33mcommit 7f800c14f37ea5b736cb007ee778978c838a9a3d[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 10:29:16 2016 -0500
+
+    Algunas huevaditas
+    
+    - Eliminación de comentarios autogenerados.
+    - Cambio del nombre de los objetos DAO por uno más descriptivo.
+    - Cambio de nombre de las listas.
+
+[33mcommit 53ed0fb903c240fddfc957414c53d19afdd62acb[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 10:09:29 2016 -0500
+
+    Cambios al atributo usuario
+    
+    - Se cambió el nombre a username (en concordancia con password).
+    - Se cambió el nombre de los métodos get y set de usuario.
+
+[33mcommit f2c28834c1dbb579e1805003efd9a8bb43d3e644[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 10:07:10 2016 -0500
+
+    Parámetros de registrar() se cambiaron
+    
+    - Refactoring en los parámetros de la función registrar (se reemplazaron por el bean Cliente).
+    - Los objetos de tipo BasicDBObject ahora tiene un nombre más descriptivo.
+
+[33mcommit dad1fd1ab8063ceb7aef66c9079f59ababeac855[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 09:59:27 2016 -0500
+
+    Cambios al atributo user
+    
+    - Se cambió el nombre a usuario.
+    - Se cambió el nombre de los métodos get y set del atributo usuario.
+
+[33mcommit 0b67b5cfe70f21086770b72b08217d9c8a16757f[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 09:56:12 2016 -0500
+
+    Parámetros de dao.registrar() se cambiaron
+
+[33mcommit 6cae69141e959c8f2038c163f6337b0040efbeca[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 09:45:13 2016 -0500
+
+    Algunas huevaditas
+    
+    - Cambio de nombre de los objetos de tipo BasicDBObject a uno más descriptivo.
+    - Cambio de nombre de la variable IngredientesA a arrayIngredientes (como en PedidoDAO).
+
+[33mcommit 51163c9e9fe9d616f05018eb339fc3cbf9575532[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 09:39:33 2016 -0500
+
+    Comentario con pregunta
+
+[33mcommit d1104c0aeca2e19d193b9d3eeb9bd4f152815c42[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 09:37:17 2016 -0500
+
+    Varias huevaditas
+    
+    - Refactoring en los parámetros de la función agregar (se usó el bean Pedido y el nombre del método es (aún) más descriptivo).
+    - Se cambió el nombre de los objetos de tipo BasicDBObject por uno más descriptivo.
+    - Getters como mierda.
+
+[33mcommit ff901a352afcd01b392d0b9d6c93ec84f8147bb9[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 09:21:41 2016 -0500
+
+    Cambios con respecto al atributo productos
+    
+    Se añadieron los métodos get y set para el atributo productos y también se añadió al constructor no vacío.
+
+[33mcommit 99ba099fb2c68114c7dfaef37d211c410a3d47cb[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 09:18:25 2016 -0500
+
+    Parámetros de dao.agregar() se cambiaron
+
+[33mcommit cc785479bc63625f1e003473914d6ebcab190c31[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 09:02:28 2016 -0500
+
+    Limpieza
+
+[33mcommit d2fd6e9bd100750829cf2f159ec4f0620ffc2adc[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 08:51:16 2016 -0500
+
+    Un import y objetos no utilizados fueron borrados.
+
+[33mcommit 7cb074cc41ec9a2d28c7c3ac8ac6d8f99703a34d[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 08:46:03 2016 -0500
+
+    Huevaditas
+    
+    Huevaditas
+
+[33mcommit fb01457b5ec85d44312ba100f9a005647ae5f73e[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 08:45:03 2016 -0500
+
+    Huevaditas
+    
+    Huevaditas
+
+[33mcommit 5a4c8ac696cf0b360ce606b0f0e85b189b5aca1d[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 08:44:05 2016 -0500
+
+    Huevaditas
+    
+    Huevaditas
+
+[33mcommit e12d354684e60ef2903c7438789e80c43b033ffd[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 08:42:16 2016 -0500
+
+    Huevaditas
+    
+    Huevaditas
+
+[33mcommit 45804bb699e708d60cb13ca237475d638f172173[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 08:40:53 2016 -0500
+
+    Huevaditas
+    
+    Huevaditas
+
+[33mcommit 597584ad1dfb288eb5e08c8cb8a6f55fff98ecaa[m
+Author: christopherfr <chfernandezrios@gmail.com>
+Date:   Tue May 17 08:35:23 2016 -0500
+
+    Update LoginDAO.java
+    
+    Huevaditas
+
+[33mcommit d1eca4d962b7c8f573253b9a349059c15ab47297[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun May 15 19:35:40 2016 -0500
+
+    Pequeñas correcciones en la interfaz web
+
+[33mcommit cfe0e8333e323f93a7cffada2122b19144bd2901[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Sun May 15 19:23:20 2016 -0500
+
+    No se hara mas :v
+
+[33mcommit 33736b30f1b1e5e09a412118e4e0747360e8492e[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun May 15 18:50:46 2016 -0500
+
+    Ya se registran los pedidos
+
+[33mcommit 7d55931640dacdb605e653db34786c664ed1445f[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Sun May 15 18:10:44 2016 -0500
+
+     falta debug :v
+
+[33mcommit a4858c82094aa7256d932c04a288164cf2008fae[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun May 15 16:38:10 2016 -0500
+
+    Correcciòn de todos los errores
+
+[33mcommit 2bdd17b8858e11c7042b9db64bbaed18e5cd6ac9[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun May 15 15:21:17 2016 -0500
+
+    Conexion y login corregidos
+
+[33mcommit d199f3f1b891207b7aca18c161ad21bf7e1a3d5b[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun May 15 12:33:15 2016 -0500
+
+    Cambios en los DAOs y la conexion de la BD
+
+[33mcommit 41a1fe01a4c27464149354a7222e847d5484c070[m
+Author: Christopher Fernández <Christopher Fernández>
+Date:   Sun May 15 12:21:02 2016 -0500
+
+    Putitas
+
+[33mcommit c0c25e7009cce82e1fb0de5191a6088bf6442a31[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Sun May 15 11:52:11 2016 -0500
+
+     error en el login... el error esta en el query HELPgit push origin master . El error de PED1 aun no esta corregido
+
+[33mcommit 6ce31ebb95450cc17d13fcc5c418baf5c6cb5366[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Sun May 15 03:59:27 2016 -0500
+
+     ..
+
+[33mcommit 9dfebc4079ca5c94f830c32d01e130fe6901e6c2[m
+Merge: a84185e 6bc8ece
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Sun May 15 03:54:01 2016 -0500
+
+    Merge pull request #2 from joseluisgd/ped1
+    
+    Ped1
+
+[33mcommit 6bc8ecec4778ceb6200b79739c75c3c6bdd46896[m
+Merge: e28d9c8 a84185e
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Sun May 15 03:50:44 2016 -0500
+
+    Merge branch 'master' of https://github.com/joseluisgd/PizzaPlanetita into ped1
+
+[33mcommit e28d9c8c7577222a3d46b7bd4621002cc5491750[m
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Sun May 15 03:50:21 2016 -0500
+
+    Corregir errores
+
+[33mcommit 73fe384ac56bda2fe6da545e9d5f86440fe252de[m
+Author: Jose <joseluisgd95@gmail.com>
+Date:   Sun May 15 03:32:05 2016 -0500
+
+    CU PED1 avance un 50%? Falta corregir errores al guardar la data y falta poner un Usuario. Lo deje en comentarios Just in case. El error que tuve esta al momento de guardar la data... Solo guarda un ingrediente y no todos los que se le da check en el checkbox. Una mano ahi.
+
+[33mcommit 44b841bc68044a78473b338767b0339775d31cad[m
+Author: Jose <joseluisgd95@gmail.com>
+Date:   Sun May 15 01:23:25 2016 -0500
+
+    done
+
+[33mcommit a84185e62999cac7ab973ae532f615a52aa72534[m
+Merge: e477631 a2b7467
+Author: joseluisgd <joseluisgd95@gmail.com>
+Date:   Sun May 15 00:41:52 2016 -0500
+
+    Merge pull request #1 from joseluisgd/pepe1
+    
+    Pepe1
+
+[33mcommit a2b746718c97aebdfb6eb622d99c417fea5474ef[m
+Author: Jose <joseluisgd95@gmail.com>
+Date:   Sun May 15 00:25:51 2016 -0500
+
+    ACA EMPEZZAMOS TODOS
+
+[33mcommit cbdeb6f12d68ddd0eae692c429d23d7231264ca4[m
+Author: Jose <joseluisgd95@gmail.com>
+Date:   Sat May 14 23:57:50 2016 -0500
+
+    Probando 1
+
+[33mcommit e4776317a0815851e4333e6a21de77b8cb1d479a[m
+Author: Jose <joseluisgd95@gmail.com>
+Date:   Sat May 14 23:38:20 2016 -0500
+
+    Arreglo
+
+[33mcommit 4de64ce1bb2dadd5e0758f10dc770c20672e1c6b[m
+Author: Jose <joseluisgd95@gmail.com>
+Date:   Sat May 14 23:35:06 2016 -0500
+
+     elimine el archivo readme
+
+[33mcommit 41d3dde2500593893e52041ff5af825f344f2ac7[m
+Author: Jose <joseluisgd95@gmail.com>
+Date:   Sat May 14 23:30:40 2016 -0500
+
+    Proyecto base
+
+[33mcommit 27c5f5c11ebc58bad4cb19ee7aca14a2dea964b2[m
+Author: Jose <joseluisgd95@gmail.com>
+Date:   Sat May 14 23:15:48 2016 -0500
+
+    Empezo
