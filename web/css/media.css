@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13/06/2016, 01:38:25 AM
+    Author     : Luis
+*/
+
+/*
+@media all{
+    body{
+        color: red;
+    }
+    }
+*/
+   //Para tmaños de diferentes dispositvos, que chevere :D
+             //Escritorio
+             
+             //---------------------
+             @media (min-width: @screen-sm-min) {  body{
+                      color: yellow;
+                  } }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {  body{
+                      color: blue;
+                  } }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {   body{
+                          color: red;
+                      }}
+
+.texto-grande{
+    font-size: 300px;
+    line-height: 320px;
+    
+}
+             
+      

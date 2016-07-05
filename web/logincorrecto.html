@@ -5,15 +5,32 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>...::Bienvenido::...</title>
-        <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.css" type="text/css"/>
+      <head>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.css" type="text/css"/>
+        
+       
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        
         <link href="css/styles.css" rel="stylesheet">
+        
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+          <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+            <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+              <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+              <link rel="stylesheet" type="text/css" href="css/media.css">
+              <link rel="stylesheet"  href="font-awesome/css/font-awesome.css">
+              
+              
+              <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>﻿
+              <script type="text/javascript" src="js/js.js"></script>
     </head>
-    <body background="https://loqueva.com/wp-content/uploads/2016/05/pizza-pedidosya-loqueva-argentina.jpeg">
+    <body>
+           <div class="container">
         <table style="width:100%">
             <tr>
                 <td>
@@ -29,48 +46,22 @@ and open the template in the editor.
                 </td>
             </tr>
         </table>
+        
+        
         <ul class="nav nav-pills nav-justified" style="background: white">
-            <li class="active"><a href="#">Pedido</a></li>
+            <li class="dropdown" ><a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedido <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+      <li><a href="#">Enlace #1</a></li>
+      <li><a href="#">Enlace #2</a></li>
+    </ul>
+            </li>
             <li><a href="#" style="color:#ec1f26">Carta</a></li>
             <li><a href="#" style="color:#ec1f26">Ofertas</a></li>
             <li><a href="#" style="color:#ec1f26">Ubicanos</a></li>
         </ul>
-        <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top: 200px">
-
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <img src="imagenes/pizza planeta.jpg" alt="" width="150" height="75" style="margin-left: 200px"/>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form col-md-12 center-block">
-                            <div class="form-group">
-                                <form method="post" action="sPizzaPersonalizada">
-                                    <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Crear pedido Personalizado </button>
-                                </form>
-                            </div>
-                            <div class="form-group">
-                                <form method="post" action="sPizzasPredeterminadas">
-                                    <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Crear pedido </button>
-                                </form>
-                            </div>
-                            <div class="form-group">
-                            <form method="post" action="sMostrarPedidos">
-                                <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Mostrar pedidos </button>
-                            </form>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col-md-12">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true" style="margin-top: 20px" onclick="history.back()">Regresar</button>
-                        </div>	
-                    </div>
-                </div>
+            
             </div>
-        </div>
-
-
-
+        
+         <script type="text/javascript" src="js/bootstrap.js"></script>
     </body>
 </html>
