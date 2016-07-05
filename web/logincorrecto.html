@@ -29,7 +29,7 @@ and open the template in the editor.
               <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>﻿
               <script type="text/javascript" src="js/js.js"></script>
     </head>
-    <body>
+    <body background="https://loqueva.com/wp-content/uploads/2016/05/pizza-pedidosya-loqueva-argentina.jpeg">
            <div class="container">
         <table style="width:100%">
             <tr>
@@ -46,21 +46,64 @@ and open the template in the editor.
                 </td>
             </tr>
         </table>
+               
+              
+               
+               <div class="col-md-12" style="padding-left:  0px; padding-right: 0px; padding-top: 10px" >
         
         
         <ul class="nav nav-pills nav-justified" style="background: white">
             <li class="dropdown " >
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#ec1f26">Pedido <span class="fa fa-motorcycle"></span>
+                <a data-toggle="modal" data-target="#loginModal" style="color:#ec1f26">Pedido <span class="fa fa-motorcycle"></span>
                 </a>
-                <ul class="dropdown-menu" role="menu">
-                      <li><a href="#" style="color:#ec1f26">Crear Pedido</a></li>
-                      <li><a href="#" style="color:#ec1f26">Personalizar Pedido</a></li>
-                </ul>
+              
+           
+                      
+               
+                      
+               
+                     
             </li>
             <li><a href="#" style="color:#ec1f26">Carta</a></li>
             <li><a href="#" style="color:#ec1f26">Ofertas</a></li>
             <li><a href="#" style="color:#ec1f26">Ubicanos <span class="fa fa-map-marker"></span></a></li>
         </ul>
+            </div>
+               
+                  <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" >
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="imagenes/pizza planeta.jpg" alt="" width="150" height="75" style="margin-left: 200px"/>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form col-md-12 center-block">
+                            <div class="form-group">
+                                <form method="post" action="sPizzaPersonalizada">
+                                    <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Crear pedido Personalizado </button>
+                                </form>
+                            </div>
+                            <div class="form-group">
+                                <form method="post" action="sPizzasPredeterminadas">
+                                    <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Crear pedido </button>
+                                </form>
+                            </div>
+                            <div class="form-group">
+                            <form method="post" action="sMostrarPedidos">
+                                <button class="btn btn-primary btn-lg btn-block" style="background-color:#ec1f26 " type="submit"> Mostrar pedidos </button>
+                            </form>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true" style="margin-top: 20px" >Regresar</button>
+                        </div>	
+                    </div>
+                </div>
+            </div>
+        </div>
             
             </div>
         
