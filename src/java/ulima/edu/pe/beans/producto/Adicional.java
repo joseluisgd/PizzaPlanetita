@@ -42,4 +42,8 @@ public class Adicional implements IProducto {
         this.precio = precio;
     }
 
+    public Adicional clonar() {
+        return new Adicional(id, nombre, precio);
+    }
+
 }

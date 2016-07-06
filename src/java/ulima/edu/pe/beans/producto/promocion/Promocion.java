@@ -95,4 +95,8 @@ public class Promocion implements IProducto {
         this.descripcion = descripcion;
     }
 
+    public Promocion clonar() {
+        return new Promocion(id, nombre, precio, fechaInicio, fechaFin, pizzas, adicionales, descripcion);
+    }
+
 }
