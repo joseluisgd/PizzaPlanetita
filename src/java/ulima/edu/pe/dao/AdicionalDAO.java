@@ -57,7 +57,7 @@ public class AdicionalDAO {
                 dbo = cursor.next();
                 
                 adicional = new Adicional();
-                adicional.setId((int) dbo.get("id"));
+                adicional.setId((int) dbo.get("_id"));
                 adicional.setNombre((String) dbo.get("nombre"));
                 adicional.setPrecio((float) ((double) dbo.get("precio")));
 
