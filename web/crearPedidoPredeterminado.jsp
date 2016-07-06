@@ -17,10 +17,9 @@
     <body>
         <h1>Selecciona tu pedido</h1>
         <form action="sPedidoPredeterminado" method="post">
-            <%--ChF: Falta añadir un textBox a cada producto generado para indicar la cantidad --%>
             <%--ChF: Se podría desmembrar cada tipo de producto en su propio .jsp para así hacer la carga de la página más ligera (y ordenada) --%>
             <%--ChF: Se genera correctamente el html pero no he probado si se pueden gettear bien los id de los input o esas cosas para obtener los valores ingresados --%>
-            <%--ChF: Se podría añadir un botón que diga "Añadir PIZZA personalizada", y que mande una nueva ventanita (o como sea) con inputs para Ingredientes y Tamaño, y que al dar aceptar se añada a la lista de pizzas del pedido--%>
+            <%--ChF: Se debe añadir un botón que diga "Añadir PIZZA personalizada", y que mande una nueva ventanita (o como sea) con inputs para Ingredientes y Tamaño, y que al dar aceptar se añada a la lista de pizzas del pedido--%>
             <h3>***PIZZAS***</h3>
             <%List<PizzaCarta> pizzas = (List<PizzaCarta>) session.getAttribute("pizzasCarta");%>
             <%for(PizzaCarta pizza : pizzas) {%>
@@ -32,9 +31,9 @@
                 <%}%>
                 <br>Tamaños:
                 <%for(Tamano tamano : pizza.getTamanos()) {%>
-                    <br><input type="radio" name="pizza<%=pizza.getId()%>" value="pizza<%=pizza.getId()%>tamano<%=tamano.getId()%>"> <%=tamano.getNombre()%> (S/ <%=tamano.getPrecio()%>)<br> <%--ChF: Probar --%>
+                    <br><input type="radio" name="pizza<%=pizza.getId()%>tamano" value="pizza<%=pizza.getId()%>tamano<%=tamano.getId()%>"> <%=tamano.getNombre()%> (S/ <%=tamano.getPrecio()%>)<br> <%--ChF: Probar --%>
                 <%}%>
-                <br>
+                <br>Cantidad: <input type="number" name="pizza<%=pizza.getId()%>cantidad" min="1">
             <%}%>
             <br>    
             <h3>***ADICIONALES***</h3>
@@ -43,6 +42,7 @@
                 <input type="checkbox" value="<%=adicional.getId()%>" name="adicionalId">
                 <br>Nombre: <%=adicional.getNombre()%>
                 <br>Precio: <%=adicional.getPrecio()%>
+                <br>Cantidad: <input type="number" name="adicional<%=adicional.getId()%>cantidad" min="1">
                 <br>
             <%}%>       
             <br>
@@ -63,6 +63,7 @@
                     <br>- Nombre:<%=adicional.getNombre()%>
                     <br>- Cantidad:<%=adicional.getCantidad()%>
                 <%}%>
+                <br>Cantidad: <input type="number" name="pizza<%=promocion.getId()%>cantidad" min="1">
                 <br>
             <%}%>
             <%--

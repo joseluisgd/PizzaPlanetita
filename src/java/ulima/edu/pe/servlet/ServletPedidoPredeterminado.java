@@ -16,7 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import ulima.edu.pe.beans.pedido.ProductoPedido;
 import ulima.edu.pe.beans.producto.pizza.Pizza;
+import ulima.edu.pe.beans.producto.pizza.PizzaCarta;
+import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
 import ulima.edu.pe.beans.producto.pizza.Tamano;
 
 /**
@@ -28,21 +31,51 @@ public class ServletPedidoPredeterminado extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
+        List<ProductoPedido> productosPedido = new ArrayList<>();
+        ProductoPedido productoPedido;
+        PizzaPedido pizzaPedido;
+
         String[] idPizzas = request.getParameterValues("pizzaId");
-//<editor-fold defaultstate="collapsed" desc="... Just in case.">
+        List<PizzaCarta> pizzasCarta = (List<PizzaCarta>) ses.getAttribute("pizzas");
+        for (String pizzaId : idPizzas) {
+            productoPedido = new ProductoPedido();
+            tamanos:
+            for (int tamanoId = 1; tamanoId <= 4; tamanoId++) {
+                if (request.getParameter("pizza" + pizzaId + "tamano" + tamanoId) != null) {
+                    //pizzaPedido.getTamano().setId(tamanoId);
+                    //tamanos.add(request.getParameter("tamanoId" + tamanoId));
+                    for (PizzaCarta pizzaCarta : pizzasCarta) {
+                        if (pizzaCarta.getId() == Integer.parseInt(pizzaId)) {
+                            productoPedido.setProducto(pizzaCarta.convertirEnPizzaPedido(tamanoId));
+                            break tamanos;
+                        }
+                    }
+                }
+            }
+            productoPedido.setCantidad(Integer.parseInt(request.getParameter("pizza" + pizzaId + "cantidad")));
+            productosPedido.add(productoPedido);
+        }
+
+        //ChF: Continuar aquí
+        
+        
+        
+        
+        
+        List<String> tamanos = new ArrayList<>();
+        for (int i = 0; i <= pizzasCarta.size(); i++) {
+            if (request.getParameter("tamanoId" + i) != null) {
+                tamanos.add(request.getParameter("tamanoId" + i));
+            }
+        }
+        //<editor-fold defaultstate="collapsed" desc="... Just in case.">
         //Estoy en busca de como gettear todos los radio button en el jsp.
 //        String idTamano1 = request.getParameter("tamanoId1");
 //        String idTamano2 = request.getParameter("tamanoId2");
 //        String idTamano3 = request.getParameter("tamanoId3");
 //        
 // </editor-fold>
-        List<Pizza> p = (List<Pizza>) ses.getAttribute("pizzas");
-        List<String> tamanos = new ArrayList<>();
-        for (int i = 0; i <= p.size(); i++) {
-            if (request.getParameter("tamanoId" + i) != null) {
-                tamanos.add(request.getParameter("tamanoId" + i));
-            }
-        }
+
         /* <editor-fold defaultstate="collapsed" desc="Codigo porsiacaso vaya a servir...">
         int[] idTamanos = new int[idPizzas.length];>>
 //        int a = 0;
@@ -56,7 +89,6 @@ public class ServletPedidoPredeterminado extends HttpServlet {
 //        }
          */
 // </editor-fold>
-
         List<Pizza> pAux = new ArrayList<>();
 
         Tamano t = null;
@@ -95,7 +127,7 @@ public class ServletPedidoPredeterminado extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("pedidoPredeterminadoIngresado.jsp");
         rd.forward(request, response);
-
+*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
