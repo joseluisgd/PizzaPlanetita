@@ -99,4 +99,19 @@ public class Promocion implements IProducto {
         return new Promocion(id, nombre, precio, fechaInicio, fechaFin, pizzas, adicionales, descripcion);
     }
 
+    @Override
+    public boolean esPizza() {
+        return false;
+    }
+
+    @Override
+    public boolean esAdicional() {
+        return false;
+    }
+
+    @Override
+    public boolean esPromocion() {
+        return true;
+    }
+
 }

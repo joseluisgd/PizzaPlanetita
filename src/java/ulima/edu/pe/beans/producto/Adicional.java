@@ -46,4 +46,19 @@ public class Adicional implements IProducto {
         return new Adicional(id, nombre, precio);
     }
 
+    @Override
+    public boolean esPizza() {
+        return false;
+    }
+
+    @Override
+    public boolean esAdicional() {
+        return true;
+    }
+
+    @Override
+    public boolean esPromocion() {
+        return false;
+    }
+
 }

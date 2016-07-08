@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ulima.edu.pe.servlet;
 
-import com.mongodb.BasicDBList;
-import com.mongodb.DBObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +14,6 @@ import ulima.edu.pe.beans.pedido.ProductoPedido;
 import ulima.edu.pe.beans.producto.Adicional;
 import ulima.edu.pe.beans.producto.pizza.PizzaCarta;
 import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
-import ulima.edu.pe.beans.producto.pizza.Tamano;
 import ulima.edu.pe.beans.producto.promocion.Promocion;
 
 /**
@@ -33,18 +25,15 @@ public class ServletPedidoPredeterminado extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
+        
         Pedido pedido = new Pedido();
         
         pedido.setUsername(ses.getAttribute("username").toString());
-        
-        
-        
         
         List<ProductoPedido> productosPedido = new ArrayList<>();
         ProductoPedido productoPedido;
         
         //ChF: Obtención de las pizzas seleccionadas para el pedido
-        PizzaPedido pizzaPedido;
         String[] idPizzas = request.getParameterValues("pizzasId");
         List<PizzaCarta> pizzasCarta = (List<PizzaCarta>) ses.getAttribute("pizzasCarta");
         for (String pizzaId : idPizzas) {
@@ -99,7 +88,6 @@ public class ServletPedidoPredeterminado extends HttpServlet {
             productoPedido.setCantidad(Integer.parseInt(request.getParameter("promocion" + promocionId + "cantidad")));
             productosPedido.add(productoPedido);
         }
-        
 
 //        List<String> tamanos = new ArrayList<>();
 //        for (int i = 0; i <= pizzasCarta.size(); i++) {
@@ -160,7 +148,9 @@ public class ServletPedidoPredeterminado extends HttpServlet {
 //            }
 //
 //        }
-        pedido.calcularPrecioPedido();
+        pedido.setProductos(productosPedido);
+
+        //ChF: La dirección se añade en la siguiente página, cuando se confirma el pedido.
 
         ses.setAttribute("pedido", pedido);
 

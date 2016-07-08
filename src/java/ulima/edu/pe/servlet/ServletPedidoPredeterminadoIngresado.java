@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import ulima.edu.pe.beans.pedido.Direccion;
 import ulima.edu.pe.beans.pedido.Estado;
 import ulima.edu.pe.beans.producto.pizza.Ingrediente;
 import ulima.edu.pe.beans.pedido.Pedido;
@@ -22,79 +23,24 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //INGRESAR PEDIDO PREDETERMINADO A LA BD.
+//        //INGRESAR PEDIDO PREDETERMINADO A LA BD.
         HttpSession ses = request.getSession(true);
 
-        //pizza,ingredientes
-        //esta lista es de pizzas predeterminadas. Tiene los ingredientes aqui.
-        //de misma manera el precio.
-        //-----pizzas
-        List<Pizza> pAux = (List<Pizza>) ses.getAttribute("pizzasOrdenadas");
-        //------ingredientes de cada pizza
-        List<List<Ingrediente>> ingAux = new ArrayList<>();
-        for (Pizza pizza : pAux) {
-            ingAux.add(pizza.getIngredientes());
-        }
-        
-        ses.setAttribute("ingredientes", ingAux);
+        Pedido pedido = (Pedido) ses.getAttribute("pedido");
 
-        //tamano, precio
-        List<Tamano> tLista = (List<Tamano>) ses.getAttribute("tamanoEscogico");
-        List<Float> precios = new ArrayList<>();
-        List<String> tamanos = new ArrayList<>();
-        for (Tamano tamano : tLista) {
-            tamanos.add(tamano.getNombre());
-            precios.add(tamano.getPrecio());
-        }
-        ses.setAttribute("tamanoIngresado", tamanos);
-        //organizadas para el pedido DAO
-        List<Pizza> pizzas = new ArrayList<>();
-        Pizza p = null;
-        int a = 0;
-        for (Pizza pizza1 : pAux) {
-            p= new Pizza();
-            p.setNombre(pizza1.getNombre());
-            p.setIng(ingAux.get(a));
-            p.setTamano(tamanos.get(a));
-            p.setPrecio(precios.get(a));
-            pizzas.add(p);
-            a++;
-        }
-        ses.setAttribute("pizza", pizzas);
-        //estado
-        Estado estado = new Estado();
-        estado.setFechaHora(Util.obtenerFechaHoraActual());
-        estado.setEstado("En cola");
-        ses.setAttribute("estado", estado);
-        //usuario
-        String username = String.valueOf(ses.getAttribute("username"));
-        UsuarioDAO logDao = new UsuarioDAO();
-        //direccion
-        String direccion = request.getParameter("direccion");
-        ses.setAttribute("direccion", direccion);
-
-        
-        //monto
-        float monto=0;
-        for (int i = 0; i < precios.size(); i++) {
-            monto=monto + precios.get(i);
-        }
-        ses.setAttribute("precio", monto);
-        
-        Pedido pedido = new Pedido();
-        pedido.setEstado(estado);
-        pedido.setUsuario(logDao.buscarUsuario(username));
-        pedido.setMonto(monto);
+        Direccion direccion = new Direccion();
+        direccion.setCalle((String) ses.getAttribute("calleDireccionPedido"));
+        direccion.setDistrito((String) ses.getAttribute("distritoDireccionPedido"));
         pedido.setDireccion(direccion);
-        pedido.setPizzas(pizzas);
-        pedido.setProductos(null);
-        //Estructura tiene que ser iugal a la de pedidos personalizados.
-        //Si un campo no se llena, pongan null y a la hora de llamarlo
-        // para mostrar los datos, no consideramos esos campos.
-        //Ingresen estos pedidso en el mismo documento que los personalizados.
+
+        Estado estado = new Estado();
+        estado.setId(0);
+        estado.setFechaHora(Util.obtenerFechaHoraActual());
+        estado.setUsername(pedido.getUsername());
+        pedido.setEstado(estado);
 
         PedidoDAO daoPedido = new PedidoDAO();
-        daoPedido.agregarPedido(pedido,2);
+        daoPedido.agregarPedido(pedido);
 
         RequestDispatcher rd = request.getRequestDispatcher("pedidoRegistradoPredeterminado.jsp");
         rd.forward(request, response);

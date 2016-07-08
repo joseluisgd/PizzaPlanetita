@@ -42,4 +42,19 @@ public class PizzaPedido extends Pizza implements IProducto {
         this.personalizada = personalizada;
     }
 
+    @Override
+    public boolean esPizza() {
+        return true;
+    }
+
+    @Override
+    public boolean esAdicional() {
+        return false;
+    }
+
+    @Override
+    public boolean esPromocion() {
+        return false;
+    }
+
 }

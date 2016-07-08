@@ -21,7 +21,7 @@ import ulima.edu.pe.util.ConexionMLab;
 
 public class PedidoDAO {
 
-    public void agregarPedido(Pedido pedido, int identificador) {
+    public void agregarPedido(Pedido pedido) {
         MongoClient mongo = ConexionMLab.getMongoClient();
         try {
             DB db = mongo.getDB("basededatos");
@@ -60,12 +60,12 @@ public class PedidoDAO {
                 docProductoPedido.put("cantidad", productoPedido.getCantidad());
                 docProductoPedido.put("precioTotal", productoPedido.getPrecioTotal());
 
-                if (productoPedido.getClass().getName().equals(PizzaPedido.class.getName())) {
+                if (productoPedido.getProducto().esPizza()) {
                     docProductoPedido.put("tamanoId", ((PizzaPedido) productoPedido.getProducto()).getTamano().getId());
                     arrayPizzas.add(docProductoPedido);
-                } else if (productoPedido.getClass().getName().equals(Adicional.class.getName())) {
+                } else if (productoPedido.getProducto().esAdicional()) {
                     arrayAdicionales.add(docProductoPedido);
-                } else if (productoPedido.getClass().getName().equals(Promocion.class.getName())) {
+                } else if (productoPedido.getProducto().esPromocion()) {
                     arrayPromociones.add(docProductoPedido);
                 }
             }

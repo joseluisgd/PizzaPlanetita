@@ -12,4 +12,10 @@ public interface IProducto {
 
     public float getPrecio();
 
+    public boolean esPizza();
+
+    public boolean esAdicional();
+
+    public boolean esPromocion();
+
 }

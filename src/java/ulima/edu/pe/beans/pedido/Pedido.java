@@ -61,15 +61,16 @@ public class Pedido {
 
     public void setProductos(List<ProductoPedido> productos) {
         this.productos = productos;
+        calcularPrecioPedido();
     }
 
     public float getPrecioPedido() {
         return precioPedido;
     }
 
-    public void setPrecioPedido(float precioPedido) {
-        this.precioPedido = precioPedido;
-    }
+//    public void setPrecioPedido(float precioPedido) {
+//        this.precioPedido = precioPedido;
+//    }
 
     public void calcularPrecioPedido() {
         for (ProductoPedido productoPedido : productos) {
