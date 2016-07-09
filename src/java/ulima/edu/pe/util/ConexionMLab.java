@@ -14,25 +14,22 @@ public class ConexionMLab {
 
     private static final MongoClientURI URI = new MongoClientURI("mongodb://" + USERNAME + ":" + PASSWORD + "@" + HOST + ":" + PORT + "/" + DATABASE);
 
-    private static MongoClient cliente = null;
+//    private static MongoClient cliente = null;
 
     private ConexionMLab() {
     }
 
     public static MongoClient getMongoClient() {
         try {
-            if (cliente == null) {
-                cliente = new MongoClient(URI);
-            }
-            return cliente;
+            return new MongoClient(URI);
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
             return null;
         }
     }
     
-    public static void closeMongoClient() {
-        cliente.close();
-        cliente = null;
-    }
+//    public static void closeMongoClient() {
+//        cliente.close();
+//        cliente = null;
+//    }
 }

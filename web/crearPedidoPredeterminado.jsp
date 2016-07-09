@@ -23,7 +23,7 @@
             <h3>***PIZZAS***</h3>
             <%List<PizzaCarta> pizzas = (List<PizzaCarta>) session.getAttribute("pizzasCarta");%>
             <%for(PizzaCarta pizza : pizzas) {%>
-                <input type="checkbox" value="<%=pizza.getId()%>" name="pizzasId">
+                <br><input type="checkbox" value="<%=pizza.getId()%>" name="pizzasId">
                 <br>Nombre: <%=pizza.getNombre()%>
                 <br>Ingredientes:
                 <%for(Ingrediente ingrediente : pizza.getIngredientes()) {%>
@@ -31,7 +31,7 @@
                 <%}%>
                 <br>Tamaños:
                 <%for(Tamano tamano : pizza.getTamanos()) {%>
-                    <br><input type="radio" name="pizza<%=pizza.getId()%>tamano" value="pizza<%=pizza.getId()%>tamano<%=tamano.getId()%>"> <%=tamano.getNombre()%> (S/ <%=tamano.getPrecio()%>)<br> <%--ChF: Probar --%>
+                    <br><input type="radio" name="pizza<%=pizza.getId()%>tamano" value="<%=tamano.getId()%>"> <%=tamano.getNombre()%> (S/ <%=tamano.getPrecio()%>)<br> <%--ChF: Probar --%>
                 <%}%>
                 <br>Cantidad: <input type="number" name="pizza<%=pizza.getId()%>cantidad" min="1">
             <%}%>
@@ -39,7 +39,7 @@
             <h3>***ADICIONALES***</h3>
             <%List<Adicional> adicionales = (List<Adicional>) session.getAttribute("adicionalesCarta");%>
             <%for(Adicional adicional : adicionales) {%>
-                <input type="checkbox" value="<%=adicional.getId()%>" name="adicionalesId">
+                <br><input type="checkbox" value="<%=adicional.getId()%>" name="adicionalesId">
                 <br>Nombre: <%=adicional.getNombre()%>
                 <br>Precio: <%=adicional.getPrecio()%>
                 <br>Cantidad: <input type="number" name="adicional<%=adicional.getId()%>cantidad" min="1">
@@ -49,7 +49,7 @@
             <h3>***PROMOCIONES***</h3>
             <%List<Promocion> promomciones = (List<Promocion>) session.getAttribute("promocionesCarta");%>
             <%for(Promocion promocion : promomciones) {%>
-                <input type="checkbox" value="<%=promocion.getId()%>" name="promocionesId">
+                <br><input type="checkbox" value="<%=promocion.getId()%>" name="promocionesId">
                 <br>Nombre: <%=promocion.getNombre()%>
                 <br>Descripcion: <%=promocion.getDescripcion()%>
                 <br>Productos:
@@ -63,7 +63,7 @@
                     <br>- Nombre:<%=adicional.getNombre()%>
                     <br>- Cantidad:<%=adicional.getCantidad()%>
                 <%}%>
-                <br>Cantidad: <input type="number" name="pizza<%=promocion.getId()%>cantidad" min="1">
+                <br>Cantidad: <input type="number" name="promocion<%=promocion.getId()%>cantidad" min="1">
                 <br>
             <%}%>
             <%--

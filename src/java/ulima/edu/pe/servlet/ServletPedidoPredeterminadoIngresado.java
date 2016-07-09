@@ -29,8 +29,8 @@ public class ServletPedidoPredeterminadoIngresado extends HttpServlet {
         Pedido pedido = (Pedido) ses.getAttribute("pedido");
 
         Direccion direccion = new Direccion();
-        direccion.setCalle((String) ses.getAttribute("calleDireccionPedido"));
-        direccion.setDistrito((String) ses.getAttribute("distritoDireccionPedido"));
+        direccion.setCalle((String) request.getParameter("calleDireccionPedido"));
+        direccion.setDistrito((String) request.getParameter("distritoDireccionPedido"));
         pedido.setDireccion(direccion);
 
         Estado estado = new Estado();

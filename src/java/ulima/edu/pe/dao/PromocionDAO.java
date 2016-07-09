@@ -85,7 +85,7 @@ public class PromocionDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return promociones;
     }

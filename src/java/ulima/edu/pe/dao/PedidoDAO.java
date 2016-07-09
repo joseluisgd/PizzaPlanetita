@@ -24,7 +24,7 @@ public class PedidoDAO {
     public void agregarPedido(Pedido pedido) {
         MongoClient mongo = ConexionMLab.getMongoClient();
         try {
-            DB db = mongo.getDB("basededatos");
+            DB db = mongo.getDB("pizzaplaneta");
             DBCollection coleccion = db.getCollection("pedido");
 
             BasicDBObject docPedido = new BasicDBObject();
@@ -40,7 +40,7 @@ public class PedidoDAO {
 
             //ChF: Estados del pedido
             BasicDBObject docEstado = new BasicDBObject();
-            //ChF: Ya que es un pedido nuevo, el único estado que debería tener es "En camino"
+            //ChF: Ya que es un pedido nuevo, el único estado que debería tener es el primero
             docEstado.put("id", pedido.getEstado().getId());
             docEstado.put("fechaHora", pedido.getEstado().getFechaHora());
             docEstado.put("username", pedido.getEstado().getUsername()); //pedido.getUsername()
@@ -92,7 +92,7 @@ public class PedidoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
 
     }
@@ -116,7 +116,7 @@ public class PedidoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return pedido;
 
@@ -143,7 +143,7 @@ public class PedidoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return pedidos;
 
@@ -300,7 +300,7 @@ public class PedidoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return pedidos;
     }
@@ -329,7 +329,7 @@ public class PedidoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return mayor + 1;
     }

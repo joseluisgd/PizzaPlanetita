@@ -76,7 +76,7 @@ public class PizzaDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return pizzas;
     }
@@ -138,7 +138,7 @@ public class PizzaDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return pizza;
     }

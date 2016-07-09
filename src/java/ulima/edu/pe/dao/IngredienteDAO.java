@@ -27,7 +27,7 @@ public class IngredienteDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return ingrediente;
     }
@@ -52,7 +52,7 @@ public class IngredienteDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return ingrediente;
     }

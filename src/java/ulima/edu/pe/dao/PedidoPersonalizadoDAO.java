@@ -39,7 +39,7 @@ public class PedidoPersonalizadoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
     }
 
@@ -57,7 +57,7 @@ public class PedidoPersonalizadoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return cont + 1;
     }

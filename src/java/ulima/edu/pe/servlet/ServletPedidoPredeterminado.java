@@ -25,30 +25,25 @@ public class ServletPedidoPredeterminado extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(true);
-        
+
         Pedido pedido = new Pedido();
-        
+
         pedido.setUsername(ses.getAttribute("username").toString());
-        
+
         List<ProductoPedido> productosPedido = new ArrayList<>();
         ProductoPedido productoPedido;
-        
+
         //ChF: Obtención de las pizzas seleccionadas para el pedido
+        int tamanoId;
         String[] idPizzas = request.getParameterValues("pizzasId");
         List<PizzaCarta> pizzasCarta = (List<PizzaCarta>) ses.getAttribute("pizzasCarta");
         for (String pizzaId : idPizzas) {
             productoPedido = new ProductoPedido();
-            tamanos:
-            for (int tamanoId = 1; tamanoId <= 4; tamanoId++) {
-                if (request.getParameter("pizza" + pizzaId + "tamano" + tamanoId) != null) {
-                    //pizzaPedido.getTamano().setId(tamanoId);
-                    //tamanos.add(request.getParameter("tamanoId" + tamanoId));
-                    for (PizzaCarta pizzaCarta : pizzasCarta) {
-                        if (pizzaCarta.getId() == Integer.parseInt(pizzaId)) {
-                            productoPedido.setProducto(pizzaCarta.convertirEnPizzaPedido(tamanoId));
-                            break tamanos;
-                        }
-                    }
+            tamanoId = Integer.parseInt(request.getParameter("pizza" + pizzaId + "tamano"));
+            for (PizzaCarta pizzaCarta : pizzasCarta) {
+                if (pizzaCarta.getId() == Integer.parseInt(pizzaId)) {
+                    productoPedido.setProducto(pizzaCarta.convertirEnPizzaPedido(tamanoId));
+                    break;
                 }
             }
             productoPedido.setCantidad(Integer.parseInt(request.getParameter("pizza" + pizzaId + "cantidad")));
@@ -65,7 +60,7 @@ public class ServletPedidoPredeterminado extends HttpServlet {
                     //ChF: Clono porque me da miedo que, ya que Java maneja todo en referencias, se vaya a 
                     //joder la lista de adicionales de la carta por manipular la lista de adicionales del pedido.
                     //En pizzas no clono porque el método convertirEnPizzaPedido retorna un objeto nuevo.
-                    productoPedido.setProducto(adicional.clonar()); 
+                    productoPedido.setProducto(adicional.clonar());
                     break;
                 }
             }
@@ -81,7 +76,7 @@ public class ServletPedidoPredeterminado extends HttpServlet {
             for (Promocion promocion : promocionesCarta) {
                 if (promocion.getId() == Integer.parseInt(promocionId)) {
                     //ChF: La razón de la clonación está arriba.
-                    productoPedido.setProducto(promocion.clonar()); 
+                    productoPedido.setProducto(promocion.clonar());
                     break;
                 }
             }
@@ -89,69 +84,9 @@ public class ServletPedidoPredeterminado extends HttpServlet {
             productosPedido.add(productoPedido);
         }
 
-//        List<String> tamanos = new ArrayList<>();
-//        for (int i = 0; i <= pizzasCarta.size(); i++) {
-//            if (request.getParameter("tamanoId" + i) != null) {
-//                tamanos.add(request.getParameter("tamanoId" + i));
-//            }
-//        }
-//        //<editor-fold defaultstate="collapsed" desc="... Just in case.">
-//        //Estoy en busca de como gettear todos los radio button en el jsp.
-////        String idTamano1 = request.getParameter("tamanoId1");
-////        String idTamano2 = request.getParameter("tamanoId2");
-////        String idTamano3 = request.getParameter("tamanoId3");
-////        
-//// </editor-fold>
-//
-//        /* <editor-fold defaultstate="collapsed" desc="Codigo porsiacaso vaya a servir...">
-//        int[] idTamanos = new int[idPizzas.length];>>
-////        int a = 0;
-////        for (int i = 0; i < idPizzas.length; i++) {
-////            for (int j = 1; j <= 3; j++) {
-////                if (Integer.parseInt(idPizzas[i]) == j) {
-////                    idTamanos[a] = j;
-////                    a++;
-////                }
-////            }
-////        }
-//         */
-//// </editor-fold>
-//        List<Pizza> pAux = new ArrayList<>();
-//
-//        Tamano t = null;
-//        List<Tamano> tLista = new ArrayList<>();
-//        int b = 0;
-//        //ChF: No entiendo bien qué se hace aquí, así que he cambiado y agregado
-//        //cosas puntuales de acuerdo al cambio que hice en MostrarCartaPizzaDAO.java
-//        //Líneas: 72, 74, 75
-//        for (Pizza pizza : p) {
-//            for (int i = 0; i < idPizzas.length; i++) {
-//                if (pizza.getId() == Integer.parseInt(idPizzas[i])) {
-//                    List<Tamano> listTam = pizza.getTam();
-////                    for (Object tam : listTam) {
-//                    for (Tamano tamano : listTam) {
-////                        DBObject dbo = DBObject.class.cast(tam);
-////                        if ((Integer) dbo.get("id") == Integer.parseInt(tamanos.get(b))) {
-//                        if (tamano.getId() == Integer.parseInt(tamanos.get(b))) {
-//                            t = tamano.clonar();
-////                            t = new Tamano();
-////                            t.setId((Integer) dbo.get("id"));
-////                            t.setNombre((String) dbo.get("NombreTamano"));
-////                            t.setPrecio((Integer) dbo.get("Slices"));
-////                            t.setSlices((Integer) dbo.get("Precio"));
-//                            pAux.add(pizza);
-//                            tLista.add(t);
-//                        }
-//                    }
-//                    b++;
-//                }
-//            }
-//
-//        }
         pedido.setProductos(productosPedido);
 
         //ChF: La dirección se añade en la siguiente página, cuando se confirma el pedido.
-
         ses.setAttribute("pedido", pedido);
 
         RequestDispatcher rd = request.getRequestDispatcher("pedidoPredeterminadoIngresado.jsp");

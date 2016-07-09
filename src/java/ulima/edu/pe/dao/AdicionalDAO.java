@@ -36,7 +36,7 @@ public class AdicionalDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return adicional;
     }
@@ -66,7 +66,7 @@ public class AdicionalDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return adicionales;
     }

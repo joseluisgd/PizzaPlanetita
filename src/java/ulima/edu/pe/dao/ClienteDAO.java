@@ -47,7 +47,7 @@ public class ClienteDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
     }
 
@@ -102,7 +102,7 @@ public class ClienteDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return cliente;
     }
@@ -125,7 +125,7 @@ public class ClienteDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return mayor + 1;
     }

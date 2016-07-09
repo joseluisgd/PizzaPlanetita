@@ -31,7 +31,7 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return registrado;
     }
@@ -54,7 +54,7 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return ingreso;
     }
@@ -83,7 +83,7 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return usuario;
     }
@@ -107,7 +107,7 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return existe;
     }
@@ -130,7 +130,7 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConexionMLab.closeMongoClient();
+            mongo.close();
         }
         return mayor + 1;
     }
