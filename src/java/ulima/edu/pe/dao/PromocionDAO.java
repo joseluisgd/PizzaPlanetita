@@ -43,44 +43,48 @@ public class PromocionDAO {
                 dbo = cursor.next();
 
                 promocion = new Promocion();
-                promocion.setId((int) dbo.get("_id"));
-                promocion.setNombre((String) dbo.get("nombre"));
-                promocion.setPrecio((float) ((double) dbo.get("precio")));
+                //ChF: Antes de nada, se valida la vigencia de la promocion
                 promocion.setFechaInicio((String) dbo.get("fechaInicio"));
                 promocion.setFechaFin((String) dbo.get("fechaFin"));
+                if (promocion.estaVigente()) {
 
-                //ChF: Se obtienen los documentos del array pizzas del documento productos
-                pizzas = new ArrayList<>();
-                docArrayPizzas = (BasicDBList) ((DBObject) dbo.get("productos")).get("pizzas");
-                for (Object objPizza : docArrayPizzas) {
-                    docPizza = (BasicDBObject) objPizza;
+                    promocion.setId((int) dbo.get("_id"));
+                    promocion.setNombre((String) dbo.get("nombre"));
+                    promocion.setPrecio((float) ((double) dbo.get("precio")));
 
-                    pizza = new PizzaPromocion();
-                    pizza.setNombre((String) docPizza.get("nombre"));
-                    pizza.setTamanoId((int) docPizza.get("tamanoId"));
-                    pizza.setCantidad((int) docPizza.get("cantidad"));
+                    //ChF: Se obtienen los documentos del array pizzas del documento productos
+                    pizzas = new ArrayList<>();
+                    docArrayPizzas = (BasicDBList) ((DBObject) dbo.get("productos")).get("pizzas");
+                    for (Object objPizza : docArrayPizzas) {
+                        docPizza = (BasicDBObject) objPizza;
 
-                    pizzas.add(pizza);
+                        pizza = new PizzaPromocion();
+                        pizza.setNombre((String) docPizza.get("nombre"));
+                        pizza.setTamanoId((int) docPizza.get("tamanoId"));
+                        pizza.setCantidad((int) docPizza.get("cantidad"));
+
+                        pizzas.add(pizza);
+                    }
+                    promocion.setPizzas(pizzas);
+
+                    //ChF: Se obtienen los documentos del array adicionales del documento productos
+                    adicionales = new ArrayList<>();
+                    docArrayAdicionales = (BasicDBList) ((DBObject) dbo.get("productos")).get("adicionales");
+                    for (Object objAdicional : docArrayAdicionales) {
+                        docAdicional = (BasicDBObject) objAdicional;
+
+                        adicional = new AdicionalPromocion();
+                        adicional.setNombre((String) docAdicional.get("nombre"));
+                        adicional.setCantidad((int) docAdicional.get("cantidad"));
+
+                        adicionales.add(adicional);
+                    }
+                    promocion.setAdicionales(adicionales);
+
+                    promocion.setDescripcion((String) dbo.get("descripcion"));
+
+                    promociones.add(promocion);
                 }
-                promocion.setPizzas(pizzas);
-
-                //ChF: Se obtienen los documentos del array adicionales del documento productos
-                adicionales = new ArrayList<>();
-                docArrayAdicionales = (BasicDBList) ((DBObject) dbo.get("productos")).get("adicionales");
-                for (Object objAdicional : docArrayAdicionales) {
-                    docAdicional = (BasicDBObject) objAdicional;
-
-                    adicional = new AdicionalPromocion();
-                    adicional.setNombre((String) docAdicional.get("nombre"));
-                    adicional.setCantidad((int) docAdicional.get("cantidad"));
-
-                    adicionales.add(adicional);
-                }
-                promocion.setAdicionales(adicionales);
-                
-                promocion.setDescripcion((String) dbo.get("descripcion"));
-                
-                promociones.add(promocion);
             }
         } catch (Exception e) {
             e.printStackTrace();
