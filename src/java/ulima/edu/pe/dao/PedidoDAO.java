@@ -40,11 +40,13 @@ public class PedidoDAO {
 
             //ChF: Estados del pedido
             BasicDBObject docEstado = new BasicDBObject();
+            ArrayList arrayEstados = new ArrayList();
             //ChF: Ya que es un pedido nuevo, el único estado que debería tener es el primero
             docEstado.put("id", pedido.getEstado().getId());
             docEstado.put("fechaHora", pedido.getEstado().getFechaHora());
             docEstado.put("username", pedido.getEstado().getUsername()); //pedido.getUsername()
-            docPedido.put("estados", docEstado);
+            arrayEstados.add(docEstado);
+            docPedido.put("estados", arrayEstados);
 
             //ChF: Lista de productos del pedido
             BasicDBObject docProductoPedido;
