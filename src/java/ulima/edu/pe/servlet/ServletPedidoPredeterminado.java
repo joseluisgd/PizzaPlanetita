@@ -34,54 +34,60 @@ public class ServletPedidoPredeterminado extends HttpServlet {
         ProductoPedido productoPedido;
 
         //ChF: Obtención de las pizzas seleccionadas para el pedido
-        int tamanoId;
-        String[] idPizzas = request.getParameterValues("pizzasId");
-        List<PizzaCarta> pizzasCarta = (List<PizzaCarta>) ses.getAttribute("pizzasCarta");
-        for (String pizzaId : idPizzas) {
-            productoPedido = new ProductoPedido();
-            tamanoId = Integer.parseInt(request.getParameter("pizza" + pizzaId + "tamano"));
-            for (PizzaCarta pizzaCarta : pizzasCarta) {
-                if (pizzaCarta.getId() == Integer.parseInt(pizzaId)) {
-                    productoPedido.setProducto(pizzaCarta.convertirEnPizzaPedido(tamanoId));
-                    break;
+        if (request.getParameterValues("pizzasId") != null) {
+            String[] idPizzas = request.getParameterValues("pizzasId");
+            List<PizzaCarta> pizzasCarta = (List<PizzaCarta>) ses.getAttribute("pizzasCarta");
+            int tamanoId;
+            for (String pizzaId : idPizzas) {
+                productoPedido = new ProductoPedido();
+                tamanoId = Integer.parseInt(request.getParameter("pizza" + pizzaId + "tamano"));
+                for (PizzaCarta pizzaCarta : pizzasCarta) {
+                    if (pizzaCarta.getId() == Integer.parseInt(pizzaId)) {
+                        productoPedido.setProducto(pizzaCarta.convertirEnPizzaPedido(tamanoId));
+                        break;
+                    }
                 }
+                productoPedido.setCantidad(Integer.parseInt(request.getParameter("pizza" + pizzaId + "cantidad")));
+                productosPedido.add(productoPedido);
             }
-            productoPedido.setCantidad(Integer.parseInt(request.getParameter("pizza" + pizzaId + "cantidad")));
-            productosPedido.add(productoPedido);
         }
 
-        //ChF: Obtención de los adicionales seleccionadas para el pedido
-        String[] idAdicionales = request.getParameterValues("adicionalesId");
-        List<Adicional> adicionalesCarta = (List<Adicional>) ses.getAttribute("adicionalesCarta");
-        for (String adicionalId : idAdicionales) {
-            productoPedido = new ProductoPedido();
-            for (Adicional adicional : adicionalesCarta) {
-                if (adicional.getId() == Integer.parseInt(adicionalId)) {
-                    //ChF: Clono porque me da miedo que, ya que Java maneja todo en referencias, se vaya a 
-                    //joder la lista de adicionales de la carta por manipular la lista de adicionales del pedido.
-                    //En pizzas no clono porque el método convertirEnPizzaPedido retorna un objeto nuevo.
-                    productoPedido.setProducto(adicional.clonar());
-                    break;
+        if (request.getParameterValues("adicionalesId") != null) {
+            //ChF: Obtención de los adicionales seleccionadas para el pedido
+            String[] idAdicionales = request.getParameterValues("adicionalesId");
+            List<Adicional> adicionalesCarta = (List<Adicional>) ses.getAttribute("adicionalesCarta");
+            for (String adicionalId : idAdicionales) {
+                productoPedido = new ProductoPedido();
+                for (Adicional adicional : adicionalesCarta) {
+                    if (adicional.getId() == Integer.parseInt(adicionalId)) {
+                        //ChF: Clono porque me da miedo que, ya que Java maneja todo en referencias, se vaya a 
+                        //joder la lista de adicionales de la carta por manipular la lista de adicionales del pedido.
+                        //En pizzas no clono porque el método convertirEnPizzaPedido retorna un objeto nuevo.
+                        productoPedido.setProducto(adicional.clonar());
+                        break;
+                    }
                 }
+                productoPedido.setCantidad(Integer.parseInt(request.getParameter("adicional" + adicionalId + "cantidad")));
+                productosPedido.add(productoPedido);
             }
-            productoPedido.setCantidad(Integer.parseInt(request.getParameter("adicional" + adicionalId + "cantidad")));
-            productosPedido.add(productoPedido);
         }
 
-        //ChF: Obtención de los adicionales seleccionadas para el pedido
-        String[] idPromociones = request.getParameterValues("promocionesId");
-        List<Promocion> promocionesCarta = (List<Promocion>) ses.getAttribute("promocionesCarta");
-        for (String promocionId : idPromociones) {
-            productoPedido = new ProductoPedido();
-            for (Promocion promocion : promocionesCarta) {
-                if (promocion.getId() == Integer.parseInt(promocionId)) {
-                    //ChF: La razón de la clonación está arriba.
-                    productoPedido.setProducto(promocion.clonar());
-                    break;
+        if (request.getParameterValues("promocionesId") != null) {
+            //ChF: Obtención de los adicionales seleccionadas para el pedido
+            String[] idPromociones = request.getParameterValues("promocionesId");
+            List<Promocion> promocionesCarta = (List<Promocion>) ses.getAttribute("promocionesCarta");
+            for (String promocionId : idPromociones) {
+                productoPedido = new ProductoPedido();
+                for (Promocion promocion : promocionesCarta) {
+                    if (promocion.getId() == Integer.parseInt(promocionId)) {
+                        //ChF: La razón de la clonación está arriba.
+                        productoPedido.setProducto(promocion.clonar());
+                        break;
+                    }
                 }
+                productoPedido.setCantidad(Integer.parseInt(request.getParameter("promocion" + promocionId + "cantidad")));
+                productosPedido.add(productoPedido);
             }
-            productoPedido.setCantidad(Integer.parseInt(request.getParameter("promocion" + promocionId + "cantidad")));
-            productosPedido.add(productoPedido);
         }
 
         pedido.setProductos(productosPedido);

@@ -8,9 +8,11 @@ import ulima.edu.pe.beans.producto.IProducto;
 import ulima.edu.pe.beans.producto.pizza.Ingrediente;
 import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
 import ulima.edu.pe.beans.producto.pizza.Tamano;
+import ulima.edu.pe.beans.producto.promocion.Promocion;
 import ulima.edu.pe.dao.AdicionalDAO;
 import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.dao.PizzaDAO;
+import ulima.edu.pe.dao.PromocionDAO;
 import ulima.edu.pe.util.Util;
 
 /**
@@ -77,5 +79,25 @@ public class JUnitTest {
         if (pizza.getClass().getName().equals(PizzaPedido.class.getName())){
             System.out.println("Son iguales");
         }
+    }
+    
+    @Test
+    public void testPromocionDAO() {
+        PromocionDAO pDAO = new PromocionDAO();
+        
+        List<Promocion> promociones  = pDAO.obtenerPromociones();
+        
+        for (Promocion promocion : promociones) {
+            promocion.getNombre();
+        }
+        
+//        IProducto pizza = new PizzaPedido();
+//        
+//        System.out.println(pizza.getClass().getName());
+//        System.out.println(PizzaPedido.class.getName());
+//        
+//        if (pizza.getClass().getName().equals(PizzaPedido.class.getName())){
+//            System.out.println("Son iguales");
+//        }
     }
 }

@@ -46,45 +46,44 @@ public class PromocionDAO {
                 //ChF: Antes de nada, se valida la vigencia de la promocion
                 promocion.setFechaInicio((String) dbo.get("fechaInicio"));
                 promocion.setFechaFin((String) dbo.get("fechaFin"));
-                if (promocion.estaVigente()) {
+//                if (promocion.estaVigente()) {
 
-                    promocion.setId((int) dbo.get("_id"));
-                    promocion.setNombre((String) dbo.get("nombre"));
-                    promocion.setPrecio((float) ((double) dbo.get("precio")));
+                promocion.setId((int) dbo.get("_id"));
+                promocion.setNombre((String) dbo.get("nombre"));
+                promocion.setPrecio((float) ((double) dbo.get("precio")));
 
-                    //ChF: Se obtienen los documentos del array pizzas del documento productos
-                    pizzas = new ArrayList<>();
-                    docArrayPizzas = (BasicDBList) ((DBObject) dbo.get("productos")).get("pizzas");
-                    for (Object objPizza : docArrayPizzas) {
-                        docPizza = (BasicDBObject) objPizza;
+                //ChF: Se obtienen los documentos del array pizzas del documento productos
+                pizzas = new ArrayList<>();
+                docArrayPizzas = (BasicDBList) ((DBObject) dbo.get("productos")).get("pizzas");
+                for (Object objPizza : docArrayPizzas) {
+                    docPizza = (BasicDBObject) objPizza;
 
-                        pizza = new PizzaPromocion();
-                        pizza.setNombre((String) docPizza.get("nombre"));
-                        pizza.setTamanoId((int) docPizza.get("tamanoId"));
-                        pizza.setCantidad((int) docPizza.get("cantidad"));
+                    pizza = new PizzaPromocion();
+                    pizza.setNombre((String) docPizza.get("nombre"));
+                    pizza.setTamanoId((int) docPizza.get("tamanoId"));
+                    pizza.setCantidad((int) docPizza.get("cantidad"));
 
-                        pizzas.add(pizza);
-                    }
+                    pizzas.add(pizza);
+//                    }
                     promocion.setPizzas(pizzas);
-
-                    //ChF: Se obtienen los documentos del array adicionales del documento productos
-                    adicionales = new ArrayList<>();
-                    docArrayAdicionales = (BasicDBList) ((DBObject) dbo.get("productos")).get("adicionales");
-                    for (Object objAdicional : docArrayAdicionales) {
-                        docAdicional = (BasicDBObject) objAdicional;
-
-                        adicional = new AdicionalPromocion();
-                        adicional.setNombre((String) docAdicional.get("nombre"));
-                        adicional.setCantidad((int) docAdicional.get("cantidad"));
-
-                        adicionales.add(adicional);
-                    }
-                    promocion.setAdicionales(adicionales);
-
-                    promocion.setDescripcion((String) dbo.get("descripcion"));
-
-                    promociones.add(promocion);
                 }
+                //ChF: Se obtienen los documentos del array adicionales del documento productos
+                adicionales = new ArrayList<>();
+                docArrayAdicionales = (BasicDBList) ((DBObject) dbo.get("productos")).get("adicionales");
+                for (Object objAdicional : docArrayAdicionales) {
+                    docAdicional = (BasicDBObject) objAdicional;
+
+                    adicional = new AdicionalPromocion();
+                    adicional.setNombre((String) docAdicional.get("nombre"));
+                    adicional.setCantidad((int) docAdicional.get("cantidad"));
+
+                    adicionales.add(adicional);
+
+                    promocion.setAdicionales(adicionales);
+                }
+                promocion.setDescripcion((String) dbo.get("descripcion"));
+
+                promociones.add(promocion);
             }
         } catch (Exception e) {
             e.printStackTrace();
