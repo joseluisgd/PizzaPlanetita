@@ -17,13 +17,15 @@ import ulima.edu.pe.beans.pedido.Pedido;
 import ulima.edu.pe.beans.pedido.ProductoPedido;
 import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
 import ulima.edu.pe.beans.producto.pizza.Tamano;
+import ulima.edu.pe.dao.UsuarioDAO;
 import ulima.edu.pe.util.Util;
 
 public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        //ChF: Comentado porque jode:
+/*
         HttpSession ses = request.getSession(true);
         
         //estado
@@ -35,7 +37,7 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
         
         //usuario
         String username = String.valueOf(ses.getAttribute("username"));
-        LoginDAO logDao= new LoginDAO();
+        UsuarioDAO logDao= new UsuarioDAO();
         String direccion = request.getParameter("direccion");
         //ChF: Ahora se necesita tanto calle como distrito para llenar el objeto direccion
 //        Direccion direccion = new Direccion();
@@ -82,7 +84,7 @@ public class ServletPedidoPersonalizadoIngresado extends HttpServlet {
 
         //rd
         RequestDispatcher rd = request.getRequestDispatcher("pedidoRegistrado.jsp");
-        rd.forward(request, response);
+        rd.forward(request, response);*/
     }
 
     @Override

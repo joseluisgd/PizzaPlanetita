@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.dao.IngredienteDAO;
-import ulima.edu.pe.dao.MostrarCartaDAO;
 import ulima.edu.pe.dao.AdicionalDAO;
 
 public class ServletPizzaPersonalizada extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        //ChF: Comentado porque jode:
+/*
         HttpSession ses = request.getSession(true);
 
         IngredienteDAO daoIngrediente = new IngredienteDAO();
@@ -30,7 +30,7 @@ public class ServletPizzaPersonalizada extends HttpServlet {
         ses.setAttribute("tamanos", daoTamano.getTamanos());
         //-----
         RequestDispatcher rd = request.getRequestDispatcher("crearPedidoPersonalizado.jsp");
-        rd.forward(request, response);
+        rd.forward(request, response);*/
     }
 
     @Override
