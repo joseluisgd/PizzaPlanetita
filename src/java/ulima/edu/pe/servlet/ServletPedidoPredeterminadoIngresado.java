@@ -1,8 +1,6 @@
 package ulima.edu.pe.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,11 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ulima.edu.pe.beans.pedido.Direccion;
 import ulima.edu.pe.beans.pedido.Estado;
-import ulima.edu.pe.beans.producto.pizza.Ingrediente;
 import ulima.edu.pe.beans.pedido.Pedido;
-import ulima.edu.pe.beans.producto.pizza.Pizza;
-import ulima.edu.pe.beans.producto.pizza.Tamano;
-import ulima.edu.pe.dao.UsuarioDAO;
 import ulima.edu.pe.dao.PedidoDAO;
 import ulima.edu.pe.util.Util;
 

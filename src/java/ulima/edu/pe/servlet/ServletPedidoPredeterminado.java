@@ -13,7 +13,6 @@ import ulima.edu.pe.beans.pedido.Pedido;
 import ulima.edu.pe.beans.pedido.ProductoPedido;
 import ulima.edu.pe.beans.producto.Adicional;
 import ulima.edu.pe.beans.producto.pizza.PizzaCarta;
-import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
 import ulima.edu.pe.beans.producto.promocion.Promocion;
 
 /**
