@@ -1,7 +1,9 @@
 package ulima.edu.pe.beans.producto.promocion;
 
+import java.util.Date;
 import java.util.List;
 import ulima.edu.pe.beans.producto.IProducto;
+import ulima.edu.pe.util.Util;
 
 public class Promocion implements IProducto {
 
@@ -112,6 +114,16 @@ public class Promocion implements IProducto {
     @Override
     public boolean esPromocion() {
         return true;
+    }
+
+    public boolean estaVigente() {
+        boolean vigente = false;
+        Date fechaActual = Util.fechaStringADate(Util.obtenerFechaHoraActual());
+
+        if (Util.fechaStringADate(fechaInicio).before(fechaActual) && Util.fechaStringADate(fechaFin).after(fechaActual)) {
+            vigente = true;
+        }
+        return vigente;
     }
 
 }

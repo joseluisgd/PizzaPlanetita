@@ -43,11 +43,14 @@ public class PromocionDAO {
                 dbo = cursor.next();
 
                 promocion = new Promocion();
+                //ChF: Antes de nada, se valida la vigencia de la promocion
+                promocion.setFechaInicio((String) dbo.get("fechaInicio"));
+                promocion.setFechaFin((String) dbo.get("fechaFin"));
+//                if (promocion.estaVigente()) {
+
                 promocion.setId((int) dbo.get("_id"));
                 promocion.setNombre((String) dbo.get("nombre"));
                 promocion.setPrecio((float) ((double) dbo.get("precio")));
-                promocion.setFechaInicio((String) dbo.get("fechaInicio"));
-                promocion.setFechaFin((String) dbo.get("fechaFin"));
 
                 //ChF: Se obtienen los documentos del array pizzas del documento productos
                 pizzas = new ArrayList<>();
@@ -61,9 +64,9 @@ public class PromocionDAO {
                     pizza.setCantidad((int) docPizza.get("cantidad"));
 
                     pizzas.add(pizza);
+//                    }
+                    promocion.setPizzas(pizzas);
                 }
-                promocion.setPizzas(pizzas);
-
                 //ChF: Se obtienen los documentos del array adicionales del documento productos
                 adicionales = new ArrayList<>();
                 docArrayAdicionales = (BasicDBList) ((DBObject) dbo.get("productos")).get("adicionales");
@@ -75,11 +78,11 @@ public class PromocionDAO {
                     adicional.setCantidad((int) docAdicional.get("cantidad"));
 
                     adicionales.add(adicional);
+
+                    promocion.setAdicionales(adicionales);
                 }
-                promocion.setAdicionales(adicionales);
-                
                 promocion.setDescripcion((String) dbo.get("descripcion"));
-                
+
                 promociones.add(promocion);
             }
         } catch (Exception e) {

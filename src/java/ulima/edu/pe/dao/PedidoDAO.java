@@ -16,6 +16,8 @@ import ulima.edu.pe.beans.pedido.ProductoPedido;
 import ulima.edu.pe.beans.producto.Adicional;
 import ulima.edu.pe.beans.producto.pizza.PizzaPedido;
 import ulima.edu.pe.beans.producto.pizza.Tamano;
+import ulima.edu.pe.beans.producto.promocion.AdicionalPromocion;
+import ulima.edu.pe.beans.producto.promocion.PizzaPromocion;
 import ulima.edu.pe.beans.producto.promocion.Promocion;
 import ulima.edu.pe.util.ConexionMLab;
 
@@ -40,17 +42,28 @@ public class PedidoDAO {
 
             //ChF: Estados del pedido
             BasicDBObject docEstado = new BasicDBObject();
+            ArrayList arrayEstados = new ArrayList();
             //ChF: Ya que es un pedido nuevo, el único estado que debería tener es el primero
             docEstado.put("id", pedido.getEstado().getId());
             docEstado.put("fechaHora", pedido.getEstado().getFechaHora());
             docEstado.put("username", pedido.getEstado().getUsername()); //pedido.getUsername()
-            docPedido.put("estados", docEstado);
+            arrayEstados.add(docEstado);
+            docPedido.put("estados", arrayEstados);
 
             //ChF: Lista de productos del pedido
             BasicDBObject docProductoPedido;
             ArrayList arrayPizzas = new ArrayList();
             ArrayList arrayAdicionales = new ArrayList();
             ArrayList arrayPromociones = new ArrayList();
+
+            List<PizzaPromocion> promocionPizzas;
+            ArrayList arrayPromocionPizzas;
+
+            List<AdicionalPromocion> promocionAdicionales;
+            ArrayList arrayPromocionAdicionales;
+
+            BasicDBObject docPromocionProducto;
+
             for (ProductoPedido productoPedido : pedido.getProductos()) {
                 docProductoPedido = new BasicDBObject();
 
@@ -66,6 +79,31 @@ public class PedidoDAO {
                 } else if (productoPedido.getProducto().esAdicional()) {
                     arrayAdicionales.add(docProductoPedido);
                 } else if (productoPedido.getProducto().esPromocion()) {
+                    //ChF: Array pizzas de un documento del array promociones
+                    promocionPizzas = ((Promocion) productoPedido.getProducto()).getPizzas();
+                    if (promocionPizzas != null) {
+                        arrayPromocionPizzas = new ArrayList();
+                        for (PizzaPromocion promocionPizza : promocionPizzas) {
+                            docPromocionProducto = new BasicDBObject();
+                            docPromocionProducto.put("nombre", promocionPizza.getNombre());
+                            docPromocionProducto.put("tamanoId", promocionPizza.getTamanoId());
+                            docPromocionProducto.put("cantidad", promocionPizza.getCantidad());
+                            arrayPromocionPizzas.add(docPromocionProducto);
+                        }
+                        docProductoPedido.put("pizzas", arrayPromocionPizzas);
+                    }
+                    //ChF: Array adicionales de un documento del array promociones
+                    promocionAdicionales = ((Promocion) productoPedido.getProducto()).getAdicionales();
+                    if (promocionAdicionales != null) {
+                        arrayPromocionAdicionales = new ArrayList();
+                        for (AdicionalPromocion promocionAdicional : promocionAdicionales) {
+                            docPromocionProducto = new BasicDBObject();
+                            docPromocionProducto.put("nombre", promocionAdicional.getNombre());
+                            docPromocionProducto.put("cantidad", promocionAdicional.getCantidad());
+                            arrayPromocionAdicionales.add(docPromocionProducto);
+                        }
+                        docProductoPedido.put("adicionales", arrayPromocionAdicionales);
+                    }
                     arrayPromociones.add(docProductoPedido);
                 }
             }
@@ -134,7 +172,7 @@ public class PedidoDAO {
             DBCursor cursor = coleccion.find(query);
 
             pedidos = new ArrayList<>();
-            
+
             DBObject dbo;
             while (cursor.hasNext()) {
                 dbo = cursor.next();
@@ -261,7 +299,7 @@ public class PedidoDAO {
         //   contenido de una promoción en el caso de promociones.
 
         pedido.setProductos(productos);
-        
+
         pedido.calcularPrecioPedido();
 
         return pedido;

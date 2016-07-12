@@ -24,12 +24,16 @@ public class PizzaPromocion {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public String getTamanoNombre() {
         return Tamano.getNombrePorId(tamanoId);
     }
-    
-    public void setTamanoId(int tamanoId){
+
+    public int getTamanoId() {
+        return tamanoId;
+    }
+
+    public void setTamanoId(int tamanoId) {
         this.tamanoId = tamanoId;
     }
 
