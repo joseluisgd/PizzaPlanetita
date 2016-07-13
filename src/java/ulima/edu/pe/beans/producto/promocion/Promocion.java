@@ -135,12 +135,37 @@ public class Promocion implements IProducto {
         if (promocion.id != id){
             return false;
         }
-        if (promocion.pizzas != pizzas){
+        if (promocion.nombre.equals(nombre)){
             return false;
         }
-        if (promocion.id != id){
+        if (promocion.fechaInicio.equals(fechaInicio)){
             return false;
         }
+        if (promocion.fechaFin.equals(fechaFin)){
+            return false;
+        }
+        if (promocion.pizzas.size() == pizzas.size()) {
+            for (int i = 0; i < promocion.pizzas.size(); i++) {
+                if (!promocion.pizzas.get(i).esIgualA(pizzas.get(i))){
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        if (promocion.adicionales.size() == adicionales.size()) {
+            for (int i = 0; i < promocion.adicionales.size(); i++) {
+                if (!promocion.adicionales.get(i).esIgualA(adicionales.get(i))){
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        if (promocion.descripcion.equals(descripcion)){
+            return false;
+        }
+        return true;
     }
 
 
