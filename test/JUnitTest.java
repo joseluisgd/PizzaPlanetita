@@ -328,7 +328,7 @@ public class JUnitTest {
         
         promocionEsperada.setAdicionales(adicionalesEsperados);
         
-        promocionEsperada.setDescripcion("¡En esta exposición, cómpranos pizza!"");
+        promocionEsperada.setDescripcion("¡En esta exposición, cómpranos pizza!");
         
         PromocionDAO pDAO = new PromocionDAO();
         List<Promocion> promocionesReales = pDAO.obtenerPromociones();
