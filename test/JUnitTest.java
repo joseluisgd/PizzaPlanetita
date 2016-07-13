@@ -243,7 +243,7 @@ public class JUnitTest {
 
     @Test
     public void testTraerCartaAdicionales() {
-        List<Adicionales> adicionalesEsperadas = new ArrayList<>();
+        List<Adicional> adicionalesEsperadas = new ArrayList<>();
         boolean iguales = true;
         
         //ChF: Adicional 1
@@ -281,6 +281,70 @@ public class JUnitTest {
         }
         
         assertEquals("Los adicionales no se están obteniendo correctamente.", true, iguales);
+    }
+    
+    @Test
+    public void testTraerCartaPromociones() {
+        List<Promocion> promocionesEsperadas = new ArrayList<>();
+        boolean iguales = true;
+        
+        //ChF: Promoción 3
+        Promocion promocionEsperada = new Promocion();
+        promocionEsperada.setId(3);
+        promocionEsperada.setNombre("Promoción Exposición IS2");
+        promocionEsperada.setPrecio(79.99f);
+        promocionEsperada.setFechaInicio("13/07/2016 17:00:00");
+        promocionEsperada.setFechaFin("13/07/2016 20:00:00");
+        
+        List<PizzaPromocion> pizzasEsperadas = new ArrayList<>();
+        PizzaPromocion pizzaEsperada;
+        
+        pizzaEsperada = new PizzaPromocion();
+        pizzaEsperada.setNombre("Pizza hawaiana");
+        pizzaEsperada.setTamanoId(2);
+        pizzaEsperada.setCantidad(1);
+        pizzasEsperadas.add(pizzaEsperada);
+        
+        pizzaEsperada = new PizzaPromocion();
+        pizzaEsperada.setNombre("Pizza americana");
+        pizzaEsperada.setTamanoId(2);
+        pizzaEsperada.setCantidad(1);
+        pizzasEsperadas.add(pizzaEsperada);
+        
+        promocionEsperada.setPizzas(pizzasEsperadas);
+        
+        List<AdicionalPromocion> adicionalesEsperados = new ArrayList<>();
+        AdicionalPromocion adicionalEsperado;
+        
+        adicionalEsperado = new AdicionalPromocion();
+        adicionalEsperado.setNombre("Coca cola 500ml");
+        adicionalEsperado.setCantidad(2);
+        adicionalesEsperados.add(adicionalEsperado);
+        
+        adicionalEsperado = new AdicionalPromocion();
+        adicionalEsperado.setNombre("Inca Kola 500ml");
+        adicionalEsperado.setCantidad(2);
+        adicionalesEsperados.add(adicionalEsperado);
+        
+        promocionEsperada.setAdicionales(adicionalesEsperados);
+        
+        promocionEsperada.setDescripcion("¡En esta exposición, cómpranos pizza!"");
+        
+        PromocionDAO pDAO = new PromocionDAO();
+        List<Promocion> promocionesReales = pDAO.obtenerPromociones();
+        
+        if (promocionesEsperadas.size() == promocionesReales.size()) {
+            for (int i = 0; i < promocionesEsperadas.size(); i++) {
+                if (!promocionesEsperadas.get(i).esIgualA(promocionesReales.get(i))) {
+                    iguales = false;
+                }
+            }
+        } else {
+            iguales = false;
+        }
+        
+        
+        assertEquals("Las promociones no se están obteniendo correctamente.", true, iguales);
     }
 
 //
