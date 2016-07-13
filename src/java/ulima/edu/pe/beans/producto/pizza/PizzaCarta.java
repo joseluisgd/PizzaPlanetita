@@ -49,7 +49,7 @@ public class PizzaCarta extends Pizza {
         }
         if (pizza.ingredientes.size() == ingredientes.size()){
             for (int i = 0; i < pizza.ingredientes.size(); i++) {
-                if (!pizza.ingredientes.get(i).esIgualA(ingredientes.size().get(i))){
+                if (!pizza.ingredientes.get(i).esIgualA(ingredientes.get(i))){
                     return false;
                 }
             }
@@ -58,7 +58,7 @@ public class PizzaCarta extends Pizza {
         }
         if (pizza.tamanos.size() == tamanos.size()){
             for (int i = 0; i < pizza.tamanos.size(); i++) {
-                if (!pizza.tamanos.get(i).esIgualA(tamanos.size().get(i))){
+                if (!pizza.tamanos.get(i).esIgualA(tamanos.get(i))){
                     return false;
                 }
             }
