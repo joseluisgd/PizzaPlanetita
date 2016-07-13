@@ -343,84 +343,59 @@ public class JUnitTest {
             iguales = false;
         }
         
-        
         assertEquals("Las promociones no se están obteniendo correctamente.", true, iguales);
     }
-
-//
-//    public void testFechaStringADate() {
-//        //Utilizando la fecha 31/12/2015 18:37:59
-//        Date fechaDateEsperada = new Date(2015, 12, 31, 18, 37, 59);
-//        Date fechaDateReal = Util.fechaStringADate("31/12/2015 18:37:59");
-//        assertEquals("La fecha no se está convirtiendo correctamente.",fechaDateEsperada, fechaDateReal);
-//    }
-//    
-//    //ChF: No pasa el test pero los objetos parecen tener los mismos datos
-//    
-//    public void testObtenerPizza() {
-//        //Real
-//        PizzaDAO pDAO = new PizzaDAO();
-//        PizzaPedido pizzaR = pDAO.buscarPizza(1, 1);
-//        
-//        //Esperado
-//        Tamano tamanoE = new Tamano(1, 39.9f);
-//        List<Ingrediente> ingredientesE = new ArrayList<>();
-//        ingredientesE.add(new Ingrediente(1, "Jamon"));
-//        ingredientesE.add(new Ingrediente(2, "Queso Mozzarella"));
-//        PizzaPedido pizzaE = new PizzaPedido(1, "AMERICANA", ingredientesE, tamanoE, false);
-//
-//        assertEquals("La pizza no se está obteniendo correctamente.", pizzaE, pizzaR);
-//    }
-//    
-//
-//    public void testObtenerSiguienteId() {
-//        PedidoDAO pDAO = new PedidoDAO();
-//        //int idR = pDAO.obtenerSiguienteId();
-//        //assertEquals("La pizza no se está obteniendo correctamente.", 3, idR);
-//    }
-//    
-//    
-//    public void testConexionMLab() {
-//        AdicionalDAO aDAO = new AdicionalDAO();
-//        
-//        Adicional adicionalR1, adicionalE1, adicionalR2, adicionalE2;
-//        adicionalE1 = new Adicional(1, "Coca Cola 500ml", 4.99f);
-//        adicionalR1 = aDAO.buscarAdicional(1);
-//        
-//        adicionalE2 = new Adicional(2, "Inca Kola 500ml", 3.99f);
-//        adicionalR2 = aDAO.buscarAdicional(2);
-//        assertEquals("El segundo adicional no se está obteniendo correctamente.", adicionalE2, adicionalR2);
-//    }
-//    
-//    @Test
-//    public void testEvaluacionDeNombresDeClases() {
-//        IProducto pizza = new PizzaPedido();
-//        
-//        System.out.println(pizza.getClass().getName());
-//        System.out.println(PizzaPedido.class.getName());
-//        
-//        if (pizza.getClass().getName().equals(PizzaPedido.class.getName())){
-//            System.out.println("Son iguales");
-//        }
-//    }
-//    
-//    @Test
-//    public void testPromocionDAO() {
-//        PromocionDAO pDAO = new PromocionDAO();
-//        
-//        List<Promocion> promociones  = pDAO.obtenerPromociones();
-//        
-//        for (Promocion promocion : promociones) {
-//            promocion.getNombre();
-//        }
-//        
-////        IProducto pizza = new PizzaPedido();
-////        
-////        System.out.println(pizza.getClass().getName());
-////        System.out.println(PizzaPedido.class.getName());
-////        
-////        if (pizza.getClass().getName().equals(PizzaPedido.class.getName())){
-////            System.out.println("Son iguales");
-////        }
-//    }
+    
+    @Test
+    public void testAgregarPedido() {
+        PedidoDAO pDAO = new PedidoDAO();
+        boolean iguales = false;
+        
+        Pedido pedidoAgregado = new Pedido();
+        pedidoAgregado.setId(10);
+        pedidoAgregado.setUsername("hcabezas");
+        
+        Direccion direccionAgregada = new Direccion();
+        direccionAgregada.setCalle("Canaval y Moreyra 380")
+        direccionAgregada.setDistrito("San Isidro");
+        pedidoAgregado.setDireccion(direccionAgregada);
+        
+        Estado estadoAgregado = new Estado();
+        estadoAgregado.setId(0);
+        estadoAgregado.setFechaHora("13/07/2016 13:30:45");
+        estadoAgregado.setUsername("hcabezas");
+        pedidoAgregado.setEstado(estadoAgregado);
+        
+        List<ProductoPedido> productosAgregados = new ArrayList<>();
+        
+        ProductoPedido productoAgregado = new ProductoPedido();
+        
+        PizzaPedido pizzaAgregada = new PizzaPedido();
+        pizzaAgregada.setId(1);
+        pizzaAgregada.setNombre("Pizza americana");
+        
+        Tamano tamanoAgregado = new Tamano();
+        tamanoAgregado.setId(3);
+        tamanoAgregado.setPrecio(70.98f);
+        pizzaAgregada.setTamano(tamanoAgregado());
+        
+        productoAgregado.setProducto(pizzaAgregada);
+        productoAgregado.setCantidad(10);
+        productosAgregados.add(productoAgregado);
+        
+        pedidoAgregado.setProductos(productosAgregados);
+        
+        pedidoAgregado.calcularPrecioPedido();
+        
+        pDAO.agregarPedido(pedidoAgregado);
+        
+        Pedido pedidoObtenido = pDAO.buscarPedido(10);
+        
+        if (pedidoAgregado.esIgualA(pedidoObtenido)) {
+            iguales = true;
+        }
+        
+        assertEquals("Los pedidos no se están ingresando correctamente.", true, iguales);
+    }
+    
 }
