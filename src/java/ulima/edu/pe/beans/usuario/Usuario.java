@@ -11,7 +11,6 @@ public class Usuario implements Serializable {
     private String password;
     private String correo;
     private int tipo;
-    private int puntos; //ChF: Si el usuario pertenece a un empleado, debería siempre tener 0 puntos
 
     public Usuario() {
     }
@@ -20,15 +19,13 @@ public class Usuario implements Serializable {
         this.username = username;
         this.password = password;
         this.correo = correo;
-        this.puntos = 0;
     }
 
-    public Usuario(String username, String password, String correo, int tipo, int puntos) {
+    public Usuario(String username, String password, String correo, int tipo) {
         this.username = username;
         this.password = password;
         this.correo = correo;
         this.tipo = tipo;
-        this.puntos = puntos;
     }
 
     public String getUsername() {
@@ -74,13 +71,5 @@ public class Usuario implements Serializable {
             default:
                 return "";
         }
-    }
-    
-    public int getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
     }
 }

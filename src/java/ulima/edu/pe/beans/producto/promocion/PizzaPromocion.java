@@ -45,4 +45,17 @@ public class PizzaPromocion {
         this.cantidad = cantidad;
     }
 
+    public boolean esIgualA(PizzaPromocion pizza) {
+        if (!pizza.nombre.equals(nombre)) {
+            return false;
+        }
+        if (pizza.tamanoId != tamanoId) {
+            return false;
+        }
+        if (pizza.cantidad != cantidad) {
+            return false;
+        }
+        return true;
+    }
+
 }

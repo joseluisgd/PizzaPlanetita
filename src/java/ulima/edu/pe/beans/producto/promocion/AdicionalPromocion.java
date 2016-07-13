@@ -28,5 +28,15 @@ public class AdicionalPromocion {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    
+    public boolean esIgualA(AdicionalPromocion adicional) {
+        if (!adicional.nombre.equals(nombre)) {
+            return false;
+        }
+        if (adicional.cantidad != cantidad) {
+            return false;
+        }
+        return true;
+    }
 
 }

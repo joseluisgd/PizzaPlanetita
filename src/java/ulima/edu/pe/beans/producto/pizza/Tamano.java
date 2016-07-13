@@ -99,4 +99,14 @@ public class Tamano implements Serializable {
     public Tamano clonar() {
         return new Tamano(id, precio);
     }
+
+    public boolean esIgualA(Tamano tamano) {
+        if (tamano.id != id) {
+            return false;
+        }
+        if (tamano.precio != precio) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -78,7 +78,6 @@ public class UsuarioDAO {
                 usuario.setUsername(username);
                 usuario.setPassword((String) dbo.get("password")); //ChF: Considerar no hacer esto
                 usuario.setCorreo((String) dbo.get("correo"));
-                usuario.setPuntos((int) dbo.get("puntos"));
             }
         } catch (Exception e) {
             e.printStackTrace();

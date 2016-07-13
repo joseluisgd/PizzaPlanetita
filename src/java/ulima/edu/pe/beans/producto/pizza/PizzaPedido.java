@@ -57,4 +57,33 @@ public class PizzaPedido extends Pizza implements IProducto {
         return false;
     }
 
+    @Override
+    public boolean esIgualA(IProducto producto) {
+        if (!producto.esPizza()) {
+            return false;
+        }
+        PizzaPedido pizza = (PizzaPedido) producto;
+        if (pizza.id != id) {
+            return false;
+        }
+        if (!pizza.nombre.equals(nombre)) {
+            return false;
+        }
+        if (!pizza.tamano.esIgualA(tamano)) {
+            return false;
+        }
+        if (pizza.ingredientes.size() == ingredientes.size()) {
+            for (int i = 0; i < pizza.ingredientes.size(); i++) {
+                if (!pizza.ingredientes.get(i).esIgualA(ingredientes.get(i))) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        if (pizza.personalizada != personalizada){
+            return false;
+        }
+        return true;
+    }
 }

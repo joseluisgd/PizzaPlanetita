@@ -126,4 +126,22 @@ public class Promocion implements IProducto {
         return vigente;
     }
 
+    @Override
+    public boolean esIgualA(IProducto producto) {
+        if(!producto.esPromocion()){
+            return false;
+        }
+        Promocion promocion = (Promocion) producto;
+        if (promocion.id != id){
+            return false;
+        }
+        if (promocion.pizzas != pizzas){
+            return false;
+        }
+        if (promocion.id != id){
+            return false;
+        }
+    }
+
+
 }

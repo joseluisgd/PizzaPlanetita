@@ -28,5 +28,15 @@ public class Direccion {
     public void setDistrito(String distrito) {
         this.distrito = distrito;
     }
+    
+    public boolean esIgualA(Direccion direccion){
+        if (direccion.calle.equals(this.calle)){
+            return false;
+        }
+        if (direccion.distrito.equals(this.distrito)){
+            return false;
+        }
+        return true;
+    }
 
 }

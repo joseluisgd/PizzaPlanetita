@@ -17,5 +17,7 @@ public interface IProducto {
     public boolean esAdicional();
 
     public boolean esPromocion();
+    
+    public boolean esIgualA(IProducto producto);
 
 }

@@ -77,4 +77,26 @@ public class Pedido {
             precioPedido = precioPedido + productoPedido.getPrecioTotal();
         }
     }
+    
+    public boolean esIgualA(Pedido pedido) {
+        if (pedido.id != this.id) {
+            return false;
+        }
+        if (pedido.username.equals(this.username)) {
+            return false;
+        }
+        if (pedido.estado != this.estado) {
+            return false;
+        }
+        if (pedido.direccion != this.direccion) {
+            return false;
+        }
+        if (pedido.productos != this.productos) {
+            return false;
+        }
+        if (pedido.precioPedido != this.precioPedido) {
+            return false;
+        }
+        return true;
+    }
 }

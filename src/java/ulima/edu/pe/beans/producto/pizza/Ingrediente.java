@@ -33,4 +33,14 @@ public class Ingrediente implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public boolean esIgualA(Ingrediente ingrediente){
+        if (ingrediente.id != this.id){
+            return false;
+        }
+        if (!ingrediente.nombre.equals(this.nombre)){
+            return false;
+        }
+        return true;
+    }
 }

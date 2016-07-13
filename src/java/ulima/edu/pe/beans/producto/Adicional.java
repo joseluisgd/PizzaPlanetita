@@ -61,4 +61,22 @@ public class Adicional implements IProducto {
         return false;
     }
 
+    @Override
+    public boolean esIgualA(IProducto producto) {
+        if (!producto.esAdicional()){
+            return false;
+        }
+        Adicional adicional = (Adicional) producto;
+        if (adicional.id != id){
+            return false;
+        }
+        if (!adicional.nombre.equals(nombre)){
+            return false;
+        }
+        if (adicional.precio != precio){
+            return false;
+        }
+        return true;
+    }
+
 }
