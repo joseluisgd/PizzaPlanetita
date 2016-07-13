@@ -229,7 +229,7 @@ public class PedidoDAO {
             estado.setUsername((String) docEstado.get("username"));
             estados.add(estado);
         }
-        pedido.setEstado(obtenerUltimoEstado(estados));
+        pedido.setEstado(estados.get(estados.size()-1));
 
         //ChF: Lista de productos del objeto pedido.
         //ChF: Array pizzas del documento productos.
@@ -305,50 +305,6 @@ public class PedidoDAO {
         return pedido;
     }
 
-    private Estado obtenerUltimoEstado(List<Estado> estados) {
-        Estado ultimoEstado = new Estado();
-
-        for (Estado estado : estados) {
-            if (estado.getId() > ultimoEstado.getId()) {
-                ultimoEstado = estado;
-            }
-        }
-
-        return ultimoEstado;
-    }
-
-    //ChF: Para qué?
-    public List<Pedido> getPedidos() {
-        List<Pedido> pedidos = null;
-        Pedido pedido;
-//        ConexionMLab con = new ConexionMLab();
-//        MongoClient mongo = con.getConexion();
-        MongoClient mongo = ConexionMLab.getMongoClient();
-        try {
-            DB db = mongo.getDB("basededatos");
-            DBCollection coleccion = db.getCollection("pedido");
-            DBCursor cursor = coleccion.find();
-            pedidos = new ArrayList<>();
-            while (cursor.hasNext()) {
-                DBObject dbo = cursor.next();
-//                pedido = new Pedido();
-                pedido = buscarPedido((int) dbo.get("id"));
-                pedidos.add(pedido);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            mongo.close();
-        }
-        return pedidos;
-    }
-
-    //ChF: Creeeeeeeeeeeo que nuestro módulo no actualiza estados
-    public void actualizarEstado() {
-
-    }
-
-    //ChF: Devolver a private
     private int obtenerSiguienteId() {
         MongoClient mongo = ConexionMLab.getMongoClient();
         int mayor = 0;

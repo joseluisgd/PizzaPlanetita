@@ -31,6 +31,7 @@ public class ClienteDAO {
             docCliente.put("dni", cliente.getDni());
             docCliente.put("edad", cliente.getEdad());
 
+            /* ChF: Los clientes ya no guardan direcciones
             //ChF: Lista de direcciones del cliente
             BasicDBObject docDireccion;
             ArrayList arrayDirecciones = new ArrayList();
@@ -41,7 +42,7 @@ public class ClienteDAO {
                 arrayDirecciones.add(docDireccion);
             }
             docCliente.put("direcciones", arrayDirecciones);
-
+            */
             docCliente.put("username", cliente.getUsuario().getUsername());
             coleccion.insert(docCliente);
         } catch (Exception e) {

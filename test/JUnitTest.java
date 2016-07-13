@@ -15,13 +15,10 @@ import ulima.edu.pe.dao.PizzaDAO;
 import ulima.edu.pe.dao.PromocionDAO;
 import ulima.edu.pe.util.Util;
 
-/**
- *
- * @author Christopher
- */
 public class JUnitTest {
     
     public JUnitTest() {
+        
     }
 
 

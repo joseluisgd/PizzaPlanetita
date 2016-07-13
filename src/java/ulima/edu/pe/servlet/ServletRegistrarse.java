@@ -24,6 +24,7 @@ public class ServletRegistrarse extends HttpServlet {
         usuario.setUsername(request.getParameter("username"));
         usuario.setPassword(request.getParameter("password"));
         usuario.setCorreo(request.getParameter("correo"));
+        usuario.setPuntos(100);
 //        usuario.setTipo(request.getParameter("spc"));
 //        usuario.setPuntos(request.getParameter("spc"));
 
@@ -44,7 +45,7 @@ public class ServletRegistrarse extends HttpServlet {
             rd = request.getRequestDispatcher("login.html");
         } else {
             //ChF: 
-            rd = request.getRequestDispatcher("algunaOtraPaginaDeErrorQueAunNoEstaCreada.html");
+            rd = request.getRequestDispatcher("registroIncorrecto.html");
         }
 
         rd.forward(request, response);

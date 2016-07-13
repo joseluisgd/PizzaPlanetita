@@ -31,7 +31,7 @@
             <%}%>
             <br>Precio del pedido: S/ <%=formatter.format(pedido.getPrecioPedido())%>
             <br>
-            <br>Dirección : 
+            <br>Dirección: 
             <br>- Calle: <input type="text" name="calleDireccionPedido"/>
             <br>- Distrito: 
             <select name="distritoDireccionPedido">

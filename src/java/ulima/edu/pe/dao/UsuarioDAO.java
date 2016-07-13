@@ -16,7 +16,7 @@ public class UsuarioDAO {
         boolean registrado = false;
         try {
             DB db = mongo.getDB("pizzaplaneta");
-            DBCollection coleccion = db.getCollection("cliente");
+            DBCollection coleccion = db.getCollection("usuario");
 
             BasicDBObject docUsuario = new BasicDBObject();
 
@@ -118,7 +118,7 @@ public class UsuarioDAO {
         int idRecibido = 0;
         try {
             DB db = mongo.getDB("pizzaplaneta");
-            DBCollection coleccion = db.getCollection("cliente");
+            DBCollection coleccion = db.getCollection("usuario");
             DBCursor cursor = coleccion.find();
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
