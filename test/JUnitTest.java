@@ -120,7 +120,7 @@ public class JUnitTest {
     }
 
     @Test
-    public void testTraerCartaPizza() {
+    public void testTraerCartaPizzas() {
         List<PizzaCarta> pizzasEsperadas = new ArrayList<>();
         boolean iguales = true;
         
@@ -241,8 +241,47 @@ public class JUnitTest {
         assertEquals("Las pizzas no se están obteniendo correctamente.", true, iguales);
     }
 
-
-
+    @Test
+    public void testTraerCartaAdicionales() {
+        List<Adicionales> adicionalesEsperadas = new ArrayList<>();
+        boolean iguales = true;
+        
+        //ChF: Adicional 1
+        Adicional adicionalEsperado = new Adicional();
+        adicionalEsperado.setId(1);
+        adicionalEsperado.setNombre("Coca Cola 500ml");
+        adicionalEsperado.setPrecio(4.99f);
+        adicionalesEsperadas.add(adicionalEsperado);
+                
+        //ChF: Adicional 2
+        Adicional adicionalEsperado = new Adicional();
+        adicionalEsperado.setId(2);
+        adicionalEsperado.setNombre("Inca Kola 500ml");
+        adicionalEsperado.setPrecio(3.99f);
+        adicionalesEsperadas.add(adicionalEsperado);
+                
+        //ChF: Adicional 3
+        Adicional adicionalEsperado = new Adicional();
+        adicionalEsperado.setId(3);
+        adicionalEsperado.setNombre("Sprite 500ml");
+        adicionalEsperado.setPrecio(2.99f);
+        adicionalesEsperadas.add(adicionalEsperado);
+        
+        AdicionalDAO aDAO = new AdicionalDAO();
+        List<Adicional> adicionalesReales = aDAO.obtenerAdicionales();
+        
+        if (adicionalesEsperados.size() == adicionalesReales.size()) {
+            for (int i = 0; i < adicionalesEsperados.size(); i++) {
+                if (!adicionalesEsperados.get(i).esIgualA(adicionalesReales.get(i))) {
+                    iguales = false;
+                }
+            }
+        } else {
+            iguales = false;
+        }
+        
+        assertEquals("Los adicionales no se están obteniendo correctamente.", true, iguales);
+    }
 
 //
 //    public void testFechaStringADate() {
