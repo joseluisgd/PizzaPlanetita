@@ -39,4 +39,32 @@ public class PizzaCarta extends Pizza {
         
         return pizza;
     }
+    
+    public boolean esIgualA(PizzaCarta pizza) {
+        if (pizza.id != id) {
+            return false;
+        }
+        if (!pizza.nombre.equals(nombre)) {
+            return false;
+        }
+        if (pizza.ingredientes.size() == ingredientes.size()){
+            for (int i = 0; i < pizza.ingredientes.size(); i++) {
+                if (!pizza.ingredientes.get(i).esIgualA(ingredientes.size().get(i))){
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        if (pizza.tamanos.size() == tamanos.size()){
+            for (int i = 0; i < pizza.tamanos.size(); i++) {
+                if (!pizza.tamanos.get(i).esIgualA(tamanos.size().get(i))){
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
 }
