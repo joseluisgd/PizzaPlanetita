@@ -217,8 +217,6 @@ public class PedidoDAO {
         direccion.setDistrito((String) ((DBObject) dbo.get("direccion")).get("distrito"));
         pedido.setDireccion(direccion);
 
-        //ChF: Flojera hacer un query para traer el documento con el máximo id en 
-        //el array estados del pedido así que los traigo todos y lo evalúo aquí
         //ChF: Lista de estados del objeto pedido.
         docArrayEstados = (BasicDBList) dbo.get("estados");
         for (Object objEstado : docArrayEstados) {
