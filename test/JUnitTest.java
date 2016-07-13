@@ -74,21 +74,172 @@ public class JUnitTest {
     @Test
     public void testTraerPedidos() {
         PedidoDAO pDAO = new PedidoDAO();
+        boolean iguales = false;
+        
+        Pedido pedidoEsperado = new Pedido();
+        pedidoEsperado.setId(4);
+        pedidoEsperado.setUsername("kamila");
+        
+        Direccion direccionEsperada = new Direccion();
+        direccionEsperada.setCalle("Jose de la Pinella 169")
+        direccionEsperada.setDistrito("San Borja");
+        pedidoEsperado.setDireccion(direccionEsperada);
+        
+        Estado estadoEsperado = new Estado();
+        estadoEsperado.setId(0);
+        estadoEsperado.setFechaHora("12/07/2016 18:44:12");
+        estadoEsperado.setUsername("kamila");
+        pedidoEsperado.setEstado(estadoEsperado);
+        
+        List<ProductoPedido> productosEsperados = new ArrayList<>();
+        
+        ProductoPedido productoEsperado = new ProductoPedido();
+        
+        PizzaPedido pizzaEsperada = new PizzaPedido();
+        pizzaEsperada.setId(1);
+        pizzaEsperada.setNombre("Pizza americana");
+        
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(3);
+        tamanoEsperado.setPrecio(70.98f);
+        pizzaEsperada.setTamano(tamanoEsperado());
+        
+        productoEsperado.setProducto(pizzaEsperada);
+        productoEsperado.setCantidad(10);
+        productosEsperados.add(productoEsperado);
+        pedidoEsperado.setProductos(productosEsperados);
+        pedidoEsperado.calcularPrecioPedido();
         
         Pedido pedidoReal = pDAO.obtenerPedidosDeUsername("kamila").get(0);
-
-        if
         
-        boolean ingresoReal;
+        if (pedidoReal.esIgualA(pedidoEsperado)) {
+            iguales = true;
+        }
 
-        ingresoReal = uDAO.login("hcabezas", "hhh");
-        assertEquals("El Log In al sistema no está funcionando correctamente.", true, ingresoReal);
-
-        ingresoReal = uDAO.login("intruso", "jejeje");
-        assertEquals("El Log In al sistema no está funcionando correctamente.", false, ingresoReal);
+        assertEquals("Los pedidos de un usuario no se están obteniendo correctamente.", true, iguales);
     }
 
-
+    @Test
+    public void testTraerCartaPizza() {
+        List<PizzaCarta> pizzasEsperadas = new ArrayList<>();
+        boolean iguales = true;
+        
+        //ChF: Pizza 1
+        PizzaCarta pizzaEsperada = new PizzaCarta();
+        pizzaEsperada.setId(1);
+        pizzaEsperada.setNombre("Pizza americana");
+        
+        List<Tamano> tamanosEsperados = new ArrayList<>();
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(1);
+        tamanoEsperado.setPrecio(17.99f);
+        tamanosEsperados.add(tamanoEsperado);
+        
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(2);
+        tamanoEsperado.setPrecio(35.99f);
+        tamanosEsperados.add(tamanoEsperado);
+        
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(3);
+        tamanoEsperado.setPrecio(70.99f);
+        tamanosEsperados.add(tamanoEsperado);
+        
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(4);
+        tamanoEsperado.setPrecio(90.99f);
+        tamanosEsperados.add(tamanoEsperado);
+        
+        pizzaEsperada.setTamanos(tamanosEsperados);
+        
+        List<Ingrediente> ingredientesEsperados = new ArrayList<>();
+        Ingrediente ingredienteEsperado = new Ingrediente();
+        ingredienteEsperado.setId(1);
+        ingredienteEsperado.setNombre("Salsa de tomate");
+        ingredientesEsperados.add(ingredienteEsperado);
+        
+        Ingrediente ingredienteEsperado = new Ingrediente();
+        ingredienteEsperado.setId(2);
+        ingredienteEsperado.setNombre("Jamón pizzero");
+        ingredientesEsperados.add(ingredienteEsperado);
+        
+        Ingrediente ingredienteEsperado = new Ingrediente();
+        ingredienteEsperado.setId(11);
+        ingredienteEsperado.setNombre("Queso Mozzarella");
+        ingredientesEsperados.add(ingredienteEsperado);
+        
+        pizzaEsperada.setIngredientes(ingredientesEsperados);
+        
+        pizzasEsperadas.add(pizzaEsperada);
+        
+        //ChF: Pizza 2
+        PizzaCarta pizzaEsperada = new PizzaCarta();
+        pizzaEsperada.setId(2);
+        pizzaEsperada.setNombre("Pizza hawaiana");
+        
+        List<Tamano> tamanosEsperados = new ArrayList<>();
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(1);
+        tamanoEsperado.setPrecio(18.99f);
+        tamanosEsperados.add(tamanoEsperado);
+        
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(2);
+        tamanoEsperado.setPrecio(36.99f);
+        tamanosEsperados.add(tamanoEsperado);
+        
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(3);
+        tamanoEsperado.setPrecio(72.99f);
+        tamanosEsperados.add(tamanoEsperado);
+        
+        Tamano tamanoEsperado = new Tamano();
+        tamanoEsperado.setId(4);
+        tamanoEsperado.setPrecio(92.99f);
+        tamanosEsperados.add(tamanoEsperado);
+        
+        pizzaEsperada.setTamanos(tamanosEsperados);
+        
+        List<Ingrediente> ingredientesEsperados = new ArrayList<>();
+        Ingrediente ingredienteEsperado = new Ingrediente();
+        ingredienteEsperado.setId(1);
+        ingredienteEsperado.setNombre("Salsa de tomate");
+        ingredientesEsperados.add(ingredienteEsperado);
+        
+        Ingrediente ingredienteEsperado = new Ingrediente();
+        ingredienteEsperado.setId(2);
+        ingredienteEsperado.setNombre("Jamón pizzero");
+        ingredientesEsperados.add(ingredienteEsperado);
+        
+        Ingrediente ingredienteEsperado = new Ingrediente();
+        ingredienteEsperado.setId(11);
+        ingredienteEsperado.setNombre("Queso Mozzarella");
+        ingredientesEsperados.add(ingredienteEsperado);
+        
+        Ingrediente ingredienteEsperado = new Ingrediente();
+        ingredienteEsperado.setId(12);
+        ingredienteEsperado.setNombre("Piña");
+        ingredientesEsperados.add(ingredienteEsperado);
+        
+        pizzaEsperada.setIngredientes(ingredientesEsperados);
+        
+        pizzasEsperadas.add(pizzaEsperada);
+        
+        PizzaDAO pDAO = new PizzaDAO();
+        List<PizzaCarta> pizzasReales = pDAO.obtenerPizzas();
+        
+        if (pizzasEsperadas.size() == pizzasReales.size()) {
+            for (int i = 0; i < pizzasEsperadas.size(); i++) {
+                if (!pizzasEsperadas.get(i).esIgualA(pizzasReales.get(i))) {
+                    iguales = false;
+                }
+            }
+        } else {
+            iguales = false;
+        }
+        
+        assertEquals("Las pizzas no se están obteniendo correctamente.", true, iguales);
+    }
 
 
 
